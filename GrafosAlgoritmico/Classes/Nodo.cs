@@ -8,23 +8,31 @@ namespace GrafosAlgoritmico.Classes
 {
     public class Nodo
     {
-        private string valor;
-        private int valorEjeX;
-        private int valorEjeY;
-        private string color;
+        public string valor;
+        public int coordenaEjeX;
+        public int coordenaEjeY;
+        public Color color;
 
 
-        public Nodo(string valor, int valorEjeX, int valorEjeY, string color)
+        public Nodo(int coordenaEjeX, int coordenaEjeY, Color color)
         {
-            Valor = valor;
-            ValorEjeX = valorEjeX;
-            ValorEjeY = valorEjeY;
-            Color = color;
+            this.valor = "";
+            this.coordenaEjeX = coordenaEjeX;
+            this.coordenaEjeY = coordenaEjeY;
+            this.color = color;
         }
 
-        public string Valor { get => valor; set => valor = value; }
-        public int ValorEjeX { get => valorEjeX; set => valorEjeX = value; }
-        public int ValorEjeY { get => valorEjeY; set => valorEjeY = value; }
-        public string Color { get => color; set => color = value; }
+        public string Valor
+        {
+            get { return valor; }
+            set
+            {
+                if (string.IsNullOrEmpty(value) || value.Length > 3) // Verificar que tenga exactamente 3 caracteres
+                {
+                    throw new ArgumentException("El nodo debe tener maximo 3 caracteres.");
+                }
+                this.valor = value; // Asignar si cumple con la regla
+            }
+        }
     }
 }
