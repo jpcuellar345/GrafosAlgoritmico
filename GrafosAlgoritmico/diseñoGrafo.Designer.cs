@@ -38,7 +38,9 @@
             textBox1 = new TextBox();
             txtVectores = new Label();
             comboBox2 = new ComboBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panelGrafos
@@ -112,11 +114,20 @@
             comboBox2.Size = new Size(260, 23);
             comboBox2.TabIndex = 7;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(632, 245);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(100, 50);
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
             // diseñoGrafo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(952, 576);
+            Controls.Add(pictureBox1);
             Controls.Add(comboBox2);
             Controls.Add(txtVectores);
             Controls.Add(textBox1);
@@ -128,6 +139,7 @@
             Name = "diseñoGrafo";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -144,5 +156,6 @@
         private TextBox textBox1;
         private Label txtVectores;
         private ComboBox comboBox2;
+        private PictureBox pictureBox1;
     }
 }
