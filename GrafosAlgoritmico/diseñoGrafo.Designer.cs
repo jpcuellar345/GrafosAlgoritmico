@@ -34,6 +34,10 @@
             txtMatriz = new Label();
             colorDialog1 = new ColorDialog();
             colorDialog2 = new ColorDialog();
+            txtNodoOrigen = new Label();
+            textBox1 = new TextBox();
+            txtVectores = new Label();
+            comboBox2 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).BeginInit();
             SuspendLayout();
             // 
@@ -58,7 +62,7 @@
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "3x3", "4x4", "5x5" });
-            comboBox1.Location = new Point(580, 9);
+            comboBox1.Location = new Point(588, 9);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(97, 23);
             comboBox1.TabIndex = 2;
@@ -69,15 +73,54 @@
             txtMatriz.AutoSize = true;
             txtMatriz.Location = new Point(496, 12);
             txtMatriz.Name = "txtMatriz";
-            txtMatriz.Size = new Size(78, 15);
+            txtMatriz.Size = new Size(81, 15);
             txtMatriz.TabIndex = 3;
-            txtMatriz.Text = "Definir Matriz";
+            txtMatriz.Text = "Definir Matriz:";
+            // 
+            // txtNodoOrigen
+            // 
+            txtNodoOrigen.AutoSize = true;
+            txtNodoOrigen.Location = new Point(496, 68);
+            txtNodoOrigen.Name = "txtNodoOrigen";
+            txtNodoOrigen.Size = new Size(79, 15);
+            txtNodoOrigen.TabIndex = 4;
+            txtNodoOrigen.Text = "Nodo Origen:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(588, 60);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 5;
+            // 
+            // txtVectores
+            // 
+            txtVectores.AutoSize = true;
+            txtVectores.Location = new Point(496, 128);
+            txtVectores.Name = "txtVectores";
+            txtVectores.Size = new Size(110, 15);
+            txtVectores.TabIndex = 6;
+            txtVectores.Text = "Dirección escogida:";
+            // 
+            // comboBox2
+            // 
+            comboBox2.Enabled = false;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "Arriba", "Abajo", "Izquierda", "Derecha", "Arriba y a la izquierda", "Arriba y a la derecha", "Abajo y a la izquierda", "Abajo y a la derecha" });
+            comboBox2.Location = new Point(609, 125);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(260, 23);
+            comboBox2.TabIndex = 7;
             // 
             // diseñoGrafo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(952, 576);
+            Controls.Add(comboBox2);
+            Controls.Add(txtVectores);
+            Controls.Add(textBox1);
+            Controls.Add(txtNodoOrigen);
             Controls.Add(txtMatriz);
             Controls.Add(comboBox1);
             Controls.Add(dgdvAlgoritmo);
@@ -97,5 +140,9 @@
         private Label txtMatriz;
         private ColorDialog colorDialog1;
         private ColorDialog colorDialog2;
+        private Label txtNodoOrigen;
+        private TextBox textBox1;
+        private Label txtVectores;
+        private ComboBox comboBox2;
     }
 }
