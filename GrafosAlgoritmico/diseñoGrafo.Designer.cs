@@ -28,19 +28,60 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(diseñoGrafo));
             panelGrafos = new Panel();
             dgdvAlgoritmo = new DataGridView();
-            comboBox1 = new ComboBox();
+            combo2DMatriz = new ComboBox();
             txtMatriz = new Label();
-            colorDialog1 = new ColorDialog();
-            colorDialog2 = new ColorDialog();
+            colorNodos = new ColorDialog();
+            colorNodo = new ColorDialog();
             txtNodoOrigen = new Label();
-            textBox1 = new TextBox();
-            txtVectores = new Label();
-            comboBox2 = new ComboBox();
-            pictureBox1 = new PictureBox();
+            comboNodoOrigen = new TextBox();
+            txtDireccion = new Label();
+            ComboDireccion = new ComboBox();
+            GroupComandos = new GroupBox();
+            pictureDownR = new PictureBox();
+            pictureUpR = new PictureBox();
+            pictureCenter = new PictureBox();
+            pictureRight = new PictureBox();
+            pictureLeft = new PictureBox();
+            pictureDownL = new PictureBox();
+            pictureDown = new PictureBox();
+            pictureUpL = new PictureBox();
+            pictureUp = new PictureBox();
+            btnCrearConexion = new Button();
+            btnDesahacerConexion = new Button();
+            btnExportGrafo = new Button();
+            btnExportAlgoritmo = new Button();
+            txtValorNodo = new Label();
+            txtBoxValorNodo = new TextBox();
+            comboColorMatriz = new TextBox();
+            txtColorMtriz = new Label();
+            btnGenerarMatriz = new Button();
+            txtColorNodo = new Label();
+            comboColorNodo = new TextBox();
+            btnCamColrNodo = new Button();
+            txtcolorArista = new Label();
+            btnCambiarColrArista = new Button();
+            txtBoxColrArista = new TextBox();
+            groupPanelControl = new GroupBox();
+            txtBoxColrLetra = new TextBox();
+            btnCambiarColrLetra = new Button();
+            txtColrLetra = new Label();
+            colorLetra = new ColorDialog();
+            colorArista = new ColorDialog();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            GroupComandos.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureCenter).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureRight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureLeft).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureDownL).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureDown).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureUpL).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureUp).BeginInit();
+            groupPanelControl.SuspendLayout();
             SuspendLayout();
             // 
             // panelGrafos
@@ -57,89 +98,402 @@
             dgdvAlgoritmo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdvAlgoritmo.Location = new Point(12, 441);
             dgdvAlgoritmo.Name = "dgdvAlgoritmo";
+            dgdvAlgoritmo.RowHeadersWidth = 51;
             dgdvAlgoritmo.Size = new Size(676, 107);
             dgdvAlgoritmo.TabIndex = 1;
             // 
-            // comboBox1
+            // combo2DMatriz
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "3x3", "4x4", "5x5" });
-            comboBox1.Location = new Point(588, 9);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(97, 23);
-            comboBox1.TabIndex = 2;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            combo2DMatriz.FormattingEnabled = true;
+            combo2DMatriz.Items.AddRange(new object[] { "3x3", "4x4", "5x5" });
+            combo2DMatriz.Location = new Point(605, 19);
+            combo2DMatriz.Name = "combo2DMatriz";
+            combo2DMatriz.Size = new Size(97, 23);
+            combo2DMatriz.TabIndex = 2;
+            combo2DMatriz.SelectedIndexChanged += combo2DMatriz_SelectedIndexChanged;
             // 
             // txtMatriz
             // 
             txtMatriz.AutoSize = true;
-            txtMatriz.Location = new Point(496, 12);
+            txtMatriz.Location = new Point(456, 21);
             txtMatriz.Name = "txtMatriz";
-            txtMatriz.Size = new Size(81, 15);
+            txtMatriz.Size = new Size(130, 15);
             txtMatriz.TabIndex = 3;
-            txtMatriz.Text = "Definir Matriz:";
+            txtMatriz.Text = "Dimensiones de nodos:";
             // 
             // txtNodoOrigen
             // 
             txtNodoOrigen.AutoSize = true;
-            txtNodoOrigen.Location = new Point(496, 68);
+            txtNodoOrigen.Location = new Point(6, 32);
             txtNodoOrigen.Name = "txtNodoOrigen";
             txtNodoOrigen.Size = new Size(79, 15);
             txtNodoOrigen.TabIndex = 4;
             txtNodoOrigen.Text = "Nodo Origen:";
             // 
-            // textBox1
+            // comboNodoOrigen
             // 
-            textBox1.Location = new Point(588, 60);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 5;
+            comboNodoOrigen.Enabled = false;
+            comboNodoOrigen.Location = new Point(98, 29);
+            comboNodoOrigen.Name = "comboNodoOrigen";
+            comboNodoOrigen.Size = new Size(100, 23);
+            comboNodoOrigen.TabIndex = 5;
+            comboNodoOrigen.TextChanged += comboNodoOrigen_TextChanged;
             // 
-            // txtVectores
+            // txtDireccion
             // 
-            txtVectores.AutoSize = true;
-            txtVectores.Location = new Point(496, 128);
-            txtVectores.Name = "txtVectores";
-            txtVectores.Size = new Size(110, 15);
-            txtVectores.TabIndex = 6;
-            txtVectores.Text = "Dirección escogida:";
+            txtDireccion.AutoSize = true;
+            txtDireccion.Location = new Point(7, 134);
+            txtDireccion.Name = "txtDireccion";
+            txtDireccion.Size = new Size(110, 15);
+            txtDireccion.TabIndex = 6;
+            txtDireccion.Text = "Dirección escogida:";
             // 
-            // comboBox2
+            // ComboDireccion
             // 
-            comboBox2.Enabled = false;
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "Arriba", "Abajo", "Izquierda", "Derecha", "Arriba y a la izquierda", "Arriba y a la derecha", "Abajo y a la izquierda", "Abajo y a la derecha" });
-            comboBox2.Location = new Point(609, 125);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(260, 23);
-            comboBox2.TabIndex = 7;
+            ComboDireccion.Enabled = false;
+            ComboDireccion.FormattingEnabled = true;
+            ComboDireccion.Items.AddRange(new object[] { "Arriba y a la izquierda", "Arriba", "Arriba y a la derecha", "Izquierda", "Derecha", "Abajo y a la izquierda", "Abajo", "Abajo y a la derecha" });
+            ComboDireccion.Location = new Point(134, 132);
+            ComboDireccion.Name = "ComboDireccion";
+            ComboDireccion.Size = new Size(159, 23);
+            ComboDireccion.TabIndex = 7;
             // 
-            // pictureBox1
+            // GroupComandos
             // 
-            pictureBox1.Location = new Point(632, 245);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(100, 50);
-            pictureBox1.TabIndex = 8;
-            pictureBox1.TabStop = false;
+            GroupComandos.Controls.Add(pictureDownR);
+            GroupComandos.Controls.Add(pictureUpR);
+            GroupComandos.Controls.Add(pictureCenter);
+            GroupComandos.Controls.Add(pictureRight);
+            GroupComandos.Controls.Add(pictureLeft);
+            GroupComandos.Controls.Add(pictureDownL);
+            GroupComandos.Controls.Add(pictureDown);
+            GroupComandos.Controls.Add(pictureUpL);
+            GroupComandos.Controls.Add(pictureUp);
+            GroupComandos.Location = new Point(7, 169);
+            GroupComandos.Name = "GroupComandos";
+            GroupComandos.Size = new Size(253, 178);
+            GroupComandos.TabIndex = 8;
+            GroupComandos.TabStop = false;
+            GroupComandos.Text = "Comandos";
+            // 
+            // pictureDownR
+            // 
+            pictureDownR.Image = Properties.Resources.down___right_;
+            pictureDownR.Location = new Point(168, 124);
+            pictureDownR.Name = "pictureDownR";
+            pictureDownR.Size = new Size(59, 43);
+            pictureDownR.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureDownR.TabIndex = 0;
+            pictureDownR.TabStop = false;
+            pictureDownR.Click += pictureDownR_Click;
+            // 
+            // pictureUpR
+            // 
+            pictureUpR.Image = Properties.Resources.up_right;
+            pictureUpR.Location = new Point(168, 23);
+            pictureUpR.Name = "pictureUpR";
+            pictureUpR.Size = new Size(59, 43);
+            pictureUpR.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureUpR.TabIndex = 0;
+            pictureUpR.TabStop = false;
+            pictureUpR.Click += pictureUpR_Click;
+            // 
+            // pictureCenter
+            // 
+            pictureCenter.Image = (Image)resources.GetObject("pictureCenter.Image");
+            pictureCenter.Location = new Point(103, 72);
+            pictureCenter.Name = "pictureCenter";
+            pictureCenter.Size = new Size(59, 43);
+            pictureCenter.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureCenter.TabIndex = 0;
+            pictureCenter.TabStop = false;
+            pictureCenter.Click += pictureCenter_Click;
+            // 
+            // pictureRight
+            // 
+            pictureRight.Image = Properties.Resources.rigth;
+            pictureRight.Location = new Point(168, 72);
+            pictureRight.Name = "pictureRight";
+            pictureRight.Size = new Size(59, 43);
+            pictureRight.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureRight.TabIndex = 0;
+            pictureRight.TabStop = false;
+            pictureRight.Click += pictureRight_Click;
+            // 
+            // pictureLeft
+            // 
+            pictureLeft.Image = Properties.Resources.left;
+            pictureLeft.Location = new Point(38, 72);
+            pictureLeft.Name = "pictureLeft";
+            pictureLeft.Size = new Size(59, 43);
+            pictureLeft.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureLeft.TabIndex = 0;
+            pictureLeft.TabStop = false;
+            pictureLeft.Click += pictureLeft_Click;
+            // 
+            // pictureDownL
+            // 
+            pictureDownL.Image = Properties.Resources.down_left;
+            pictureDownL.Location = new Point(38, 124);
+            pictureDownL.Name = "pictureDownL";
+            pictureDownL.Size = new Size(59, 43);
+            pictureDownL.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureDownL.TabIndex = 0;
+            pictureDownL.TabStop = false;
+            pictureDownL.Click += pictureDownL_Click;
+            // 
+            // pictureDown
+            // 
+            pictureDown.Image = Properties.Resources.down;
+            pictureDown.Location = new Point(103, 124);
+            pictureDown.Name = "pictureDown";
+            pictureDown.Size = new Size(59, 43);
+            pictureDown.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureDown.TabIndex = 0;
+            pictureDown.TabStop = false;
+            pictureDown.Click += pictureDown_Click;
+            // 
+            // pictureUpL
+            // 
+            pictureUpL.Image = Properties.Resources.up_left;
+            pictureUpL.Location = new Point(38, 23);
+            pictureUpL.Name = "pictureUpL";
+            pictureUpL.Size = new Size(59, 43);
+            pictureUpL.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureUpL.TabIndex = 0;
+            pictureUpL.TabStop = false;
+            pictureUpL.Click += pictureUpL_Click;
+            // 
+            // pictureUp
+            // 
+            pictureUp.Image = Properties.Resources.up;
+            pictureUp.Location = new Point(103, 23);
+            pictureUp.Name = "pictureUp";
+            pictureUp.Size = new Size(59, 43);
+            pictureUp.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureUp.TabIndex = 0;
+            pictureUp.TabStop = false;
+            pictureUp.Click += pictureUp_Click;
+            // 
+            // btnCrearConexion
+            // 
+            btnCrearConexion.Location = new Point(354, 293);
+            btnCrearConexion.Name = "btnCrearConexion";
+            btnCrearConexion.Size = new Size(73, 53);
+            btnCrearConexion.TabIndex = 9;
+            btnCrearConexion.Text = "Crear\r\nconexion";
+            btnCrearConexion.UseVisualStyleBackColor = true;
+            // 
+            // btnDesahacerConexion
+            // 
+            btnDesahacerConexion.Location = new Point(455, 293);
+            btnDesahacerConexion.Name = "btnDesahacerConexion";
+            btnDesahacerConexion.Size = new Size(73, 53);
+            btnDesahacerConexion.TabIndex = 9;
+            btnDesahacerConexion.Text = "Desahacer\r\nconexion";
+            btnDesahacerConexion.UseVisualStyleBackColor = true;
+            // 
+            // btnExportGrafo
+            // 
+            btnExportGrafo.Location = new Point(734, 495);
+            btnExportGrafo.Name = "btnExportGrafo";
+            btnExportGrafo.Size = new Size(73, 53);
+            btnExportGrafo.TabIndex = 9;
+            btnExportGrafo.Text = "Exportar\r\nGrafo";
+            btnExportGrafo.UseVisualStyleBackColor = true;
+            // 
+            // btnExportAlgoritmo
+            // 
+            btnExportAlgoritmo.Location = new Point(832, 495);
+            btnExportAlgoritmo.Name = "btnExportAlgoritmo";
+            btnExportAlgoritmo.Size = new Size(73, 53);
+            btnExportAlgoritmo.TabIndex = 9;
+            btnExportAlgoritmo.Text = "Exportar\r\nAlgoritmo";
+            btnExportAlgoritmo.UseVisualStyleBackColor = true;
+            // 
+            // txtValorNodo
+            // 
+            txtValorNodo.AutoSize = true;
+            txtValorNodo.Location = new Point(7, 91);
+            txtValorNodo.Name = "txtValorNodo";
+            txtValorNodo.Size = new Size(109, 15);
+            txtValorNodo.TabIndex = 4;
+            txtValorNodo.Text = "Valor nodo destino:";
+            // 
+            // txtBoxValorNodo
+            // 
+            txtBoxValorNodo.Location = new Point(122, 88);
+            txtBoxValorNodo.Name = "txtBoxValorNodo";
+            txtBoxValorNodo.Size = new Size(100, 23);
+            txtBoxValorNodo.TabIndex = 5;
+            // 
+            // comboColorMatriz
+            // 
+            comboColorMatriz.Enabled = false;
+            comboColorMatriz.Location = new Point(813, 19);
+            comboColorMatriz.Name = "comboColorMatriz";
+            comboColorMatriz.Size = new Size(70, 23);
+            comboColorMatriz.TabIndex = 10;
+            // 
+            // txtColorMtriz
+            // 
+            txtColorMtriz.AutoSize = true;
+            txtColorMtriz.Location = new Point(707, 21);
+            txtColorMtriz.Name = "txtColorMtriz";
+            txtColorMtriz.Size = new Size(91, 15);
+            txtColorMtriz.TabIndex = 4;
+            txtColorMtriz.Text = "Color de nodos:";
+            // 
+            // btnGenerarMatriz
+            // 
+            btnGenerarMatriz.Location = new Point(898, 9);
+            btnGenerarMatriz.Name = "btnGenerarMatriz";
+            btnGenerarMatriz.Size = new Size(78, 46);
+            btnGenerarMatriz.TabIndex = 11;
+            btnGenerarMatriz.Text = "Generar\r\nmatriz";
+            btnGenerarMatriz.UseVisualStyleBackColor = true;
+            btnGenerarMatriz.Click += btnGenerarMatriz_Click;
+            // 
+            // txtColorNodo
+            // 
+            txtColorNodo.AutoSize = true;
+            txtColorNodo.Location = new Point(234, 32);
+            txtColorNodo.Name = "txtColorNodo";
+            txtColorNodo.Size = new Size(89, 15);
+            txtColorNodo.TabIndex = 4;
+            txtColorNodo.Text = "Color del nodo:";
+            // 
+            // comboColorNodo
+            // 
+            comboColorNodo.BackColor = SystemColors.MenuText;
+            comboColorNodo.Enabled = false;
+            comboColorNodo.Location = new Point(329, 29);
+            comboColorNodo.Name = "comboColorNodo";
+            comboColorNodo.Size = new Size(70, 23);
+            comboColorNodo.TabIndex = 10;
+            // 
+            // btnCamColrNodo
+            // 
+            btnCamColrNodo.Location = new Point(424, 16);
+            btnCamColrNodo.Name = "btnCamColrNodo";
+            btnCamColrNodo.Size = new Size(105, 43);
+            btnCamColrNodo.TabIndex = 11;
+            btnCamColrNodo.Text = "Cambiar\r\ncolor del nodo";
+            btnCamColrNodo.UseVisualStyleBackColor = true;
+            btnCamColrNodo.Click += btnCamColrNodo_Click;
+            // 
+            // txtcolorArista
+            // 
+            txtcolorArista.AutoSize = true;
+            txtcolorArista.Location = new Point(265, 179);
+            txtcolorArista.Name = "txtcolorArista";
+            txtcolorArista.Size = new Size(89, 15);
+            txtcolorArista.TabIndex = 4;
+            txtcolorArista.Text = "Color del arista:";
+            // 
+            // btnCambiarColrArista
+            // 
+            btnCambiarColrArista.Location = new Point(434, 169);
+            btnCambiarColrArista.Name = "btnCambiarColrArista";
+            btnCambiarColrArista.Size = new Size(104, 53);
+            btnCambiarColrArista.TabIndex = 11;
+            btnCambiarColrArista.Text = "Cambiar\r\ncolor de la arista";
+            btnCambiarColrArista.UseVisualStyleBackColor = true;
+            // 
+            // txtBoxColrArista
+            // 
+            txtBoxColrArista.BackColor = SystemColors.MenuText;
+            txtBoxColrArista.Enabled = false;
+            txtBoxColrArista.Location = new Point(357, 176);
+            txtBoxColrArista.Name = "txtBoxColrArista";
+            txtBoxColrArista.Size = new Size(70, 23);
+            txtBoxColrArista.TabIndex = 10;
+            // 
+            // groupPanelControl
+            // 
+            groupPanelControl.Controls.Add(comboNodoOrigen);
+            groupPanelControl.Controls.Add(txtBoxColrLetra);
+            groupPanelControl.Controls.Add(txtBoxColrArista);
+            groupPanelControl.Controls.Add(txtNodoOrigen);
+            groupPanelControl.Controls.Add(btnDesahacerConexion);
+            groupPanelControl.Controls.Add(comboColorNodo);
+            groupPanelControl.Controls.Add(txtValorNodo);
+            groupPanelControl.Controls.Add(btnCambiarColrLetra);
+            groupPanelControl.Controls.Add(btnCambiarColrArista);
+            groupPanelControl.Controls.Add(btnCrearConexion);
+            groupPanelControl.Controls.Add(txtColrLetra);
+            groupPanelControl.Controls.Add(txtColorNodo);
+            groupPanelControl.Controls.Add(GroupComandos);
+            groupPanelControl.Controls.Add(btnCamColrNodo);
+            groupPanelControl.Controls.Add(ComboDireccion);
+            groupPanelControl.Controls.Add(txtcolorArista);
+            groupPanelControl.Controls.Add(txtDireccion);
+            groupPanelControl.Controls.Add(txtBoxValorNodo);
+            groupPanelControl.Enabled = false;
+            groupPanelControl.Location = new Point(456, 61);
+            groupPanelControl.Name = "groupPanelControl";
+            groupPanelControl.Size = new Size(548, 353);
+            groupPanelControl.TabIndex = 12;
+            groupPanelControl.TabStop = false;
+            groupPanelControl.Text = "Panel control";
+            // 
+            // txtBoxColrLetra
+            // 
+            txtBoxColrLetra.BackColor = SystemColors.MenuText;
+            txtBoxColrLetra.Enabled = false;
+            txtBoxColrLetra.Location = new Point(345, 91);
+            txtBoxColrLetra.Name = "txtBoxColrLetra";
+            txtBoxColrLetra.Size = new Size(70, 23);
+            txtBoxColrLetra.TabIndex = 10;
+            // 
+            // btnCambiarColrLetra
+            // 
+            btnCambiarColrLetra.Location = new Point(433, 80);
+            btnCambiarColrLetra.Name = "btnCambiarColrLetra";
+            btnCambiarColrLetra.Size = new Size(96, 42);
+            btnCambiarColrLetra.TabIndex = 11;
+            btnCambiarColrLetra.Text = "Cambiar\r\ncolor de letra";
+            btnCambiarColrLetra.UseVisualStyleBackColor = true;
+            // 
+            // txtColrLetra
+            // 
+            txtColrLetra.AutoSize = true;
+            txtColrLetra.Location = new Point(258, 94);
+            txtColrLetra.Name = "txtColrLetra";
+            txtColrLetra.Size = new Size(81, 15);
+            txtColrLetra.TabIndex = 4;
+            txtColrLetra.Text = "Color de letra:";
             // 
             // diseñoGrafo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(952, 576);
-            Controls.Add(pictureBox1);
-            Controls.Add(comboBox2);
-            Controls.Add(txtVectores);
-            Controls.Add(textBox1);
-            Controls.Add(txtNodoOrigen);
+            ClientSize = new Size(1016, 576);
+            Controls.Add(groupPanelControl);
+            Controls.Add(btnGenerarMatriz);
+            Controls.Add(comboColorMatriz);
+            Controls.Add(btnExportAlgoritmo);
+            Controls.Add(btnExportGrafo);
+            Controls.Add(txtColorMtriz);
             Controls.Add(txtMatriz);
-            Controls.Add(comboBox1);
+            Controls.Add(combo2DMatriz);
             Controls.Add(dgdvAlgoritmo);
             Controls.Add(panelGrafos);
             Name = "diseñoGrafo";
-            Text = "Form1";
+            Text = "Grafos";
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            GroupComandos.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureDownR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureUpR).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureCenter).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureRight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureLeft).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureDownL).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureDown).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureUpL).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureUp).EndInit();
+            groupPanelControl.ResumeLayout(false);
+            groupPanelControl.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -148,14 +502,44 @@
 
         private Panel panelGrafos;
         private DataGridView dgdvAlgoritmo;
-        private ComboBox comboBox1;
+        private ComboBox combo2DMatriz;
         private Label txtMatriz;
-        private ColorDialog colorDialog1;
-        private ColorDialog colorDialog2;
+        private ColorDialog colorNodos;
+        private ColorDialog colorNodo;
         private Label txtNodoOrigen;
-        private TextBox textBox1;
-        private Label txtVectores;
-        private ComboBox comboBox2;
-        private PictureBox pictureBox1;
+        private TextBox comboNodoOrigen;
+        private Label txtDireccion;
+        private ComboBox ComboDireccion;
+        private GroupBox GroupComandos;
+        private PictureBox pictureUpR;
+        private PictureBox pictureUpL;
+        private PictureBox pictureUp;
+        private PictureBox pictureDownR;
+        private PictureBox pictureDownL;
+        private PictureBox pictureDown;
+        private PictureBox pictureLeft;
+        private PictureBox pictureRight;
+        private Button btnCrearConexion;
+        private Button btnDesahacerConexion;
+        private Button btnExportGrafo;
+        private Button btnExportAlgoritmo;
+        private Label txtValorNodo;
+        private TextBox txtBoxValorNodo;
+        private TextBox comboColorMatriz;
+        private Label txtColorMtriz;
+        private Button btnGenerarMatriz;
+        private Label txtColorNodo;
+        private TextBox comboColorNodo;
+        private Button btnCamColrNodo;
+        private Label txtcolorArista;
+        private Button btnCambiarColrArista;
+        private TextBox txtBoxColrArista;
+        private GroupBox groupPanelControl;
+        private Button btnCambiarColrLetra;
+        private Label txtColrLetra;
+        private TextBox txtBoxColrLetra;
+        private ColorDialog colorLetra;
+        private ColorDialog colorArista;
+        private PictureBox pictureCenter;
     }
 }
