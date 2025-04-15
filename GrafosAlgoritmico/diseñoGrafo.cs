@@ -1,4 +1,5 @@
 using GrafosAlgoritmico.Classes;
+using System.Drawing.Text;
 
 namespace GrafosAlgoritmico
 {
@@ -6,6 +7,8 @@ namespace GrafosAlgoritmico
     {
         MatrizGrafo matriz = new MatrizGrafo();
         bool permisoCrearMatriz = false;
+        int[] indexAux = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
+        int[] indexPuntoPartida = new int[2]; //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
         public diseñoGrafo()
         {
             InitializeComponent();
@@ -17,7 +20,7 @@ namespace GrafosAlgoritmico
         {
             if (permisoCrearMatriz && matriz != null)
             {
-                matriz.DibujarNodos(sender, e, 50, 30);
+                matriz.DibujarNodos(e, 50, 30);
             }
         }
 
@@ -30,6 +33,7 @@ namespace GrafosAlgoritmico
                 panelGrafos.Invalidate();
                 groupPanelControl.Enabled = true;
                 permisoCrearMatriz = true;
+                comboNodoOrigen.Text = "Aun no definido";
             }
             else
             {
@@ -50,52 +54,71 @@ namespace GrafosAlgoritmico
         private void pictureUpL_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 0;
+            indexAux[0] = -1;
+            indexAux[1] = -1;
+            GenerarMovimientoPunto();
         }
 
         private void pictureUp_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 1;
+            indexAux[0] = -1;
+            indexAux[1] = 0;
+            GenerarMovimientoPunto();
         }
 
         private void pictureUpR_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 2;
+            indexAux[0] = -1;
+            indexAux[1] = 1;
+            GenerarMovimientoPunto();
         }
 
         private void pictureLeft_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 3;
+            indexAux[0] = 0;
+            indexAux[1] = -1;
+            GenerarMovimientoPunto();
         }
 
         private void pictureRight_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 4;
+            indexAux[0] = 0;
+            indexAux[1] = 1;
+            GenerarMovimientoPunto();
         }
 
         private void pictureDownL_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 5;
+            indexAux[0] = 1;
+            indexAux[1] = -1;
+            GenerarMovimientoPunto();
         }
 
         private void pictureDown_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 6;
+            indexAux[0] = 1;
+            indexAux[1] = 0;
+            GenerarMovimientoPunto();
         }
 
         private void pictureDownR_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 7;
+            indexAux[0] = 1;
+            indexAux[1] = 1;
+            GenerarMovimientoPunto();
         }
         private void pictureCenter_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = -1;
         }
 
-        private void comboNodoOrigen_TextChanged(object sender, EventArgs e)
-        {
-            //TODO
-
-        }
 
         private void btnCamColrNodo_Click(object sender, EventArgs e)
         {
@@ -105,8 +128,29 @@ namespace GrafosAlgoritmico
                 //matriz.Nodos[1, 1].color = colorDialog2.Color; // Cambiar el color del nodo
                 //panelGrafos.Invalidate(); // Redibujar el panel
             }
+            GenerarMovimientoPunto();
         }
 
-        
+        private void GenerarMovimientoPunto()
+        {
+            try
+            {
+                if (comboNodoOrigen.Text == "Aun no definido")
+                {
+                    matriz.CambiarPuntoPartida(colorNodos.Color, colorNodo.Color, indexAux[0], indexAux[1]);
+                    panelGrafos.Invalidate();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnDefinirNOrignen_Click(object sender, EventArgs e) // para dejar fijo el nodo de partida
+        {
+            indexPuntoPartida = matriz.PuntosPartida;
+            comboNodoOrigen.Text = $"fila {indexPuntoPartida[0] + 1}, columna {indexPuntoPartida[1] + 1}\"";
+        }
     }
 }
