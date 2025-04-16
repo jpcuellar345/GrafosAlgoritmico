@@ -5,15 +5,31 @@ namespace GrafosAlgoritmico
 {
     public partial class diseñoGrafo : Form
     {
-        MatrizGrafo matriz = new MatrizGrafo();
+        MatrizGrafo matriz;
         bool permisoCrearMatriz = false;
-        int[] indexAux = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
-        int[] indexPuntoPartida = new int[2]; //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
+        int[] indexAux; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
+        int[] indexPuntoPartida; //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
+
         public diseñoGrafo()
         {
             InitializeComponent();
             CenterToScreen();
 
+        }
+        private void InicializarValor()
+        {
+            matriz = new MatrizGrafo();
+            indexAux = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
+            indexPuntoPartida = new int[2];
+            groupPanelControl.Enabled = true;
+            permisoCrearMatriz = true;
+            comboNodoOrigen.Text = "Aun no definido";
+            matriz.PuntosPartida = [0, 0];
+            indexAux = [0, 0];
+            GroupComandos.Enabled = false;
+            btnDefinirNOrignen.Enabled = false;
+            btnStrNodOrig.Enabled = true;
+            ComboDireccion.SelectedIndex = -1;
         }
 
         private void panelGrafos_Paint(object sender, PaintEventArgs e)
@@ -24,32 +40,60 @@ namespace GrafosAlgoritmico
             }
         }
 
-        private void btnGenerarMatriz_Click(object sender, EventArgs e)
+        private void btnColrMatriz_Click(object sender, EventArgs e) //Para cambiar el color de la matriz
+        {
+            colorMatriz.ShowDialog();
+            btnColrMatriz.BackColor = colorMatriz.Color;
+        }
+        private void btnGenerarMatriz_Click(object sender, EventArgs e) //Para generar la matriz
         {
             if (combo2DMatriz.SelectedIndex != -1)
             {
-                int dimension = combo2DMatriz.SelectedIndex + 3;
-                matriz.CrearMatriz(dimension, dimension, 40, 60, colorNodos.Color);
+                InicializarValor();
+                int dimension = combo2DMatriz.SelectedIndex + 3; //para obtener las longitudes de la matriz
+                matriz.CrearMatriz(dimension, dimension, 40, 60, colorMatriz.Color);
                 panelGrafos.Invalidate();
-                groupPanelControl.Enabled = true;
-                permisoCrearMatriz = true;
-                comboNodoOrigen.Text = "Aun no definido";
             }
             else
             {
                 MessageBox.Show("No se ha definido las dimensiones de la matriz", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void combo2DMatriz_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnStrNodOrig_Click(object sender, EventArgs e)
         {
-            if (combo2DMatriz.SelectedIndex != -1)
+            if (btnColrNodo.BackColor == btnColrMatriz.BackColor)
             {
-                MessageBox.Show("Da aceptar para escoger un color a la matriz.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                colorNodos.ShowDialog();
-                comboColorMatriz.BackColor = colorNodos.Color;
+                MessageBox.Show("La matriz y el nodo de partida no pueden ser del mismo color", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                ComboDireccion.SelectedIndex = -1;
+                GroupComandos.Enabled = true;
+                GenerarMovimientoPunto();
             }
         }
+        private void btnColrNodo_Click(object sender, EventArgs e)
+        {
+            colorNodo.ShowDialog();
+            btnColrNodo.BackColor = colorNodo.Color;
+        }
+        private void btnDefinirNOrignen_Click(object sender, EventArgs e) // para dejar fijo el nodo de partida
+        {
+            if (comboNodoOrigen.Text == "Aun no definido")
+            {
+                indexPuntoPartida = matriz.PuntosPartida;
+                comboNodoOrigen.Text = $"fila {indexPuntoPartida[0] + 1}, columna {indexPuntoPartida[1] + 1}";
+                GroupComandos.Enabled = false;
+                btnDefinirNOrignen.Enabled = false;
+                indexAux = [0, 0];
+            }
+            else
+            {
+                //TODO
+            }
+            btnStrNodOrig.Enabled = true;
+        }
+
 
         private void pictureUpL_Click(object sender, EventArgs e)
         {
@@ -114,22 +158,10 @@ namespace GrafosAlgoritmico
             indexAux[1] = 1;
             GenerarMovimientoPunto();
         }
-        private void pictureCenter_Click(object sender, EventArgs e)
-        {
-            ComboDireccion.SelectedIndex = -1;
-        }
 
 
-        private void btnCamColrNodo_Click(object sender, EventArgs e)
-        {
-            if (colorNodo.ShowDialog() == DialogResult.OK)
-            {
-                comboColorNodo.BackColor = colorNodo.Color;
-                //matriz.Nodos[1, 1].color = colorDialog2.Color; // Cambiar el color del nodo
-                //panelGrafos.Invalidate(); // Redibujar el panel
-            }
-            GenerarMovimientoPunto();
-        }
+
+
 
         private void GenerarMovimientoPunto()
         {
@@ -137,7 +169,12 @@ namespace GrafosAlgoritmico
             {
                 if (comboNodoOrigen.Text == "Aun no definido")
                 {
-                    matriz.CambiarPuntoPartida(colorNodos.Color, colorNodo.Color, indexAux[0], indexAux[1]);
+                    matriz.SeleccionarPuntoPartida(colorMatriz.Color, colorNodo.Color, indexAux[0], indexAux[1]);
+                    panelGrafos.Invalidate();
+                }
+                else
+                {
+                    matriz.SeleccionarSiguientNodo(colorMatriz.Color, colorNodo.Color, indexAux[0], indexAux[1], txtBoxValorNodo.Text);
                     panelGrafos.Invalidate();
                 }
             }
@@ -147,10 +184,13 @@ namespace GrafosAlgoritmico
             }
         }
 
-        private void btnDefinirNOrignen_Click(object sender, EventArgs e) // para dejar fijo el nodo de partida
+        private void ComboDireccion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            indexPuntoPartida = matriz.PuntosPartida;
-            comboNodoOrigen.Text = $"fila {indexPuntoPartida[0] + 1}, columna {indexPuntoPartida[1] + 1}\"";
+            if (ComboDireccion.SelectedIndex != -1)
+            {
+                btnDefinirNOrignen.Enabled = true;
+                btnStrNodOrig.Enabled = false;
+            }
         }
     }
 }

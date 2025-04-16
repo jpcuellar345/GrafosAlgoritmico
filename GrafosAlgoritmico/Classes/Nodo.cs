@@ -8,18 +8,26 @@ namespace GrafosAlgoritmico.Classes
 {
     public class Nodo
     {
-        public string valor;
+        private string valor;
+        public Color colorValor;
         public int coordenaEjeX;
         public int coordenaEjeY;
-        public Color color;
+        public Color colorNodo;
+        public int indexXDestino;
+        public int indexYDestino;
+        public string direccionDestino;
 
-
-        public Nodo(int coordenaEjeX, int coordenaEjeY, Color color)
+        public Nodo(int coordenaEjeX, int coordenaEjeY, Color colorNodo)
         {
             this.valor = "";
+            this.colorValor = colorNodo;
             this.coordenaEjeX = coordenaEjeX;
             this.coordenaEjeY = coordenaEjeY;
-            this.color = color;
+            this.colorNodo = colorNodo;
+            indexXDestino = 0;
+            indexYDestino = 0;
+            direccionDestino = "";
+
         }
 
         public string Valor
@@ -27,12 +35,15 @@ namespace GrafosAlgoritmico.Classes
             get { return valor; }
             set
             {
-                if (string.IsNullOrEmpty(value) || value.Length > 3) // Verificar que tenga exactamente 3 caracteres
+                
+                if (value.Length <0 || value.Length > 3)
                 {
-                    throw new ArgumentException("El nodo debe tener maximo 3 caracteres.");
+                    throw new ArgumentException("El nodo debe tener máximo 3 caracteres.");
                 }
-                this.valor = value; // Asignar si cumple con la regla
+                else
+                { this.valor = value; } // Asignar el valor si cumple la regla}
             }
         }
+
     }
 }
