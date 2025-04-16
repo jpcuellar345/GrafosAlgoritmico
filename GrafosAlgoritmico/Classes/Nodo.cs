@@ -13,9 +13,7 @@ namespace GrafosAlgoritmico.Classes
         public int coordenaEjeX;
         public int coordenaEjeY;
         public Color colorNodo;
-        public int indexXDestino;
-        public int indexYDestino;
-        public string direccionDestino;
+        
 
         public Nodo(int coordenaEjeX, int coordenaEjeY, Color colorNodo)
         {
@@ -24,9 +22,6 @@ namespace GrafosAlgoritmico.Classes
             this.coordenaEjeX = coordenaEjeX;
             this.coordenaEjeY = coordenaEjeY;
             this.colorNodo = colorNodo;
-            indexXDestino = 0;
-            indexYDestino = 0;
-            direccionDestino = "";
 
         }
 

@@ -14,7 +14,8 @@ namespace GrafosAlgoritmico.Classes
     {
         private Nodo[,] nodos;
         private int[] puntosPartida = [0, 0]; // Coordenadas del punto de partida inicializado en (0,0)
-        private int[] puntos = [0, 0];
+        private int[] puntosNodoA = [0, 0];
+        private int[] puntosNodoB = [0, 0];
         public Nodo[,] Nodos { get => nodos; set => nodos = value; }
         public int[] PuntosPartida { get => puntosPartida; set => puntosPartida = value; }
 
@@ -30,7 +31,7 @@ namespace GrafosAlgoritmico.Classes
                     Nodos[i, j] = new Nodo(0, 0, colorNodo1); // Inicializar cada nodo con colorNodo1
                 }
             }
-            pilaDeNodos = new Stack<Nodo>();
+            
         }
 
         // Método para dibujar los nodos en el formulario
@@ -74,9 +75,9 @@ namespace GrafosAlgoritmico.Classes
                         g.DrawString(textoNodo, font, pincelTexto, textoX, textoY); // Dibujar texto
                     }
 
-                    // Actualizar las coordenadas del nodo
-                    nodo.coordenaEjeX = x;
-                    nodo.coordenaEjeY = y;
+                    // Actualizar las coordenadas del cada nodo de la matriz Nodods
+                    Nodos[fila, colum].coordenaEjeX = x;
+                    Nodos[fila, colum].coordenaEjeY = y;
                 }
             }
         }
@@ -122,6 +123,7 @@ namespace GrafosAlgoritmico.Classes
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorNodo = nuevoColor;
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorValor = original;
                 Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = "P1";
+                puntosNodoA = [puntosPartida[0], puntosPartida[1]];
             }
             else
             {
@@ -138,8 +140,8 @@ namespace GrafosAlgoritmico.Classes
             }
 
             // Calcular los índices del siguiente nodo
-            int nuevaFila = puntos[0] + aumentF;
-            int nuevaColumna = puntos[1] + aumentC;
+            int nuevaFila = puntosNodoB[0] + aumentF;
+            int nuevaColumna = puntosNodoB[1] + aumentC;
 
             // Validar si se intenta seleccionar el nodo de partida
             if (Nodos[nuevaFila, nuevaColumna].Valor == "P1")
@@ -150,9 +152,9 @@ namespace GrafosAlgoritmico.Classes
             }
             else
             { // Restaurar el nodo actual a su estado original
-                Nodos[puntos[0], puntos[1]].colorNodo = original;
-                Nodos[puntos[0], puntos[1]].colorValor = original;
-                Nodos[puntos[0], puntos[1]].Valor = ""; // Limpiar el texto del nodo actual
+                Nodos[puntosNodoB[0], puntosNodoB[1]].colorNodo = original;
+                Nodos[puntosNodoB[0], puntosNodoB[1]].colorValor = original;
+                Nodos[puntosNodoB[0], puntosNodoB[1]].Valor = ""; // Limpiar el texto del nodo actual
             }
 
             // Validar que los nuevos índices estén dentro del rango
@@ -163,19 +165,26 @@ namespace GrafosAlgoritmico.Classes
             }
 
             // Verificar si se selecciona el mismo nodo que el actual
-            if (puntos[0] == nuevaFila && puntos[1] == nuevaColumna)
+            if (puntosNodoB[0] == nuevaFila && puntosNodoB[1] == nuevaColumna)
             {
-                throw new ArgumentException($"No se puede usar el mismo nodo en la posición [{puntos[0] + 1}, {puntos[1] + 1}].");
+                throw new ArgumentException($"No se puede usar el mismo nodo en la posición [{puntosNodoB[0] + 1}, {puntosNodoB[1] + 1}].");
             }
 
 
 
             // Actualizar el nodo al nuevo punto
-            puntos[0] = nuevaFila;
-            puntos[1] = nuevaColumna;
-            Nodos[puntos[0], puntos[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
-            Nodos[puntos[0], puntos[1]].colorValor = original;
-            Nodos[puntos[0], puntos[1]].Valor = texto; // Asignar el texto al nuevo nodo
+            puntosNodoB[0] = nuevaFila;
+            puntosNodoB[1] = nuevaColumna;
+            Nodos[puntosNodoB[0], puntosNodoB[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
+            Nodos[puntosNodoB[0], puntosNodoB[1]].colorValor = original;
+            Nodos[puntosNodoB[0], puntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
+        }
+        public void IntercambiarPuntosNodo(out int[] nodoA, out int[] nodoB) //
+        {
+            nodoA = puntosNodoA;
+            nodoB = puntosNodoB;
+            puntosNodoA = puntosNodoB;
+            //no veo la necesidad de reiniciar los puntosNodoB, ya que eso se encargara el metodo seleccionarSigueinte punto
         }
     }
 }

@@ -1,5 +1,6 @@
 using GrafosAlgoritmico.Classes;
 using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace GrafosAlgoritmico
 {
@@ -7,8 +8,10 @@ namespace GrafosAlgoritmico
     {
         MatrizGrafo matriz;
         bool permisoCrearMatriz = false;
-        int[] indexAux; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
+        int[] indexAuxMovimiento; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
         int[] indexPuntoPartida; //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
+        BindingSource bindingSource = new BindingSource();
+        List<EstructuraControl> datos = new List<EstructuraControl>();
 
         public diseñoGrafo()
         {
@@ -19,17 +22,18 @@ namespace GrafosAlgoritmico
         private void InicializarValor()
         {
             matriz = new MatrizGrafo();
-            indexAux = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
+            indexAuxMovimiento = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
             indexPuntoPartida = new int[2];
             groupPanelControl.Enabled = true;
             permisoCrearMatriz = true;
             comboNodoOrigen.Text = "Aun no definido";
             matriz.PuntosPartida = [0, 0];
-            indexAux = [0, 0];
             GroupComandos.Enabled = false;
             btnDefinirNOrignen.Enabled = false;
             btnStrNodOrig.Enabled = true;
             ComboDireccion.SelectedIndex = -1;
+            EstructuraControl.IniciarStack();
+            IniciarDgdvAlgoritmo();
         }
 
         private void panelGrafos_Paint(object sender, PaintEventArgs e)
@@ -83,14 +87,19 @@ namespace GrafosAlgoritmico
             {
                 indexPuntoPartida = matriz.PuntosPartida;
                 comboNodoOrigen.Text = $"fila {indexPuntoPartida[0] + 1}, columna {indexPuntoPartida[1] + 1}";
-                GroupComandos.Enabled = false;
-                btnDefinirNOrignen.Enabled = false;
-                indexAux = [0, 0];
             }
             else
-            {
-                //TODO
+            { //TODO
+                matriz.IntercambiarPuntosNodo(out int[] IndexNodoA, out int[] IndexNodoB);
+                EstructuraControl nuevoRegistro = new EstructuraControl(0,
+                    IndexNodoA[0], IndexNodoA[1], ComboDireccion.Text, IndexNodoB[0], IndexNodoB[1],
+                    txtBoxValorNodo.Text);
+                EstructuraControl.AgregarRegistro(nuevoRegistro);
+                ActualizarDataGridView();
             }
+            GroupComandos.Enabled = false;
+            btnDefinirNOrignen.Enabled = false;
+            indexAuxMovimiento = [0, 0];
             btnStrNodOrig.Enabled = true;
         }
 
@@ -98,64 +107,64 @@ namespace GrafosAlgoritmico
         private void pictureUpL_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 0;
-            indexAux[0] = -1;
-            indexAux[1] = -1;
+            indexAuxMovimiento[0] = -1;
+            indexAuxMovimiento[1] = -1;
             GenerarMovimientoPunto();
         }
 
         private void pictureUp_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 1;
-            indexAux[0] = -1;
-            indexAux[1] = 0;
+            indexAuxMovimiento[0] = -1;
+            indexAuxMovimiento[1] = 0;
             GenerarMovimientoPunto();
         }
 
         private void pictureUpR_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 2;
-            indexAux[0] = -1;
-            indexAux[1] = 1;
+            indexAuxMovimiento[0] = -1;
+            indexAuxMovimiento[1] = 1;
             GenerarMovimientoPunto();
         }
 
         private void pictureLeft_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 3;
-            indexAux[0] = 0;
-            indexAux[1] = -1;
+            indexAuxMovimiento[0] = 0;
+            indexAuxMovimiento[1] = -1;
             GenerarMovimientoPunto();
         }
 
         private void pictureRight_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 4;
-            indexAux[0] = 0;
-            indexAux[1] = 1;
+            indexAuxMovimiento[0] = 0;
+            indexAuxMovimiento[1] = 1;
             GenerarMovimientoPunto();
         }
 
         private void pictureDownL_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 5;
-            indexAux[0] = 1;
-            indexAux[1] = -1;
+            indexAuxMovimiento[0] = 1;
+            indexAuxMovimiento[1] = -1;
             GenerarMovimientoPunto();
         }
 
         private void pictureDown_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 6;
-            indexAux[0] = 1;
-            indexAux[1] = 0;
+            indexAuxMovimiento[0] = 1;
+            indexAuxMovimiento[1] = 0;
             GenerarMovimientoPunto();
         }
 
         private void pictureDownR_Click(object sender, EventArgs e)
         {
             ComboDireccion.SelectedIndex = 7;
-            indexAux[0] = 1;
-            indexAux[1] = 1;
+            indexAuxMovimiento[0] = 1;
+            indexAuxMovimiento[1] = 1;
             GenerarMovimientoPunto();
         }
 
@@ -169,12 +178,12 @@ namespace GrafosAlgoritmico
             {
                 if (comboNodoOrigen.Text == "Aun no definido")
                 {
-                    matriz.SeleccionarPuntoPartida(colorMatriz.Color, colorNodo.Color, indexAux[0], indexAux[1]);
+                    matriz.SeleccionarPuntoPartida(colorMatriz.Color, colorNodo.Color, indexAuxMovimiento[0], indexAuxMovimiento[1]);
                     panelGrafos.Invalidate();
                 }
                 else
                 {
-                    matriz.SeleccionarSiguientNodo(colorMatriz.Color, colorNodo.Color, indexAux[0], indexAux[1], txtBoxValorNodo.Text);
+                    matriz.SeleccionarSiguientNodo(colorMatriz.Color, colorNodo.Color, indexAuxMovimiento[0], indexAuxMovimiento[1], txtBoxValorNodo.Text);
                     panelGrafos.Invalidate();
                 }
             }
@@ -191,6 +200,22 @@ namespace GrafosAlgoritmico
                 btnDefinirNOrignen.Enabled = true;
                 btnStrNodOrig.Enabled = false;
             }
+        }
+        private void ActualizarDataGridView()
+        {
+            datos.Clear(); // Limpia la lista
+            datos.AddRange(EstructuraControl.pilaDeNodos); // Llena la lista con los datos de la pila
+            bindingSource.ResetBindings(false); // Refresca el enlace con los datos
+            //dgdvAlgoritmo.DataSource = datos;
+            dgdvAlgoritmo.Refresh();
+        }
+
+
+        private void IniciarDgdvAlgoritmo()
+        {
+            bindingSource.DataSource = datos;
+            dgdvAlgoritmo.DataSource = bindingSource;
+            dgdvAlgoritmo.Refresh();
         }
     }
 }
