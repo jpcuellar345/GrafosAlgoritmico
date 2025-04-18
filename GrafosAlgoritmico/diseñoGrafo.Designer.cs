@@ -72,10 +72,11 @@
             NumeroPaso = new DataGridViewTextBoxColumn();
             indexFilaOrigenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             indexColumOrigenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            valorNodoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ValorNodoorigen = new DataGridViewTextBoxColumn();
             direccionDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             indexFilaDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             indexColumDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            valorNodoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -416,7 +417,7 @@
             // 
             // btnStrNodOrig
             // 
-            btnStrNodOrig.Location = new Point(7, 22);
+            btnStrNodOrig.Location = new Point(16, 22);
             btnStrNodOrig.Name = "btnStrNodOrig";
             btnStrNodOrig.Size = new Size(88, 43);
             btnStrNodOrig.TabIndex = 11;
@@ -450,12 +451,12 @@
             dgdvAlgoritmo.AllowUserToOrderColumns = true;
             dgdvAlgoritmo.AutoGenerateColumns = false;
             dgdvAlgoritmo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdvAlgoritmo.Columns.AddRange(new DataGridViewColumn[] { NumeroPaso, indexFilaOrigenDataGridViewTextBoxColumn, indexColumOrigenDataGridViewTextBoxColumn, valorNodoDataGridViewTextBoxColumn, direccionDestinoDataGridViewTextBoxColumn, indexFilaDestinoDataGridViewTextBoxColumn, indexColumDestinoDataGridViewTextBoxColumn });
+            dgdvAlgoritmo.Columns.AddRange(new DataGridViewColumn[] { NumeroPaso, indexFilaOrigenDataGridViewTextBoxColumn, indexColumOrigenDataGridViewTextBoxColumn, ValorNodoorigen, direccionDestinoDataGridViewTextBoxColumn, indexFilaDestinoDataGridViewTextBoxColumn, indexColumDestinoDataGridViewTextBoxColumn, valorNodoDataGridViewTextBoxColumn });
             dgdvAlgoritmo.DataSource = estructuraControlBindingSource;
             dgdvAlgoritmo.Location = new Point(12, 420);
             dgdvAlgoritmo.Name = "dgdvAlgoritmo";
             dgdvAlgoritmo.RowHeadersWidth = 51;
-            dgdvAlgoritmo.Size = new Size(743, 117);
+            dgdvAlgoritmo.Size = new Size(673, 117);
             dgdvAlgoritmo.TabIndex = 1;
             // 
             // estructuraControlBindingSource
@@ -477,6 +478,7 @@
             indexFilaOrigenDataGridViewTextBoxColumn.MinimumWidth = 6;
             indexFilaOrigenDataGridViewTextBoxColumn.Name = "indexFilaOrigenDataGridViewTextBoxColumn";
             indexFilaOrigenDataGridViewTextBoxColumn.ReadOnly = true;
+            indexFilaOrigenDataGridViewTextBoxColumn.Width = 60;
             // 
             // indexColumOrigenDataGridViewTextBoxColumn
             // 
@@ -485,14 +487,14 @@
             indexColumOrigenDataGridViewTextBoxColumn.MinimumWidth = 6;
             indexColumOrigenDataGridViewTextBoxColumn.Name = "indexColumOrigenDataGridViewTextBoxColumn";
             indexColumOrigenDataGridViewTextBoxColumn.ReadOnly = true;
+            indexColumOrigenDataGridViewTextBoxColumn.Width = 60;
             // 
-            // valorNodoDataGridViewTextBoxColumn
+            // ValorNodoorigen
             // 
-            valorNodoDataGridViewTextBoxColumn.DataPropertyName = "ValorNodo";
-            valorNodoDataGridViewTextBoxColumn.HeaderText = "Texto del nodo";
-            valorNodoDataGridViewTextBoxColumn.MinimumWidth = 6;
-            valorNodoDataGridViewTextBoxColumn.Name = "valorNodoDataGridViewTextBoxColumn";
-            valorNodoDataGridViewTextBoxColumn.ReadOnly = true;
+            ValorNodoorigen.DataPropertyName = "ValorNodoorigen";
+            ValorNodoorigen.HeaderText = "Texto del nodo origen";
+            ValorNodoorigen.Name = "ValorNodoorigen";
+            ValorNodoorigen.ReadOnly = true;
             // 
             // direccionDestinoDataGridViewTextBoxColumn
             // 
@@ -501,7 +503,7 @@
             direccionDestinoDataGridViewTextBoxColumn.MinimumWidth = 6;
             direccionDestinoDataGridViewTextBoxColumn.Name = "direccionDestinoDataGridViewTextBoxColumn";
             direccionDestinoDataGridViewTextBoxColumn.ReadOnly = true;
-            direccionDestinoDataGridViewTextBoxColumn.Width = 130;
+            direccionDestinoDataGridViewTextBoxColumn.Width = 120;
             // 
             // indexFilaDestinoDataGridViewTextBoxColumn
             // 
@@ -510,6 +512,7 @@
             indexFilaDestinoDataGridViewTextBoxColumn.MinimumWidth = 6;
             indexFilaDestinoDataGridViewTextBoxColumn.Name = "indexFilaDestinoDataGridViewTextBoxColumn";
             indexFilaDestinoDataGridViewTextBoxColumn.ReadOnly = true;
+            indexFilaDestinoDataGridViewTextBoxColumn.Width = 60;
             // 
             // indexColumDestinoDataGridViewTextBoxColumn
             // 
@@ -518,6 +521,15 @@
             indexColumDestinoDataGridViewTextBoxColumn.MinimumWidth = 6;
             indexColumDestinoDataGridViewTextBoxColumn.Name = "indexColumDestinoDataGridViewTextBoxColumn";
             indexColumDestinoDataGridViewTextBoxColumn.ReadOnly = true;
+            indexColumDestinoDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // valorNodoDataGridViewTextBoxColumn
+            // 
+            valorNodoDataGridViewTextBoxColumn.DataPropertyName = "ValorNodo";
+            valorNodoDataGridViewTextBoxColumn.HeaderText = "Texto del nodo destino";
+            valorNodoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            valorNodoDataGridViewTextBoxColumn.Name = "valorNodoDataGridViewTextBoxColumn";
+            valorNodoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // diseñoGrafo
             // 
@@ -536,6 +548,7 @@
             Controls.Add(panelGrafos);
             Name = "diseñoGrafo";
             Text = "Grafos";
+            Load += diseñoGrafo_Load;
             GroupComandos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureDownR).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).EndInit();
@@ -598,9 +611,10 @@
         private DataGridViewTextBoxColumn NumeroPaso;
         private DataGridViewTextBoxColumn indexFilaOrigenDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn indexColumOrigenDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn valorNodoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ValorNodoorigen;
         private DataGridViewTextBoxColumn direccionDestinoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn indexFilaDestinoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn indexColumDestinoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn valorNodoDataGridViewTextBoxColumn;
     }
 }

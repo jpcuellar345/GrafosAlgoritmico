@@ -9,7 +9,7 @@ namespace GrafosAlgoritmico
         MatrizGrafo matriz;
         bool permisoCrearMatriz = false;
         int[] indexAuxMovimiento; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
-        int[] indexPuntoPartida; //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
+                                  //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
         BindingSource bindingSource = new BindingSource();
         List<EstructuraControl> datos = new List<EstructuraControl>();
 
@@ -23,7 +23,6 @@ namespace GrafosAlgoritmico
         {
             matriz = new MatrizGrafo();
             indexAuxMovimiento = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
-            indexPuntoPartida = new int[2];
             groupPanelControl.Enabled = true;
             permisoCrearMatriz = true;
             comboNodoOrigen.Text = "Aun no definido";
@@ -34,6 +33,7 @@ namespace GrafosAlgoritmico
             ComboDireccion.SelectedIndex = -1;
             EstructuraControl.IniciarStack();
             IniciarDgdvAlgoritmo();
+            ActualizarDataGridView();
         }
 
         private void panelGrafos_Paint(object sender, PaintEventArgs e)
@@ -85,22 +85,26 @@ namespace GrafosAlgoritmico
         {
             if (comboNodoOrigen.Text == "Aun no definido")
             {
-                indexPuntoPartida = matriz.PuntosPartida;
-                comboNodoOrigen.Text = $"fila {indexPuntoPartida[0] + 1}, columna {indexPuntoPartida[1] + 1}";
+                comboNodoOrigen.Text = $"fila {matriz.PuntosPartida[0]}, columna {matriz.PuntosPartida[1]}";
+                btnStrNodOrig.Enabled = false;
+                btnDefinirNOrignen.Enabled = true;
+                GroupComandos.Enabled = true;
+                indexAuxMovimiento = [0, 0]; //nunca en tu ideas borres esto tan indispensable para que no luches de nuevo con el problema
             }
             else
             { //TODO
-                matriz.IntercambiarPuntosNodo(out int[] IndexNodoA, out int[] IndexNodoB);
+                int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
+                int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
+                matriz.ReiniciarPuntosNodoB();
+                //btnDefinirNOrignen.Enabled = true;
+                //indexAuxMovimiento = [0, 0];
+                btnStrNodOrig.Enabled = false;
                 EstructuraControl nuevoRegistro = new EstructuraControl(0,
                     IndexNodoA[0], IndexNodoA[1], ComboDireccion.Text, IndexNodoB[0], IndexNodoB[1],
-                    txtBoxValorNodo.Text);
+                    valorNodoDestino: matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoA[0], IndexNodoA[1]].Valor);
                 EstructuraControl.AgregarRegistro(nuevoRegistro);
                 ActualizarDataGridView();
             }
-            GroupComandos.Enabled = false;
-            btnDefinirNOrignen.Enabled = false;
-            indexAuxMovimiento = [0, 0];
-            btnStrNodOrig.Enabled = true;
         }
 
 
@@ -208,6 +212,7 @@ namespace GrafosAlgoritmico
             bindingSource.ResetBindings(false); // Refresca el enlace con los datos
             //dgdvAlgoritmo.DataSource = datos;
             dgdvAlgoritmo.Refresh();
+
         }
 
 
@@ -216,6 +221,11 @@ namespace GrafosAlgoritmico
             bindingSource.DataSource = datos;
             dgdvAlgoritmo.DataSource = bindingSource;
             dgdvAlgoritmo.Refresh();
+        }
+
+        private void diseñoGrafo_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

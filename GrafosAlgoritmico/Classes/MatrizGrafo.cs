@@ -18,6 +18,8 @@ namespace GrafosAlgoritmico.Classes
         private int[] puntosNodoB = [0, 0];
         public Nodo[,] Nodos { get => nodos; set => nodos = value; }
         public int[] PuntosPartida { get => puntosPartida; set => puntosPartida = value; }
+        public int[] PuntosNodoA { get => puntosNodoA; set => puntosNodoA = value; }
+        public int[] PuntosNodoB { get => puntosNodoB; set => puntosNodoB = value; }
 
         // Método para inicializar la matriz de nodos
         public void CrearMatriz(int fila, int columna, int tamanoNodo, int espacioEntreNodo, Color colorNodo1)
@@ -31,7 +33,7 @@ namespace GrafosAlgoritmico.Classes
                     Nodos[i, j] = new Nodo(0, 0, colorNodo1); // Inicializar cada nodo con colorNodo1
                 }
             }
-            
+
         }
 
         // Método para dibujar los nodos en el formulario
@@ -123,7 +125,7 @@ namespace GrafosAlgoritmico.Classes
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorNodo = nuevoColor;
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorValor = original;
                 Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = "P1";
-                puntosNodoA = [puntosPartida[0], puntosPartida[1]];
+                PuntosNodoA = [puntosPartida[0], puntosPartida[1]];
             }
             else
             {
@@ -133,57 +135,50 @@ namespace GrafosAlgoritmico.Classes
 
         public void SeleccionarSiguientNodo(Color original, Color nuevoColor, int aumentF, int aumentC, string texto)
         {
-            // Validar que la matriz esté inicializada
-            if (Nodos == null)
-            {
-                throw new InvalidOperationException("La matriz de nodos no ha sido inicializada."); // Lanzar excepción si no está inicializada
-            }
-
             // Calcular los índices del siguiente nodo
-            int nuevaFila = puntosNodoB[0] + aumentF;
-            int nuevaColumna = puntosNodoB[1] + aumentC;
+            int nuevaFila = PuntosNodoA[0] + aumentF;
+            int nuevaColumna = PuntosNodoA[1] + aumentC;
 
             // Validar si se intenta seleccionar el nodo de partida
-            if (Nodos[nuevaFila, nuevaColumna].Valor == "P1")
+            // Verificar si se selecciona el mismo nodo que el actual
+            if (puntosPartida[0] == nuevaFila && puntosPartida[1] == nuevaColumna)
             {
-                // Mover automáticamente a la siguiente fila si los índices están dentro del rango
-
-                nuevaColumna += 1; // Saltar a la siguiente fila
+                throw new ArgumentException($"No se puede usar el mismo nodo en la posición [{PuntosNodoB[0] + 1}, {PuntosNodoB[1] + 1}].");
             }
-            else
-            { // Restaurar el nodo actual a su estado original
-                Nodos[puntosNodoB[0], puntosNodoB[1]].colorNodo = original;
-                Nodos[puntosNodoB[0], puntosNodoB[1]].colorValor = original;
-                Nodos[puntosNodoB[0], puntosNodoB[1]].Valor = ""; // Limpiar el texto del nodo actual
-            }
-
-            // Validar que los nuevos índices estén dentro del rango
-            if (nuevaFila < 0 || nuevaColumna < 0 ||
+            else if (nuevaFila < 0 || nuevaColumna < 0 ||
             nuevaFila >= Nodos.GetLength(0) || nuevaColumna >= Nodos.GetLength(1))
             {
-                throw new ArgumentException($"Se sobrepasó el rango de la matriz: [{nuevaFila}, {nuevaColumna}].");
+                throw new ArgumentException($"Se sobrepasó el rango de la matriz.");
             }
-
-            // Verificar si se selecciona el mismo nodo que el actual
-            if (puntosNodoB[0] == nuevaFila && puntosNodoB[1] == nuevaColumna)
+            if ((puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == "P1")
+                || (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == "P1" && aumentF == 1 && aumentC == 1)) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
+            { //esto es para que no me reinicie el color y valor del nodo de partida, en el caso de que el nodo partida este en [0,0]
+                PuntosNodoB[0] = nuevaFila;
+                PuntosNodoB[1] = nuevaColumna;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
+            }
+            else
             {
-                throw new ArgumentException($"No se puede usar el mismo nodo en la posición [{puntosNodoB[0] + 1}, {puntosNodoB[1] + 1}].");
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = original;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = ""; // Limpiar el texto del nodo actual
+
+
+                // Validar que los nuevos índices estén dentro del rango
+                // Actualizar el nodo al nuevo punto
+                PuntosNodoB[0] = nuevaFila;
+                PuntosNodoB[1] = nuevaColumna;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
             }
-
-
-
-            // Actualizar el nodo al nuevo punto
-            puntosNodoB[0] = nuevaFila;
-            puntosNodoB[1] = nuevaColumna;
-            Nodos[puntosNodoB[0], puntosNodoB[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
-            Nodos[puntosNodoB[0], puntosNodoB[1]].colorValor = original;
-            Nodos[puntosNodoB[0], puntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
         }
-        public void IntercambiarPuntosNodo(out int[] nodoA, out int[] nodoB) //
+        public void ReiniciarPuntosNodoB() //
         {
-            nodoA = puntosNodoA;
-            nodoB = puntosNodoB;
-            puntosNodoA = puntosNodoB;
+            PuntosNodoA = PuntosNodoB;
+            puntosNodoB = [0, 0];
             //no veo la necesidad de reiniciar los puntosNodoB, ya que eso se encargara el metodo seleccionarSigueinte punto
         }
     }
