@@ -16,6 +16,7 @@ namespace GrafosAlgoritmico.Classes
         private int[] puntosPartida = [0, 0]; // Coordenadas del punto de partida inicializado en (0,0)
         private int[] puntosNodoA = [0, 0];
         private int[] puntosNodoB = [0, 0];
+        private string valorPuntoPartida = "1°";
         public Nodo[,] Nodos { get => nodos; set => nodos = value; }
         public int[] PuntosPartida { get => puntosPartida; set => puntosPartida = value; }
         public int[] PuntosNodoA { get => puntosNodoA; set => puntosNodoA = value; }
@@ -124,8 +125,15 @@ namespace GrafosAlgoritmico.Classes
                 // Cambiar el color del nuevo nodo
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorNodo = nuevoColor;
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorValor = original;
-                Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = "1°";
+                Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = valorPuntoPartida;
                 PuntosNodoA = [puntosPartida[0], puntosPartida[1]];
+
+
+                if (PuntosNodoA[0] == 0 && PuntosNodoA[0] == 0 && Nodos[puntosNodoA[0], puntosNodoA[0]].Valor == valorPuntoPartida && puntosPartida[0] == 0 && puntosPartida[1] == 0)
+                {//para solucionar error de que pasa si incio el punto de partida esta en el nodo[0,0]
+                    PuntosNodoB[1]++;
+                }
+
             }
             else
             {
@@ -150,8 +158,14 @@ namespace GrafosAlgoritmico.Classes
             {
                 throw new ArgumentException($"Se sobrepasó el rango de la matriz.");
             }
-            if ((puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == "1°")
-                || (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == "1°" && aumentF == 1 && aumentC == 1)) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
+
+            if (nodos[nuevaFila, nuevaColumna].Valor.Length != 0)
+            {
+                throw new ArgumentException("El nodo ya tiene un valor.");
+            }
+
+            if (puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == valorPuntoPartida
+                /*|| (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == valorPuntoPartida && aumentF == 1 && aumentC == 1)*/) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
             { //esto es para que no me reinicie el color y valor del nodo de partida, en el caso de que el nodo partida este en [0,0]
                 PuntosNodoB[0] = nuevaFila;
                 PuntosNodoB[1] = nuevaColumna;
@@ -178,7 +192,21 @@ namespace GrafosAlgoritmico.Classes
         public void ReiniciarPuntosNodoB() //
         {
             PuntosNodoA = PuntosNodoB;
-            puntosNodoB = [0, 0];
+
+            if (puntosNodoB[1] + 1 > Nodos.GetUpperBound(1))
+            {
+                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] - 1];
+            }
+            else
+            {
+                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
+            }
+
+
+
+
+            //puntosNodoB = [0, 1]; //aqui toca hacer que el nodo siguiente no coincida con uno que ya esta ocupado
+            //ver ejemplo al descomentar y selecionar el nodo 0,1
             //no veo la necesidad de reiniciar los puntosNodoB, ya que eso se encargara el metodo seleccionarSigueinte punto
         }
     }

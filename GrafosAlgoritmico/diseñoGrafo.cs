@@ -99,12 +99,12 @@ namespace GrafosAlgoritmico
                 {
                     int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
                     int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
+                    string direccionActual = ComboDireccion.Text;
+
                     matriz.ReiniciarPuntosNodoB();
-                    //btnDefinirNOrignen.Enabled = true;
-                    //indexAuxMovimiento = [0, 0];
                     btnStrNodOrig.Enabled = false;
                     EstructuraControl nuevoRegistro = new EstructuraControl(0,
-                        IndexNodoA[0], IndexNodoA[1], ComboDireccion.Text, IndexNodoB[0], IndexNodoB[1],
+                        IndexNodoA[0], IndexNodoA[1], direccionActual, IndexNodoB[0], IndexNodoB[1],
                         valorNodoDestino: matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoA[0], IndexNodoA[1]].Valor);
                     EstructuraControl.AgregarRegistro(nuevoRegistro);
                     ActualizarDataGridView();
@@ -121,69 +121,51 @@ namespace GrafosAlgoritmico
 
         private void pictureUpL_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 0;
-            indexAuxMovimiento[0] = -1;
-            indexAuxMovimiento[1] = -1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(0,-1,-1);
         }
 
         private void pictureUp_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 1;
-            indexAuxMovimiento[0] = -1;
-            indexAuxMovimiento[1] = 0;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(1,-1,0);
         }
 
         private void pictureUpR_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 2;
-            indexAuxMovimiento[0] = -1;
-            indexAuxMovimiento[1] = 1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(2, -1, 1);
         }
 
         private void pictureLeft_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 3;
-            indexAuxMovimiento[0] = 0;
-            indexAuxMovimiento[1] = -1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(3,0,-1);
         }
 
         private void pictureRight_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 4;
-            indexAuxMovimiento[0] = 0;
-            indexAuxMovimiento[1] = 1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(4,0,1);
         }
 
         private void pictureDownL_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 5;
-            indexAuxMovimiento[0] = 1;
-            indexAuxMovimiento[1] = -1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(5, 1, -1);
         }
 
         private void pictureDown_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 6;
-            indexAuxMovimiento[0] = 1;
-            indexAuxMovimiento[1] = 0;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(6, 1, 0);
         }
 
         private void pictureDownR_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 7;
-            indexAuxMovimiento[0] = 1;
-            indexAuxMovimiento[1] = 1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(7, 1, 1);
         }
 
-
+        private void FijarMovimientoPunto(int indexComboDireccion, int moveF, int moveC)
+        {
+            ComboDireccion.SelectedIndex = indexComboDireccion;
+            indexAuxMovimiento[0] = moveF;
+            indexAuxMovimiento[1] = moveC;
+            GenerarMovimientoPunto();
+        }
 
 
 

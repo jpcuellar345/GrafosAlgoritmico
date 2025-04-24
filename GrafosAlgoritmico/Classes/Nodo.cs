@@ -13,7 +13,7 @@ namespace GrafosAlgoritmico.Classes
         public int coordenaEjeX;
         public int coordenaEjeY;
         public Color colorNodo;
-        
+
 
         public Nodo(int coordenaEjeX, int coordenaEjeY, Color colorNodo)
         {
@@ -30,13 +30,14 @@ namespace GrafosAlgoritmico.Classes
             get { return valor; }
             set
             {
-                
-                if (value.Length <0 || value.Length > 3)
+                if (value.Length > 3)
                 {
                     throw new ArgumentException("El nodo debe tener máximo 3 caracteres.");
                 }
                 else
-                { this.valor = value; } // Asignar el valor si cumple la regla}
+                {
+                    this.valor = value; // Asignar el nuevo valor solo si está vacío
+                }
             }
         }
 
