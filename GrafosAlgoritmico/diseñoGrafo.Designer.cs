@@ -59,16 +59,13 @@
             txtcolorArista = new Label();
             groupPanelControl = new GroupBox();
             button3 = new Button();
-            button2 = new Button();
             btnColrNodo = new Button();
-            txtColrLetra = new Label();
             btnStrNodOrig = new Button();
             btnDefinirNOrignen = new Button();
             colorLetra = new ColorDialog();
             colorArista = new ColorDialog();
             btnColrMatriz = new Button();
             dgdvAlgoritmo = new DataGridView();
-            estructuraControlBindingSource = new BindingSource(components);
             NumeroPaso = new DataGridViewTextBoxColumn();
             indexFilaOrigenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             indexColumOrigenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -77,6 +74,7 @@
             indexFilaDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             indexColumDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             valorNodoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            estructuraControlBindingSource = new BindingSource(components);
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -352,14 +350,12 @@
             // groupPanelControl
             // 
             groupPanelControl.Controls.Add(button3);
-            groupPanelControl.Controls.Add(button2);
             groupPanelControl.Controls.Add(btnColrNodo);
             groupPanelControl.Controls.Add(comboNodoOrigen);
             groupPanelControl.Controls.Add(txtNodoOrigen);
             groupPanelControl.Controls.Add(btnDesahacerConexion);
             groupPanelControl.Controls.Add(txtValorNodo);
             groupPanelControl.Controls.Add(btnCrearConexion);
-            groupPanelControl.Controls.Add(txtColrLetra);
             groupPanelControl.Controls.Add(txtColorNodo);
             groupPanelControl.Controls.Add(btnStrNodOrig);
             groupPanelControl.Controls.Add(GroupComandos);
@@ -385,16 +381,6 @@
             button3.TabIndex = 13;
             button3.UseVisualStyleBackColor = false;
             // 
-            // button2
-            // 
-            button2.BackColor = SystemColors.MenuText;
-            button2.Location = new Point(333, 114);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(64, 19);
-            button2.TabIndex = 13;
-            button2.UseVisualStyleBackColor = false;
-            // 
             // btnColrNodo
             // 
             btnColrNodo.BackColor = SystemColors.MenuText;
@@ -405,15 +391,6 @@
             btnColrNodo.TabIndex = 13;
             btnColrNodo.UseVisualStyleBackColor = false;
             btnColrNodo.Click += btnColrNodo_Click;
-            // 
-            // txtColrLetra
-            // 
-            txtColrLetra.AutoSize = true;
-            txtColrLetra.Location = new Point(237, 116);
-            txtColrLetra.Name = "txtColrLetra";
-            txtColrLetra.Size = new Size(81, 15);
-            txtColrLetra.TabIndex = 4;
-            txtColrLetra.Text = "Color de letra:";
             // 
             // btnStrNodOrig
             // 
@@ -458,10 +435,6 @@
             dgdvAlgoritmo.RowHeadersWidth = 51;
             dgdvAlgoritmo.Size = new Size(673, 117);
             dgdvAlgoritmo.TabIndex = 1;
-            // 
-            // estructuraControlBindingSource
-            // 
-            estructuraControlBindingSource.DataSource = typeof(Classes.EstructuraControl);
             // 
             // NumeroPaso
             // 
@@ -531,6 +504,10 @@
             valorNodoDataGridViewTextBoxColumn.Name = "valorNodoDataGridViewTextBoxColumn";
             valorNodoDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // estructuraControlBindingSource
+            // 
+            estructuraControlBindingSource.DataSource = typeof(Classes.EstructuraControl);
+            // 
             // diseñoGrafo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -597,12 +574,10 @@
         private Label txtColorNodo;
         private Label txtcolorArista;
         private GroupBox groupPanelControl;
-        private Label txtColrLetra;
         private ColorDialog colorLetra;
         private ColorDialog colorArista;
         private Button btnDefinirNOrignen;
         private Button button3;
-        private Button button2;
         private Button btnColrNodo;
         private Button btnStrNodOrig;
         private Button btnColrMatriz;

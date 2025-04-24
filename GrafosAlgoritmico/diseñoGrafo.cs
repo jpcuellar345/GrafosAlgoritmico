@@ -90,21 +90,32 @@ namespace GrafosAlgoritmico
                 btnDefinirNOrignen.Enabled = true;
                 GroupComandos.Enabled = true;
                 indexAuxMovimiento = [0, 0]; //nunca en tu ideas borres esto tan indispensable para que no luches de nuevo con el problema
+                txtBoxValorNodo.Text = "";
+                ComboDireccion.SelectedIndex = -1;
             }
             else
             { //TODO
-                int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
-                int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
-                matriz.ReiniciarPuntosNodoB();
-                //btnDefinirNOrignen.Enabled = true;
-                //indexAuxMovimiento = [0, 0];
-                btnStrNodOrig.Enabled = false;
-                EstructuraControl nuevoRegistro = new EstructuraControl(0,
-                    IndexNodoA[0], IndexNodoA[1], ComboDireccion.Text, IndexNodoB[0], IndexNodoB[1],
-                    valorNodoDestino: matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoA[0], IndexNodoA[1]].Valor);
-                EstructuraControl.AgregarRegistro(nuevoRegistro);
-                ActualizarDataGridView();
+                if (!(txtBoxValorNodo.Text == "" || ComboDireccion.SelectedIndex == -1))
+                {
+                    int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
+                    int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
+                    matriz.ReiniciarPuntosNodoB();
+                    //btnDefinirNOrignen.Enabled = true;
+                    //indexAuxMovimiento = [0, 0];
+                    btnStrNodOrig.Enabled = false;
+                    EstructuraControl nuevoRegistro = new EstructuraControl(0,
+                        IndexNodoA[0], IndexNodoA[1], ComboDireccion.Text, IndexNodoB[0], IndexNodoB[1],
+                        valorNodoDestino: matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoA[0], IndexNodoA[1]].Valor);
+                    EstructuraControl.AgregarRegistro(nuevoRegistro);
+                    ActualizarDataGridView();
+                }
+                else
+                {
+                    MessageBox.Show("Aun falta darle un valor nodo destino o especificar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
+
         }
 
 

@@ -124,7 +124,7 @@ namespace GrafosAlgoritmico.Classes
                 // Cambiar el color del nuevo nodo
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorNodo = nuevoColor;
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorValor = original;
-                Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = "P1";
+                Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = "1°";
                 PuntosNodoA = [puntosPartida[0], puntosPartida[1]];
             }
             else
@@ -150,8 +150,8 @@ namespace GrafosAlgoritmico.Classes
             {
                 throw new ArgumentException($"Se sobrepasó el rango de la matriz.");
             }
-            if ((puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == "P1")
-                || (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == "P1" && aumentF == 1 && aumentC == 1)) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
+            if ((puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == "1°")
+                || (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == "1°" && aumentF == 1 && aumentC == 1)) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
             { //esto es para que no me reinicie el color y valor del nodo de partida, en el caso de que el nodo partida este en [0,0]
                 PuntosNodoB[0] = nuevaFila;
                 PuntosNodoB[1] = nuevaColumna;
