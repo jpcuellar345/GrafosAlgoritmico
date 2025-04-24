@@ -158,17 +158,17 @@ namespace GrafosAlgoritmico.Classes
             {
                 throw new ArgumentException($"Se sobrepasó el rango de la matriz.");
             }
-
-            if (nodos[nuevaFila, nuevaColumna].Valor.Length != 0)
-            {
-                throw new ArgumentException("El nodo ya tiene un valor.");
-            }
-
             if (puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == valorPuntoPartida
-                /*|| (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == valorPuntoPartida && aumentF == 1 && aumentC == 1)*/) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
+    /*|| (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == valorPuntoPartida && aumentF == 1 && aumentC == 1)*/) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
             { //esto es para que no me reinicie el color y valor del nodo de partida, en el caso de que el nodo partida este en [0,0]
                 PuntosNodoB[0] = nuevaFila;
                 PuntosNodoB[1] = nuevaColumna;
+                if (Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor.Length != 0)
+                {
+                    PuntosNodoB[0] -= nuevaFila;
+                    PuntosNodoB[1] -= nuevaColumna;
+                    throw new ArgumentException("El nodo ya tiene un valor.");
+                }
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
@@ -184,6 +184,12 @@ namespace GrafosAlgoritmico.Classes
                 // Actualizar el nodo al nuevo punto
                 PuntosNodoB[0] = nuevaFila;
                 PuntosNodoB[1] = nuevaColumna;
+                if (Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor.Length != 0)
+                {
+                    PuntosNodoB[0] -= nuevaFila;
+                    PuntosNodoB[1] -= nuevaColumna;
+                    throw new ArgumentException("El nodo ya tiene un valor.");
+                }
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
