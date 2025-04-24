@@ -1,6 +1,4 @@
 using GrafosAlgoritmico.Classes;
-using System.Drawing.Text;
-using System.Windows.Forms;
 
 namespace GrafosAlgoritmico
 {
@@ -121,12 +119,12 @@ namespace GrafosAlgoritmico
 
         private void pictureUpL_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(0,-1,-1);
+            FijarMovimientoPunto(0, -1, -1);
         }
 
         private void pictureUp_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(1,-1,0);
+            FijarMovimientoPunto(1, -1, 0);
         }
 
         private void pictureUpR_Click(object sender, EventArgs e)
@@ -136,12 +134,12 @@ namespace GrafosAlgoritmico
 
         private void pictureLeft_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(3,0,-1);
+            FijarMovimientoPunto(3, 0, -1);
         }
 
         private void pictureRight_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(4,0,1);
+            FijarMovimientoPunto(4, 0, 1);
         }
 
         private void pictureDownL_Click(object sender, EventArgs e)

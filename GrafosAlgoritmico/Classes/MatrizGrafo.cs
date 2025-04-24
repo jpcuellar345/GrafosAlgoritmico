@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace GrafosAlgoritmico.Classes
+﻿namespace GrafosAlgoritmico.Classes
 {
     public class MatrizGrafo
     {
@@ -109,6 +99,7 @@ namespace GrafosAlgoritmico.Classes
                 throw new InvalidOperationException("La matriz de nodos no ha sido inicializada."); // Lanzar excepción si no está inicializada
             }
             Nodos[PuntosPartida[0], PuntosPartida[1]].colorNodo = original; //devolver al estado
+            Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = string.Empty;
 
             // Calcular nuevos índices para el punto de partida
             int nuevaFila = PuntosPartida[0] + aumentF;
@@ -129,9 +120,9 @@ namespace GrafosAlgoritmico.Classes
                 PuntosNodoA = [puntosPartida[0], puntosPartida[1]];
 
 
-                if (PuntosNodoA[0] == 0 && PuntosNodoA[0] == 0 && Nodos[puntosNodoA[0], puntosNodoA[0]].Valor == valorPuntoPartida && puntosPartida[0] == 0 && puntosPartida[1] == 0)
+                if (PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[puntosNodoA[0], puntosNodoA[0]].Valor == valorPuntoPartida)
                 {//para solucionar error de que pasa si incio el punto de partida esta en el nodo[0,0]
-                    PuntosNodoB[1]++;
+                    PuntosNodoB = [0, 1];
                 }
 
             }
@@ -177,7 +168,7 @@ namespace GrafosAlgoritmico.Classes
             {
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = original;
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
-                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = ""; // Limpiar el texto del nodo actual
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = string.Empty; // Limpiar el texto del nodo actual
 
 
                 // Validar que los nuevos índices estén dentro del rango
