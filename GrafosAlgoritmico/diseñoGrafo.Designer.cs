@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             panelGrafos = new Panel();
             combo2DMatriz = new ComboBox();
             txtMatriz = new Label();
@@ -58,15 +59,22 @@
             txtcolorArista = new Label();
             groupPanelControl = new GroupBox();
             button3 = new Button();
-            button2 = new Button();
             btnColrNodo = new Button();
-            txtColrLetra = new Label();
             btnStrNodOrig = new Button();
             btnDefinirNOrignen = new Button();
             colorLetra = new ColorDialog();
             colorArista = new ColorDialog();
-            dgdvAlgoritmo = new DataGridView();
             btnColrMatriz = new Button();
+            dgdvAlgoritmo = new DataGridView();
+            NumeroPaso = new DataGridViewTextBoxColumn();
+            indexFilaOrigenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            indexColumOrigenDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ValorNodoorigen = new DataGridViewTextBoxColumn();
+            direccionDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            indexFilaDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            indexColumDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            valorNodoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            estructuraControlBindingSource = new BindingSource(components);
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -78,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureUp).BeginInit();
             groupPanelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)estructuraControlBindingSource).BeginInit();
             SuspendLayout();
             // 
             // panelGrafos
@@ -269,7 +278,7 @@
             // 
             // btnExportGrafo
             // 
-            btnExportGrafo.Location = new Point(728, 441);
+            btnExportGrafo.Location = new Point(791, 441);
             btnExportGrafo.Name = "btnExportGrafo";
             btnExportGrafo.Size = new Size(73, 53);
             btnExportGrafo.TabIndex = 9;
@@ -278,7 +287,7 @@
             // 
             // btnExportAlgoritmo
             // 
-            btnExportAlgoritmo.Location = new Point(830, 441);
+            btnExportAlgoritmo.Location = new Point(893, 441);
             btnExportAlgoritmo.Name = "btnExportAlgoritmo";
             btnExportAlgoritmo.Size = new Size(73, 53);
             btnExportAlgoritmo.TabIndex = 9;
@@ -341,14 +350,12 @@
             // groupPanelControl
             // 
             groupPanelControl.Controls.Add(button3);
-            groupPanelControl.Controls.Add(button2);
             groupPanelControl.Controls.Add(btnColrNodo);
             groupPanelControl.Controls.Add(comboNodoOrigen);
             groupPanelControl.Controls.Add(txtNodoOrigen);
             groupPanelControl.Controls.Add(btnDesahacerConexion);
             groupPanelControl.Controls.Add(txtValorNodo);
             groupPanelControl.Controls.Add(btnCrearConexion);
-            groupPanelControl.Controls.Add(txtColrLetra);
             groupPanelControl.Controls.Add(txtColorNodo);
             groupPanelControl.Controls.Add(btnStrNodOrig);
             groupPanelControl.Controls.Add(GroupComandos);
@@ -374,16 +381,6 @@
             button3.TabIndex = 13;
             button3.UseVisualStyleBackColor = false;
             // 
-            // button2
-            // 
-            button2.BackColor = SystemColors.MenuText;
-            button2.Location = new Point(333, 114);
-            button2.Margin = new Padding(3, 2, 3, 2);
-            button2.Name = "button2";
-            button2.Size = new Size(64, 19);
-            button2.TabIndex = 13;
-            button2.UseVisualStyleBackColor = false;
-            // 
             // btnColrNodo
             // 
             btnColrNodo.BackColor = SystemColors.MenuText;
@@ -395,18 +392,9 @@
             btnColrNodo.UseVisualStyleBackColor = false;
             btnColrNodo.Click += btnColrNodo_Click;
             // 
-            // txtColrLetra
-            // 
-            txtColrLetra.AutoSize = true;
-            txtColrLetra.Location = new Point(237, 116);
-            txtColrLetra.Name = "txtColrLetra";
-            txtColrLetra.Size = new Size(81, 15);
-            txtColrLetra.TabIndex = 4;
-            txtColrLetra.Text = "Color de letra:";
-            // 
             // btnStrNodOrig
             // 
-            btnStrNodOrig.Location = new Point(7, 22);
+            btnStrNodOrig.Location = new Point(16, 22);
             btnStrNodOrig.Name = "btnStrNodOrig";
             btnStrNodOrig.Size = new Size(88, 43);
             btnStrNodOrig.TabIndex = 11;
@@ -424,16 +412,6 @@
             btnDefinirNOrignen.UseVisualStyleBackColor = true;
             btnDefinirNOrignen.Click += btnDefinirNOrignen_Click;
             // 
-            // dgdvAlgoritmo
-            // 
-            dgdvAlgoritmo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgdvAlgoritmo.Enabled = false;
-            dgdvAlgoritmo.Location = new Point(12, 420);
-            dgdvAlgoritmo.Name = "dgdvAlgoritmo";
-            dgdvAlgoritmo.RowHeadersWidth = 51;
-            dgdvAlgoritmo.Size = new Size(671, 94);
-            dgdvAlgoritmo.TabIndex = 1;
-            // 
             // btnColrMatriz
             // 
             btnColrMatriz.BackColor = SystemColors.MenuText;
@@ -445,11 +423,96 @@
             btnColrMatriz.UseVisualStyleBackColor = false;
             btnColrMatriz.Click += btnColrMatriz_Click;
             // 
+            // dgdvAlgoritmo
+            // 
+            dgdvAlgoritmo.AllowUserToOrderColumns = true;
+            dgdvAlgoritmo.AutoGenerateColumns = false;
+            dgdvAlgoritmo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgdvAlgoritmo.Columns.AddRange(new DataGridViewColumn[] { NumeroPaso, indexFilaOrigenDataGridViewTextBoxColumn, indexColumOrigenDataGridViewTextBoxColumn, ValorNodoorigen, direccionDestinoDataGridViewTextBoxColumn, indexFilaDestinoDataGridViewTextBoxColumn, indexColumDestinoDataGridViewTextBoxColumn, valorNodoDataGridViewTextBoxColumn });
+            dgdvAlgoritmo.DataSource = estructuraControlBindingSource;
+            dgdvAlgoritmo.Location = new Point(12, 420);
+            dgdvAlgoritmo.Name = "dgdvAlgoritmo";
+            dgdvAlgoritmo.RowHeadersWidth = 51;
+            dgdvAlgoritmo.Size = new Size(673, 117);
+            dgdvAlgoritmo.TabIndex = 1;
+            // 
+            // NumeroPaso
+            // 
+            NumeroPaso.DataPropertyName = "NumeroPaso";
+            NumeroPaso.HeaderText = "No. Paso";
+            NumeroPaso.Name = "NumeroPaso";
+            NumeroPaso.ReadOnly = true;
+            NumeroPaso.Width = 60;
+            // 
+            // indexFilaOrigenDataGridViewTextBoxColumn
+            // 
+            indexFilaOrigenDataGridViewTextBoxColumn.DataPropertyName = "IndexFilaOrigen";
+            indexFilaOrigenDataGridViewTextBoxColumn.HeaderText = "Fila nodo origen";
+            indexFilaOrigenDataGridViewTextBoxColumn.MinimumWidth = 6;
+            indexFilaOrigenDataGridViewTextBoxColumn.Name = "indexFilaOrigenDataGridViewTextBoxColumn";
+            indexFilaOrigenDataGridViewTextBoxColumn.ReadOnly = true;
+            indexFilaOrigenDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // indexColumOrigenDataGridViewTextBoxColumn
+            // 
+            indexColumOrigenDataGridViewTextBoxColumn.DataPropertyName = "IndexColumOrigen";
+            indexColumOrigenDataGridViewTextBoxColumn.HeaderText = "Columna nodo origen";
+            indexColumOrigenDataGridViewTextBoxColumn.MinimumWidth = 6;
+            indexColumOrigenDataGridViewTextBoxColumn.Name = "indexColumOrigenDataGridViewTextBoxColumn";
+            indexColumOrigenDataGridViewTextBoxColumn.ReadOnly = true;
+            indexColumOrigenDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // ValorNodoorigen
+            // 
+            ValorNodoorigen.DataPropertyName = "ValorNodoorigen";
+            ValorNodoorigen.HeaderText = "Texto del nodo origen";
+            ValorNodoorigen.Name = "ValorNodoorigen";
+            ValorNodoorigen.ReadOnly = true;
+            // 
+            // direccionDestinoDataGridViewTextBoxColumn
+            // 
+            direccionDestinoDataGridViewTextBoxColumn.DataPropertyName = "DireccionDestino";
+            direccionDestinoDataGridViewTextBoxColumn.HeaderText = "Direccion de destino";
+            direccionDestinoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            direccionDestinoDataGridViewTextBoxColumn.Name = "direccionDestinoDataGridViewTextBoxColumn";
+            direccionDestinoDataGridViewTextBoxColumn.ReadOnly = true;
+            direccionDestinoDataGridViewTextBoxColumn.Width = 120;
+            // 
+            // indexFilaDestinoDataGridViewTextBoxColumn
+            // 
+            indexFilaDestinoDataGridViewTextBoxColumn.DataPropertyName = "IndexFilaDestino";
+            indexFilaDestinoDataGridViewTextBoxColumn.HeaderText = "Fila nodo destino";
+            indexFilaDestinoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            indexFilaDestinoDataGridViewTextBoxColumn.Name = "indexFilaDestinoDataGridViewTextBoxColumn";
+            indexFilaDestinoDataGridViewTextBoxColumn.ReadOnly = true;
+            indexFilaDestinoDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // indexColumDestinoDataGridViewTextBoxColumn
+            // 
+            indexColumDestinoDataGridViewTextBoxColumn.DataPropertyName = "IndexColumDestino";
+            indexColumDestinoDataGridViewTextBoxColumn.HeaderText = "Columna nodo destino";
+            indexColumDestinoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            indexColumDestinoDataGridViewTextBoxColumn.Name = "indexColumDestinoDataGridViewTextBoxColumn";
+            indexColumDestinoDataGridViewTextBoxColumn.ReadOnly = true;
+            indexColumDestinoDataGridViewTextBoxColumn.Width = 60;
+            // 
+            // valorNodoDataGridViewTextBoxColumn
+            // 
+            valorNodoDataGridViewTextBoxColumn.DataPropertyName = "ValorNodo";
+            valorNodoDataGridViewTextBoxColumn.HeaderText = "Texto del nodo destino";
+            valorNodoDataGridViewTextBoxColumn.MinimumWidth = 6;
+            valorNodoDataGridViewTextBoxColumn.Name = "valorNodoDataGridViewTextBoxColumn";
+            valorNodoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // estructuraControlBindingSource
+            // 
+            estructuraControlBindingSource.DataSource = typeof(Classes.EstructuraControl);
+            // 
             // diseñoGrafo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1016, 526);
+            ClientSize = new Size(1016, 549);
             Controls.Add(btnColrMatriz);
             Controls.Add(groupPanelControl);
             Controls.Add(btnGenerarMatriz);
@@ -462,6 +525,7 @@
             Controls.Add(panelGrafos);
             Name = "diseñoGrafo";
             Text = "Grafos";
+            Load += diseñoGrafo_Load;
             GroupComandos.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureDownR).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).EndInit();
@@ -474,6 +538,7 @@
             groupPanelControl.ResumeLayout(false);
             groupPanelControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)estructuraControlBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -509,15 +574,22 @@
         private Label txtColorNodo;
         private Label txtcolorArista;
         private GroupBox groupPanelControl;
-        private Label txtColrLetra;
         private ColorDialog colorLetra;
         private ColorDialog colorArista;
         private Button btnDefinirNOrignen;
         private Button button3;
-        private Button button2;
         private Button btnColrNodo;
         private Button btnStrNodOrig;
-        private DataGridView dgdvAlgoritmo;
         private Button btnColrMatriz;
+        private DataGridView dgdvAlgoritmo;
+        private BindingSource estructuraControlBindingSource;
+        private DataGridViewTextBoxColumn NumeroPaso;
+        private DataGridViewTextBoxColumn indexFilaOrigenDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn indexColumOrigenDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ValorNodoorigen;
+        private DataGridViewTextBoxColumn direccionDestinoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn indexFilaDestinoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn indexColumDestinoDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn valorNodoDataGridViewTextBoxColumn;
     }
 }

@@ -14,9 +14,13 @@ namespace GrafosAlgoritmico.Classes
     {
         private Nodo[,] nodos;
         private int[] puntosPartida = [0, 0]; // Coordenadas del punto de partida inicializado en (0,0)
-        private int[] puntos = [0, 0];
+        private int[] puntosNodoA = [0, 0];
+        private int[] puntosNodoB = [0, 0];
+        private string valorPuntoPartida = "1°";
         public Nodo[,] Nodos { get => nodos; set => nodos = value; }
         public int[] PuntosPartida { get => puntosPartida; set => puntosPartida = value; }
+        public int[] PuntosNodoA { get => puntosNodoA; set => puntosNodoA = value; }
+        public int[] PuntosNodoB { get => puntosNodoB; set => puntosNodoB = value; }
 
         // Método para inicializar la matriz de nodos
         public void CrearMatriz(int fila, int columna, int tamanoNodo, int espacioEntreNodo, Color colorNodo1)
@@ -30,7 +34,7 @@ namespace GrafosAlgoritmico.Classes
                     Nodos[i, j] = new Nodo(0, 0, colorNodo1); // Inicializar cada nodo con colorNodo1
                 }
             }
-            pilaDeNodos = new Stack<Nodo>();
+
         }
 
         // Método para dibujar los nodos en el formulario
@@ -74,9 +78,9 @@ namespace GrafosAlgoritmico.Classes
                         g.DrawString(textoNodo, font, pincelTexto, textoX, textoY); // Dibujar texto
                     }
 
-                    // Actualizar las coordenadas del nodo
-                    nodo.coordenaEjeX = x;
-                    nodo.coordenaEjeY = y;
+                    // Actualizar las coordenadas del cada nodo de la matriz Nodods
+                    Nodos[fila, colum].coordenaEjeX = x;
+                    Nodos[fila, colum].coordenaEjeY = y;
                 }
             }
         }
@@ -121,7 +125,15 @@ namespace GrafosAlgoritmico.Classes
                 // Cambiar el color del nuevo nodo
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorNodo = nuevoColor;
                 Nodos[PuntosPartida[0], PuntosPartida[1]].colorValor = original;
-                Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = "P1";
+                Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = valorPuntoPartida;
+                PuntosNodoA = [puntosPartida[0], puntosPartida[1]];
+
+
+                if (PuntosNodoA[0] == 0 && PuntosNodoA[0] == 0 && Nodos[puntosNodoA[0], puntosNodoA[0]].Valor == valorPuntoPartida && puntosPartida[0] == 0 && puntosPartida[1] == 0)
+                {//para solucionar error de que pasa si incio el punto de partida esta en el nodo[0,0]
+                    PuntosNodoB[1]++;
+                }
+
             }
             else
             {
@@ -131,22 +143,25 @@ namespace GrafosAlgoritmico.Classes
 
         public void SeleccionarSiguientNodo(Color original, Color nuevoColor, int aumentF, int aumentC, string texto)
         {
-            // Validar que la matriz esté inicializada
-            if (Nodos == null)
-            {
-                throw new InvalidOperationException("La matriz de nodos no ha sido inicializada."); // Lanzar excepción si no está inicializada
-            }
-
             // Calcular los índices del siguiente nodo
-            int nuevaFila = puntos[0] + aumentF;
-            int nuevaColumna = puntos[1] + aumentC;
+            int nuevaFila = PuntosNodoA[0] + aumentF;
+            int nuevaColumna = PuntosNodoA[1] + aumentC;
 
             // Validar si se intenta seleccionar el nodo de partida
-            if (Nodos[nuevaFila, nuevaColumna].Valor == "P1")
+            // Verificar si se selecciona el mismo nodo que el actual
+            if (puntosPartida[0] == nuevaFila && puntosPartida[1] == nuevaColumna)
             {
-                // Mover automáticamente a la siguiente fila si los índices están dentro del rango
+                throw new ArgumentException($"No se puede usar el mismo nodo en la posición [{PuntosNodoB[0] + 1}, {PuntosNodoB[1] + 1}].");
+            }
+            else if (nuevaFila < 0 || nuevaColumna < 0 ||
+            nuevaFila >= Nodos.GetLength(0) || nuevaColumna >= Nodos.GetLength(1))
+            {
+                throw new ArgumentException($"Se sobrepasó el rango de la matriz.");
+            }
 
-                nuevaColumna += 1; // Saltar a la siguiente fila
+            if (nodos[nuevaFila, nuevaColumna].Valor.Length != 0)
+            {
+                throw new ArgumentException("El nodo ya tiene un valor.");
             }
 
             if (puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == valorPuntoPartida
@@ -158,28 +173,41 @@ namespace GrafosAlgoritmico.Classes
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
             }
-
-            // Validar que los nuevos índices estén dentro del rango
-            if (nuevaFila < 0 || nuevaColumna < 0 ||
-            nuevaFila >= Nodos.GetLength(0) || nuevaColumna >= Nodos.GetLength(1))
+            else
             {
-                throw new ArgumentException($"Se sobrepasó el rango de la matriz: [{nuevaFila}, {nuevaColumna}].");
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = original;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = ""; // Limpiar el texto del nodo actual
+
+
+                // Validar que los nuevos índices estén dentro del rango
+                // Actualizar el nodo al nuevo punto
+                PuntosNodoB[0] = nuevaFila;
+                PuntosNodoB[1] = nuevaColumna;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = texto; // Asignar el texto al nuevo nodo
+            }
+        }
+        public void ReiniciarPuntosNodoB() //
+        {
+            PuntosNodoA = PuntosNodoB;
+
+            if (puntosNodoB[1] + 1 > Nodos.GetUpperBound(1))
+            {
+                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] - 1];
+            }
+            else
+            {
+                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
             }
 
-            // Verificar si se selecciona el mismo nodo que el actual
-            if (puntos[0] == nuevaFila && puntos[1] == nuevaColumna)
-            {
-                throw new ArgumentException($"No se puede usar el mismo nodo en la posición [{puntos[0] + 1}, {puntos[1] + 1}].");
-            }
 
 
 
-            // Actualizar el nodo al nuevo punto
-            puntos[0] = nuevaFila;
-            puntos[1] = nuevaColumna;
-            Nodos[puntos[0], puntos[1]].colorNodo = nuevoColor; // Cambiar el color del nuevo nodo
-            Nodos[puntos[0], puntos[1]].colorValor = original;
-            Nodos[puntos[0], puntos[1]].Valor = texto; // Asignar el texto al nuevo nodo
+            //puntosNodoB = [0, 1]; //aqui toca hacer que el nodo siguiente no coincida con uno que ya esta ocupado
+            //ver ejemplo al descomentar y selecionar el nodo 0,1
+            //no veo la necesidad de reiniciar los puntosNodoB, ya que eso se encargara el metodo seleccionarSigueinte punto
         }
     }
 }

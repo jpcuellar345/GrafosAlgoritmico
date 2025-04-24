@@ -1,5 +1,6 @@
 using GrafosAlgoritmico.Classes;
 using System.Drawing.Text;
+using System.Windows.Forms;
 
 namespace GrafosAlgoritmico
 {
@@ -7,8 +8,10 @@ namespace GrafosAlgoritmico
     {
         MatrizGrafo matriz;
         bool permisoCrearMatriz = false;
-        int[] indexAux; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
-        int[] indexPuntoPartida; //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
+        int[] indexAuxMovimiento; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
+                                  //fila, columna. Esto es para tener fijo los indices del nodo que sera el punto de partida
+        BindingSource bindingSource = new BindingSource();
+        List<EstructuraControl> datos = new List<EstructuraControl>();
 
         public diseñoGrafo()
         {
@@ -19,17 +22,18 @@ namespace GrafosAlgoritmico
         private void InicializarValor()
         {
             matriz = new MatrizGrafo();
-            indexAux = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
-            indexPuntoPartida = new int[2];
+            indexAuxMovimiento = [0, 0]; //fila, columna. Esto sirve para ubicarse dentro de la matriz de nodos
             groupPanelControl.Enabled = true;
             permisoCrearMatriz = true;
             comboNodoOrigen.Text = "Aun no definido";
             matriz.PuntosPartida = [0, 0];
-            indexAux = [0, 0];
             GroupComandos.Enabled = false;
             btnDefinirNOrignen.Enabled = false;
             btnStrNodOrig.Enabled = true;
             ComboDireccion.SelectedIndex = -1;
+            EstructuraControl.IniciarStack();
+            IniciarDgdvAlgoritmo();
+            ActualizarDataGridView();
         }
 
         private void panelGrafos_Paint(object sender, PaintEventArgs e)
@@ -81,85 +85,87 @@ namespace GrafosAlgoritmico
         {
             if (comboNodoOrigen.Text == "Aun no definido")
             {
-                indexPuntoPartida = matriz.PuntosPartida;
-                comboNodoOrigen.Text = $"fila {indexPuntoPartida[0] + 1}, columna {indexPuntoPartida[1] + 1}";
-                GroupComandos.Enabled = false;
-                btnDefinirNOrignen.Enabled = false;
-                indexAux = [0, 0];
+                comboNodoOrigen.Text = $"fila {matriz.PuntosPartida[0]}, columna {matriz.PuntosPartida[1]}";
+                btnStrNodOrig.Enabled = false;
+                btnDefinirNOrignen.Enabled = true;
+                GroupComandos.Enabled = true;
+                indexAuxMovimiento = [0, 0]; //nunca en tu ideas borres esto tan indispensable para que no luches de nuevo con el problema
+                txtBoxValorNodo.Text = "";
+                ComboDireccion.SelectedIndex = -1;
             }
             else
-            {
-                //TODO
+            { //TODO
+                if (!(txtBoxValorNodo.Text == "" || ComboDireccion.SelectedIndex == -1))
+                {
+                    int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
+                    int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
+                    string direccionActual = ComboDireccion.Text;
+
+                    matriz.ReiniciarPuntosNodoB();
+                    btnStrNodOrig.Enabled = false;
+                    EstructuraControl nuevoRegistro = new EstructuraControl(0,
+                        IndexNodoA[0], IndexNodoA[1], direccionActual, IndexNodoB[0], IndexNodoB[1],
+                        valorNodoDestino: matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoA[0], IndexNodoA[1]].Valor);
+                    EstructuraControl.AgregarRegistro(nuevoRegistro);
+                    ActualizarDataGridView();
+                }
+                else
+                {
+                    MessageBox.Show("Aun falta darle un valor nodo destino o especificar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
-            btnStrNodOrig.Enabled = true;
+
         }
 
 
         private void pictureUpL_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 0;
-            indexAux[0] = -1;
-            indexAux[1] = -1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(0,-1,-1);
         }
 
         private void pictureUp_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 1;
-            indexAux[0] = -1;
-            indexAux[1] = 0;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(1,-1,0);
         }
 
         private void pictureUpR_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 2;
-            indexAux[0] = -1;
-            indexAux[1] = 1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(2, -1, 1);
         }
 
         private void pictureLeft_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 3;
-            indexAux[0] = 0;
-            indexAux[1] = -1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(3,0,-1);
         }
 
         private void pictureRight_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 4;
-            indexAux[0] = 0;
-            indexAux[1] = 1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(4,0,1);
         }
 
         private void pictureDownL_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 5;
-            indexAux[0] = 1;
-            indexAux[1] = -1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(5, 1, -1);
         }
 
         private void pictureDown_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 6;
-            indexAux[0] = 1;
-            indexAux[1] = 0;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(6, 1, 0);
         }
 
         private void pictureDownR_Click(object sender, EventArgs e)
         {
-            ComboDireccion.SelectedIndex = 7;
-            indexAux[0] = 1;
-            indexAux[1] = 1;
-            GenerarMovimientoPunto();
+            FijarMovimientoPunto(7, 1, 1);
         }
 
-
+        private void FijarMovimientoPunto(int indexComboDireccion, int moveF, int moveC)
+        {
+            ComboDireccion.SelectedIndex = indexComboDireccion;
+            indexAuxMovimiento[0] = moveF;
+            indexAuxMovimiento[1] = moveC;
+            GenerarMovimientoPunto();
+        }
 
 
 
@@ -169,12 +175,12 @@ namespace GrafosAlgoritmico
             {
                 if (comboNodoOrigen.Text == "Aun no definido")
                 {
-                    matriz.SeleccionarPuntoPartida(colorMatriz.Color, colorNodo.Color, indexAux[0], indexAux[1]);
+                    matriz.SeleccionarPuntoPartida(colorMatriz.Color, colorNodo.Color, indexAuxMovimiento[0], indexAuxMovimiento[1]);
                     panelGrafos.Invalidate();
                 }
                 else
                 {
-                    matriz.SeleccionarSiguientNodo(colorMatriz.Color, colorNodo.Color, indexAux[0], indexAux[1], txtBoxValorNodo.Text);
+                    matriz.SeleccionarSiguientNodo(colorMatriz.Color, colorNodo.Color, indexAuxMovimiento[0], indexAuxMovimiento[1], txtBoxValorNodo.Text);
                     panelGrafos.Invalidate();
                 }
             }
@@ -191,6 +197,28 @@ namespace GrafosAlgoritmico
                 btnDefinirNOrignen.Enabled = true;
                 btnStrNodOrig.Enabled = false;
             }
+        }
+        private void ActualizarDataGridView()
+        {
+            datos.Clear(); // Limpia la lista
+            datos.AddRange(EstructuraControl.pilaDeNodos); // Llena la lista con los datos de la pila
+            bindingSource.ResetBindings(false); // Refresca el enlace con los datos
+            //dgdvAlgoritmo.DataSource = datos;
+            dgdvAlgoritmo.Refresh();
+
+        }
+
+
+        private void IniciarDgdvAlgoritmo()
+        {
+            bindingSource.DataSource = datos;
+            dgdvAlgoritmo.DataSource = bindingSource;
+            dgdvAlgoritmo.Refresh();
+        }
+
+        private void diseñoGrafo_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
