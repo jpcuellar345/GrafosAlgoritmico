@@ -277,7 +277,7 @@
             btnDesahacerConexion.Name = "btnDesahacerConexion";
             btnDesahacerConexion.Size = new Size(122, 57);
             btnDesahacerConexion.TabIndex = 9;
-            btnDesahacerConexion.Text = "Desahacer\r\nconexion";
+            btnDesahacerConexion.Text = "Desahacer\r\nultimo nodo\r\n";
             btnDesahacerConexion.UseVisualStyleBackColor = true;
             btnDesahacerConexion.Click += btnDesahacerConexion_Click;
             // 

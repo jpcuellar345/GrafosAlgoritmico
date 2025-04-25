@@ -33,6 +33,7 @@ namespace GrafosAlgoritmico
             EstructuraControl.IniciarStack();
             IniciarDgdvAlgoritmo();
             ActualizarDataGridView();
+            txtBoxValorNodo.Enabled = false;
         }
 
         private void panelGrafos_Paint(object sender, PaintEventArgs e)
@@ -115,6 +116,7 @@ namespace GrafosAlgoritmico
                 indexAuxMovimiento = [0, 0]; //nunca en tu ideas borres esto tan indispensable para que no luches de nuevo con el problema
                 txtBoxValorNodo.Text = "";
                 ComboDireccion.SelectedIndex = -1;
+                txtBoxValorNodo.Enabled = true;
                 txtBoxValorNodo.Focus();
             }
             else
@@ -147,6 +149,10 @@ namespace GrafosAlgoritmico
             int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
             int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
             string direccionActual = ComboDireccion.Text;
+            if (matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor == "")
+            {
+                throw new ArgumentException("En el grafo aun no aparece el valor del nodo destino. \nIntenta ejecutar de nuevo el comando.");
+            }
             matriz.ReiniciarPuntosNodoB();
             EstructuraControl nuevoRegistro = new EstructuraControl(0,
                 IndexNodoA[0], IndexNodoA[1], direccionActual, IndexNodoB[0], IndexNodoB[1],
@@ -272,12 +278,13 @@ namespace GrafosAlgoritmico
                     {
                         comboNodoOrigen.Text = "Aun no definido";
                         MessageBox.Show("Actualmente se puede cambiar el punto de partida", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtBoxValorNodo.Enabled = false;
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Acción no disponible, primero debe estar vacia la dirección escogina y valor nodo destino", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Acción no disponible, primero debe estar vacia la dirección escogina y valor nodo destino.\nEsto debido a que se esta ejecutando la acción de definir un nuevo nodo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
