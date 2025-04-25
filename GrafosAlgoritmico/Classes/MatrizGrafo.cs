@@ -28,7 +28,7 @@
         }
 
         // Método para dibujar los nodos en el formulario
-        public void DibujarNodos(PaintEventArgs e, int diametroNodo, int distancia)
+        public void DibujarNodos(PaintEventArgs e, int diametroNodo, int distancia, Color colorMatriz)
         {
             // Validar que la matriz esté inicializada
             if (Nodos == null)
@@ -53,7 +53,7 @@
                     {
                         g.FillEllipse(pincelNodo, x, y, diametroNodo, diametroNodo); // Dibujar círculo relleno
                     }
-                    using (Pen bordeNodo = new Pen(Color.Black, 2)) // Color negro con grosor de 2px
+                    using (Pen bordeNodo = new Pen(colorMatriz, 2)) // Color negro con grosor de 2px
                     {
                         g.DrawEllipse(bordeNodo, x, y, diametroNodo, diametroNodo);
                     }

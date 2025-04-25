@@ -78,7 +78,6 @@
             grafoTlSpMenuItemExportGrafo = new ToolStripMenuItem();
             algoritmoToolStripMenuItem = new ToolStripMenuItem();
             pDFToolStripMenuItem = new ToolStripMenuItem();
-            excelToolStripMenuItem = new ToolStripMenuItem();
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -97,10 +96,9 @@
             // panelGrafos
             // 
             panelGrafos.BorderStyle = BorderStyle.FixedSingle;
-            panelGrafos.Location = new Point(14, 36);
-            panelGrafos.Margin = new Padding(3, 4, 3, 4);
+            panelGrafos.Location = new Point(12, 27);
             panelGrafos.Name = "panelGrafos";
-            panelGrafos.Size = new Size(485, 535);
+            panelGrafos.Size = new Size(425, 402);
             panelGrafos.TabIndex = 0;
             panelGrafos.Paint += panelGrafos_Paint;
             // 
@@ -108,45 +106,43 @@
             // 
             combo2DMatriz.FormattingEnabled = true;
             combo2DMatriz.Items.AddRange(new object[] { "3x3", "4x4", "5x5" });
-            combo2DMatriz.Location = new Point(691, 45);
-            combo2DMatriz.Margin = new Padding(3, 4, 3, 4);
+            combo2DMatriz.Location = new Point(605, 34);
             combo2DMatriz.Name = "combo2DMatriz";
-            combo2DMatriz.Size = new Size(110, 28);
+            combo2DMatriz.Size = new Size(97, 23);
             combo2DMatriz.TabIndex = 2;
             // 
             // txtMatriz
             // 
             txtMatriz.AutoSize = true;
-            txtMatriz.Location = new Point(521, 48);
+            txtMatriz.Location = new Point(456, 36);
             txtMatriz.Name = "txtMatriz";
-            txtMatriz.Size = new Size(163, 20);
+            txtMatriz.Size = new Size(130, 15);
             txtMatriz.TabIndex = 3;
             txtMatriz.Text = "Dimensiones de nodos:";
             // 
             // txtNodoOrigen
             // 
             txtNodoOrigen.AutoSize = true;
-            txtNodoOrigen.Location = new Point(8, 93);
+            txtNodoOrigen.Location = new Point(7, 70);
             txtNodoOrigen.Name = "txtNodoOrigen";
-            txtNodoOrigen.Size = new Size(166, 20);
+            txtNodoOrigen.Size = new Size(131, 15);
             txtNodoOrigen.TabIndex = 4;
             txtNodoOrigen.Text = "Estado de nodo Origen:";
             // 
             // comboNodoOrigen
             // 
             comboNodoOrigen.Enabled = false;
-            comboNodoOrigen.Location = new Point(176, 89);
-            comboNodoOrigen.Margin = new Padding(3, 4, 3, 4);
+            comboNodoOrigen.Location = new Point(154, 67);
             comboNodoOrigen.Name = "comboNodoOrigen";
-            comboNodoOrigen.Size = new Size(114, 27);
+            comboNodoOrigen.Size = new Size(100, 23);
             comboNodoOrigen.TabIndex = 5;
             // 
             // txtDireccion
             // 
             txtDireccion.AutoSize = true;
-            txtDireccion.Location = new Point(302, 224);
+            txtDireccion.Location = new Point(264, 168);
             txtDireccion.Name = "txtDireccion";
-            txtDireccion.Size = new Size(139, 20);
+            txtDireccion.Size = new Size(110, 15);
             txtDireccion.TabIndex = 6;
             txtDireccion.Text = "Dirección escogida:";
             // 
@@ -155,10 +151,9 @@
             ComboDireccion.Enabled = false;
             ComboDireccion.FormattingEnabled = true;
             ComboDireccion.Items.AddRange(new object[] { "Arriba y a la izquierda", "Arriba", "Arriba y a la derecha", "Izquierda", "Derecha", "Abajo y a la izquierda", "Abajo", "Abajo y a la derecha" });
-            ComboDireccion.Location = new Point(447, 220);
-            ComboDireccion.Margin = new Padding(3, 4, 3, 4);
+            ComboDireccion.Location = new Point(391, 165);
             ComboDireccion.Name = "ComboDireccion";
-            ComboDireccion.Size = new Size(181, 28);
+            ComboDireccion.Size = new Size(159, 23);
             ComboDireccion.TabIndex = 7;
             ComboDireccion.SelectedIndexChanged += ComboDireccion_SelectedIndexChanged;
             // 
@@ -172,11 +167,9 @@
             GroupComandos.Controls.Add(pictureDown);
             GroupComandos.Controls.Add(pictureUpL);
             GroupComandos.Controls.Add(pictureUp);
-            GroupComandos.Location = new Point(8, 208);
-            GroupComandos.Margin = new Padding(3, 4, 3, 4);
+            GroupComandos.Location = new Point(7, 156);
             GroupComandos.Name = "GroupComandos";
-            GroupComandos.Padding = new Padding(3, 4, 3, 4);
-            GroupComandos.Size = new Size(289, 237);
+            GroupComandos.Size = new Size(253, 178);
             GroupComandos.TabIndex = 8;
             GroupComandos.TabStop = false;
             GroupComandos.Text = "Comandos";
@@ -184,10 +177,9 @@
             // pictureDownR
             // 
             pictureDownR.Image = Properties.Resources.down___right_;
-            pictureDownR.Location = new Point(192, 165);
-            pictureDownR.Margin = new Padding(3, 4, 3, 4);
+            pictureDownR.Location = new Point(168, 124);
             pictureDownR.Name = "pictureDownR";
-            pictureDownR.Size = new Size(67, 57);
+            pictureDownR.Size = new Size(59, 43);
             pictureDownR.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureDownR.TabIndex = 0;
             pictureDownR.TabStop = false;
@@ -196,10 +188,9 @@
             // pictureUpR
             // 
             pictureUpR.Image = Properties.Resources.up_right;
-            pictureUpR.Location = new Point(192, 31);
-            pictureUpR.Margin = new Padding(3, 4, 3, 4);
+            pictureUpR.Location = new Point(168, 23);
             pictureUpR.Name = "pictureUpR";
-            pictureUpR.Size = new Size(67, 57);
+            pictureUpR.Size = new Size(59, 43);
             pictureUpR.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureUpR.TabIndex = 0;
             pictureUpR.TabStop = false;
@@ -208,10 +199,9 @@
             // pictureRight
             // 
             pictureRight.Image = Properties.Resources.rigth;
-            pictureRight.Location = new Point(192, 96);
-            pictureRight.Margin = new Padding(3, 4, 3, 4);
+            pictureRight.Location = new Point(168, 72);
             pictureRight.Name = "pictureRight";
-            pictureRight.Size = new Size(67, 57);
+            pictureRight.Size = new Size(59, 43);
             pictureRight.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureRight.TabIndex = 0;
             pictureRight.TabStop = false;
@@ -220,10 +210,9 @@
             // pictureLeft
             // 
             pictureLeft.Image = Properties.Resources.left;
-            pictureLeft.Location = new Point(43, 96);
-            pictureLeft.Margin = new Padding(3, 4, 3, 4);
+            pictureLeft.Location = new Point(38, 72);
             pictureLeft.Name = "pictureLeft";
-            pictureLeft.Size = new Size(67, 57);
+            pictureLeft.Size = new Size(59, 43);
             pictureLeft.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureLeft.TabIndex = 0;
             pictureLeft.TabStop = false;
@@ -232,10 +221,9 @@
             // pictureDownL
             // 
             pictureDownL.Image = Properties.Resources.down_left;
-            pictureDownL.Location = new Point(43, 165);
-            pictureDownL.Margin = new Padding(3, 4, 3, 4);
+            pictureDownL.Location = new Point(38, 124);
             pictureDownL.Name = "pictureDownL";
-            pictureDownL.Size = new Size(67, 57);
+            pictureDownL.Size = new Size(59, 43);
             pictureDownL.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureDownL.TabIndex = 0;
             pictureDownL.TabStop = false;
@@ -244,10 +232,9 @@
             // pictureDown
             // 
             pictureDown.Image = Properties.Resources.down;
-            pictureDown.Location = new Point(118, 165);
-            pictureDown.Margin = new Padding(3, 4, 3, 4);
+            pictureDown.Location = new Point(103, 124);
             pictureDown.Name = "pictureDown";
-            pictureDown.Size = new Size(67, 57);
+            pictureDown.Size = new Size(59, 43);
             pictureDown.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureDown.TabIndex = 0;
             pictureDown.TabStop = false;
@@ -256,10 +243,9 @@
             // pictureUpL
             // 
             pictureUpL.Image = Properties.Resources.up_left;
-            pictureUpL.Location = new Point(43, 31);
-            pictureUpL.Margin = new Padding(3, 4, 3, 4);
+            pictureUpL.Location = new Point(38, 23);
             pictureUpL.Name = "pictureUpL";
-            pictureUpL.Size = new Size(67, 57);
+            pictureUpL.Size = new Size(59, 43);
             pictureUpL.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureUpL.TabIndex = 0;
             pictureUpL.TabStop = false;
@@ -268,10 +254,9 @@
             // pictureUp
             // 
             pictureUp.Image = Properties.Resources.up;
-            pictureUp.Location = new Point(118, 31);
-            pictureUp.Margin = new Padding(3, 4, 3, 4);
+            pictureUp.Location = new Point(103, 23);
             pictureUp.Name = "pictureUp";
-            pictureUp.Size = new Size(67, 57);
+            pictureUp.Size = new Size(59, 43);
             pictureUp.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureUp.TabIndex = 0;
             pictureUp.TabStop = false;
@@ -279,10 +264,9 @@
             // 
             // btnDesahacerConexion
             // 
-            btnDesahacerConexion.Location = new Point(478, 304);
-            btnDesahacerConexion.Margin = new Padding(3, 4, 3, 4);
+            btnDesahacerConexion.Location = new Point(418, 228);
             btnDesahacerConexion.Name = "btnDesahacerConexion";
-            btnDesahacerConexion.Size = new Size(122, 57);
+            btnDesahacerConexion.Size = new Size(107, 43);
             btnDesahacerConexion.TabIndex = 9;
             btnDesahacerConexion.Text = "Desahacer\r\nultimo nodo\r\n";
             btnDesahacerConexion.UseVisualStyleBackColor = true;
@@ -291,35 +275,33 @@
             // txtValorNodo
             // 
             txtValorNodo.AutoSize = true;
-            txtValorNodo.Location = new Point(8, 155);
+            txtValorNodo.Location = new Point(7, 116);
             txtValorNodo.Name = "txtValorNodo";
-            txtValorNodo.Size = new Size(138, 20);
+            txtValorNodo.Size = new Size(109, 15);
             txtValorNodo.TabIndex = 4;
             txtValorNodo.Text = "Valor nodo destino:";
             // 
             // txtBoxValorNodo
             // 
-            txtBoxValorNodo.Location = new Point(151, 149);
-            txtBoxValorNodo.Margin = new Padding(3, 4, 3, 4);
+            txtBoxValorNodo.Location = new Point(132, 112);
             txtBoxValorNodo.Name = "txtBoxValorNodo";
-            txtBoxValorNodo.Size = new Size(114, 27);
+            txtBoxValorNodo.Size = new Size(100, 23);
             txtBoxValorNodo.TabIndex = 5;
             // 
             // txtColorMtriz
             // 
             txtColorMtriz.AutoSize = true;
-            txtColorMtriz.Location = new Point(811, 48);
+            txtColorMtriz.Location = new Point(710, 36);
             txtColorMtriz.Name = "txtColorMtriz";
-            txtColorMtriz.Size = new Size(114, 20);
+            txtColorMtriz.Size = new Size(91, 15);
             txtColorMtriz.TabIndex = 4;
             txtColorMtriz.Text = "Color de nodos:";
             // 
             // btnGenerarMatriz
             // 
-            btnGenerarMatriz.Location = new Point(1026, 32);
-            btnGenerarMatriz.Margin = new Padding(3, 4, 3, 4);
+            btnGenerarMatriz.Location = new Point(898, 24);
             btnGenerarMatriz.Name = "btnGenerarMatriz";
-            btnGenerarMatriz.Size = new Size(89, 61);
+            btnGenerarMatriz.Size = new Size(78, 46);
             btnGenerarMatriz.TabIndex = 11;
             btnGenerarMatriz.Text = "Generar\r\nmatriz";
             btnGenerarMatriz.UseVisualStyleBackColor = true;
@@ -328,18 +310,18 @@
             // txtColorNodo
             // 
             txtColorNodo.AutoSize = true;
-            txtColorNodo.Location = new Point(296, 93);
+            txtColorNodo.Location = new Point(259, 70);
             txtColorNodo.Name = "txtColorNodo";
-            txtColorNodo.Size = new Size(112, 20);
+            txtColorNodo.Size = new Size(89, 15);
             txtColorNodo.TabIndex = 4;
             txtColorNodo.Text = "Color del nodo:";
             // 
             // txtcolorArista
             // 
             txtcolorArista.AutoSize = true;
-            txtcolorArista.Location = new Point(298, 149);
+            txtcolorArista.Location = new Point(261, 112);
             txtcolorArista.Name = "txtcolorArista";
-            txtcolorArista.Size = new Size(113, 20);
+            txtcolorArista.Size = new Size(89, 15);
             txtcolorArista.TabIndex = 4;
             txtcolorArista.Text = "Color del arista:";
             // 
@@ -360,20 +342,19 @@
             groupPanelControl.Controls.Add(txtDireccion);
             groupPanelControl.Controls.Add(txtBoxValorNodo);
             groupPanelControl.Enabled = false;
-            groupPanelControl.Location = new Point(515, 101);
-            groupPanelControl.Margin = new Padding(3, 4, 3, 4);
+            groupPanelControl.Location = new Point(451, 76);
             groupPanelControl.Name = "groupPanelControl";
-            groupPanelControl.Padding = new Padding(3, 4, 3, 4);
-            groupPanelControl.Size = new Size(635, 451);
+            groupPanelControl.Size = new Size(556, 338);
             groupPanelControl.TabIndex = 12;
             groupPanelControl.TabStop = false;
             // 
             // btnColrArista
             // 
             btnColrArista.BackColor = SystemColors.MenuText;
-            btnColrArista.Location = new Point(415, 148);
+            btnColrArista.Location = new Point(363, 111);
+            btnColrArista.Margin = new Padding(3, 2, 3, 2);
             btnColrArista.Name = "btnColrArista";
-            btnColrArista.Size = new Size(73, 25);
+            btnColrArista.Size = new Size(64, 19);
             btnColrArista.TabIndex = 13;
             btnColrArista.UseVisualStyleBackColor = false;
             btnColrArista.Click += btnColrArista_Click;
@@ -381,19 +362,19 @@
             // btnColrNodo
             // 
             btnColrNodo.BackColor = SystemColors.MenuText;
-            btnColrNodo.Location = new Point(413, 92);
+            btnColrNodo.Location = new Point(361, 69);
+            btnColrNodo.Margin = new Padding(3, 2, 3, 2);
             btnColrNodo.Name = "btnColrNodo";
-            btnColrNodo.Size = new Size(73, 25);
+            btnColrNodo.Size = new Size(64, 19);
             btnColrNodo.TabIndex = 13;
             btnColrNodo.UseVisualStyleBackColor = false;
             btnColrNodo.Click += btnColrNodo_Click;
             // 
             // btnStrNodOrig
             // 
-            btnStrNodOrig.Location = new Point(18, 29);
-            btnStrNodOrig.Margin = new Padding(3, 4, 3, 4);
+            btnStrNodOrig.Location = new Point(16, 22);
             btnStrNodOrig.Name = "btnStrNodOrig";
-            btnStrNodOrig.Size = new Size(101, 57);
+            btnStrNodOrig.Size = new Size(88, 43);
             btnStrNodOrig.TabIndex = 11;
             btnStrNodOrig.Text = "Iniciar nodo";
             btnStrNodOrig.UseVisualStyleBackColor = true;
@@ -401,10 +382,9 @@
             // 
             // btnDefinirNOrignen
             // 
-            btnDefinirNOrignen.Location = new Point(328, 304);
-            btnDefinirNOrignen.Margin = new Padding(3, 4, 3, 4);
+            btnDefinirNOrignen.Location = new Point(287, 228);
             btnDefinirNOrignen.Name = "btnDefinirNOrignen";
-            btnDefinirNOrignen.Size = new Size(120, 57);
+            btnDefinirNOrignen.Size = new Size(105, 43);
             btnDefinirNOrignen.TabIndex = 11;
             btnDefinirNOrignen.Text = "Definir\r\nnodo origen";
             btnDefinirNOrignen.UseVisualStyleBackColor = true;
@@ -413,9 +393,10 @@
             // btnColrMatriz
             // 
             btnColrMatriz.BackColor = SystemColors.MenuText;
-            btnColrMatriz.Location = new Point(933, 47);
+            btnColrMatriz.Location = new Point(816, 35);
+            btnColrMatriz.Margin = new Padding(3, 2, 3, 2);
             btnColrMatriz.Name = "btnColrMatriz";
-            btnColrMatriz.Size = new Size(73, 25);
+            btnColrMatriz.Size = new Size(64, 19);
             btnColrMatriz.TabIndex = 13;
             btnColrMatriz.UseVisualStyleBackColor = false;
             btnColrMatriz.Click += btnColrMatriz_Click;
@@ -427,11 +408,10 @@
             dgdvAlgoritmo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdvAlgoritmo.Columns.AddRange(new DataGridViewColumn[] { NumeroPaso, indexFilaOrigenDataGridViewTextBoxColumn, indexColumOrigenDataGridViewTextBoxColumn, ValorNodoorigen, direccionDestinoDataGridViewTextBoxColumn, indexFilaDestinoDataGridViewTextBoxColumn, indexColumDestinoDataGridViewTextBoxColumn, valorNodoDataGridViewTextBoxColumn });
             dgdvAlgoritmo.DataSource = estructuraControlBindingSource;
-            dgdvAlgoritmo.Location = new Point(14, 580);
-            dgdvAlgoritmo.Margin = new Padding(3, 4, 3, 4);
+            dgdvAlgoritmo.Location = new Point(12, 435);
             dgdvAlgoritmo.Name = "dgdvAlgoritmo";
             dgdvAlgoritmo.RowHeadersWidth = 51;
-            dgdvAlgoritmo.Size = new Size(769, 202);
+            dgdvAlgoritmo.Size = new Size(723, 152);
             dgdvAlgoritmo.TabIndex = 1;
             // 
             // NumeroPaso
@@ -441,7 +421,7 @@
             NumeroPaso.MinimumWidth = 6;
             NumeroPaso.Name = "NumeroPaso";
             NumeroPaso.ReadOnly = true;
-            NumeroPaso.Width = 60;
+            NumeroPaso.Width = 40;
             // 
             // indexFilaOrigenDataGridViewTextBoxColumn
             // 
@@ -477,7 +457,7 @@
             direccionDestinoDataGridViewTextBoxColumn.MinimumWidth = 6;
             direccionDestinoDataGridViewTextBoxColumn.Name = "direccionDestinoDataGridViewTextBoxColumn";
             direccionDestinoDataGridViewTextBoxColumn.ReadOnly = true;
-            direccionDestinoDataGridViewTextBoxColumn.Width = 120;
+            direccionDestinoDataGridViewTextBoxColumn.Width = 140;
             // 
             // indexFilaDestinoDataGridViewTextBoxColumn
             // 
@@ -516,7 +496,7 @@
             toolStrip1.Items.AddRange(new ToolStripItem[] { tlStripAcerca, toolStripSplitButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new Size(1161, 27);
+            toolStrip1.Size = new Size(1016, 25);
             toolStrip1.TabIndex = 14;
             toolStrip1.Text = "toolStrip1";
             // 
@@ -526,7 +506,7 @@
             tlStripAcerca.Image = (Image)resources.GetObject("tlStripAcerca.Image");
             tlStripAcerca.ImageTransparentColor = Color.Magenta;
             tlStripAcerca.Name = "tlStripAcerca";
-            tlStripAcerca.Size = new Size(79, 24);
+            tlStripAcerca.Size = new Size(63, 22);
             tlStripAcerca.Text = "Acerca de";
             tlStripAcerca.Click += toolStripButton1_Click;
             // 
@@ -537,42 +517,35 @@
             toolStripSplitButton1.Image = (Image)resources.GetObject("toolStripSplitButton1.Image");
             toolStripSplitButton1.ImageTransparentColor = Color.Magenta;
             toolStripSplitButton1.Name = "toolStripSplitButton1";
-            toolStripSplitButton1.Size = new Size(84, 24);
+            toolStripSplitButton1.Size = new Size(67, 22);
             toolStripSplitButton1.Text = "Exportar";
             // 
             // grafoTlSpMenuItemExportGrafo
             // 
             grafoTlSpMenuItemExportGrafo.Name = "grafoTlSpMenuItemExportGrafo";
-            grafoTlSpMenuItemExportGrafo.Size = new Size(224, 26);
+            grafoTlSpMenuItemExportGrafo.Size = new Size(180, 22);
             grafoTlSpMenuItemExportGrafo.Text = "Grafo";
             grafoTlSpMenuItemExportGrafo.Click += grafoTlSpMenuItemExportGrafo_Click;
             // 
             // algoritmoToolStripMenuItem
             // 
-            algoritmoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pDFToolStripMenuItem, excelToolStripMenuItem });
+            algoritmoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pDFToolStripMenuItem });
             algoritmoToolStripMenuItem.Name = "algoritmoToolStripMenuItem";
-            algoritmoToolStripMenuItem.Size = new Size(224, 26);
+            algoritmoToolStripMenuItem.Size = new Size(180, 22);
             algoritmoToolStripMenuItem.Text = "Algoritmo";
             // 
             // pDFToolStripMenuItem
             // 
             pDFToolStripMenuItem.Name = "pDFToolStripMenuItem";
-            pDFToolStripMenuItem.Size = new Size(224, 26);
+            pDFToolStripMenuItem.Size = new Size(180, 22);
             pDFToolStripMenuItem.Text = "PDF";
             pDFToolStripMenuItem.Click += pDFToolStripMenuItem_Click;
             // 
-            // excelToolStripMenuItem
-            // 
-            excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            excelToolStripMenuItem.Size = new Size(224, 26);
-            excelToolStripMenuItem.Text = "Excel";
-            excelToolStripMenuItem.Click += excelToolStripMenuItem_Click;
-            // 
             // diseñoGrafo
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1161, 795);
+            ClientSize = new Size(1016, 592);
             Controls.Add(toolStrip1);
             Controls.Add(btnColrMatriz);
             Controls.Add(groupPanelControl);
@@ -582,7 +555,6 @@
             Controls.Add(combo2DMatriz);
             Controls.Add(dgdvAlgoritmo);
             Controls.Add(panelGrafos);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "diseñoGrafo";
             Text = "Grafos";
             GroupComandos.ResumeLayout(false);
@@ -640,6 +612,12 @@
         private Button btnColrMatriz;
         private DataGridView dgdvAlgoritmo;
         private BindingSource estructuraControlBindingSource;
+        private ToolStrip toolStrip1;
+        private ToolStripButton tlStripAcerca;
+        private ToolStripSplitButton toolStripSplitButton1;
+        private ToolStripMenuItem grafoTlSpMenuItemExportGrafo;
+        private ToolStripMenuItem algoritmoToolStripMenuItem;
+        private ToolStripMenuItem pDFToolStripMenuItem;
         private DataGridViewTextBoxColumn NumeroPaso;
         private DataGridViewTextBoxColumn indexFilaOrigenDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn indexColumOrigenDataGridViewTextBoxColumn;
@@ -648,12 +626,5 @@
         private DataGridViewTextBoxColumn indexFilaDestinoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn indexColumDestinoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorNodoDataGridViewTextBoxColumn;
-        private ToolStrip toolStrip1;
-        private ToolStripButton tlStripAcerca;
-        private ToolStripSplitButton toolStripSplitButton1;
-        private ToolStripMenuItem grafoTlSpMenuItemExportGrafo;
-        private ToolStripMenuItem algoritmoToolStripMenuItem;
-        private ToolStripMenuItem pDFToolStripMenuItem;
-        private ToolStripMenuItem excelToolStripMenuItem;
     }
 }

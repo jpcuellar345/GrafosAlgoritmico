@@ -59,7 +59,7 @@ namespace GrafosAlgoritmico
                 }
 
                 // **Luego dibujar los nodos**
-                matriz.DibujarNodos(e, 50, 30);
+                matriz.DibujarNodos(e, 50, 30, colorMatriz.Color);
             }
         }
 
