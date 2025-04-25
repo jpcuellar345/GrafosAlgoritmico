@@ -287,5 +287,28 @@ namespace GrafosAlgoritmico
                 MessageBox.Show("Acción no disponible, primero debe estar vacia la dirección escogina y valor nodo destino.\nEsto debido a que se esta ejecutando la acción de definir un nuevo nodo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"Prestador de servicio unadista: Juan Pablo Cuellar Vanegas
+Grupo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
+
+        private void grafoTlSpMenuItemExportGrafo_Click(object sender, EventArgs e)
+        {
+            Exportar.ImagenPanel(panelGrafos);
+        }
+
+        private void pDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Exportar.DtGdVwAPDF(dgdvAlgoritmo);
+        }
+
+        private void excelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Exportar.DtGdVwAExcel(dgdvAlgoritmo);
+        }
     }
 }

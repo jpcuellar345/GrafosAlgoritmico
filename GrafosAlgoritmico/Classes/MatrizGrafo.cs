@@ -53,6 +53,10 @@
                     {
                         g.FillEllipse(pincelNodo, x, y, diametroNodo, diametroNodo); // Dibujar círculo relleno
                     }
+                    using (Pen bordeNodo = new Pen(Color.Black, 2)) // Color negro con grosor de 2px
+                    {
+                        g.DrawEllipse(bordeNodo, x, y, diametroNodo, diametroNodo);
+                    }
 
                     // Obtener el texto del nodo
                     string textoNodo = Nodos[fila, colum].Valor;
@@ -75,22 +79,6 @@
             }
         }
 
-        //public void CrearLineaNodos(PaintEventArgs e, Color colorArista, int x1, int y1, int x2, int y2)
-        //{
-        //    // Crear el objeto Graphics
-        //    Graphics g = e.Graphics;
-
-        //    // Especificar el color de la línea
-        //    Pen pen = new Pen(colorArista, 2); // Color rojo y grosor de 2px
-
-        //    // Dibujar la línea
-        //    g.DrawLine(pen, x1, y1, x2, y2);
-
-        //    // Liberar recursos
-        //    pen.Dispose();
-        //}
-
-        // Método para cambiar el punto de partida
         public void SeleccionarPuntoPartida(Color original, Color nuevoColor, int aumentF, int aumentC)
         {
             // Validar que la matriz esté inicializada

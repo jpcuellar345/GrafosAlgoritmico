@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(diseñoGrafo));
             panelGrafos = new Panel();
             combo2DMatriz = new ComboBox();
             txtMatriz = new Label();
@@ -48,8 +49,6 @@
             pictureUpL = new PictureBox();
             pictureUp = new PictureBox();
             btnDesahacerConexion = new Button();
-            btnExportGrafo = new Button();
-            btnExportAlgoritmo = new Button();
             txtValorNodo = new Label();
             txtBoxValorNodo = new TextBox();
             txtColorMtriz = new Label();
@@ -73,6 +72,13 @@
             indexColumDestinoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             valorNodoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             estructuraControlBindingSource = new BindingSource(components);
+            toolStrip1 = new ToolStrip();
+            tlStripAcerca = new ToolStripButton();
+            toolStripSplitButton1 = new ToolStripSplitButton();
+            grafoTlSpMenuItemExportGrafo = new ToolStripMenuItem();
+            algoritmoToolStripMenuItem = new ToolStripMenuItem();
+            pDFToolStripMenuItem = new ToolStripMenuItem();
+            excelToolStripMenuItem = new ToolStripMenuItem();
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -85,12 +91,13 @@
             groupPanelControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)estructuraControlBindingSource).BeginInit();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // panelGrafos
             // 
             panelGrafos.BorderStyle = BorderStyle.FixedSingle;
-            panelGrafos.Location = new Point(14, 16);
+            panelGrafos.Location = new Point(14, 36);
             panelGrafos.Margin = new Padding(3, 4, 3, 4);
             panelGrafos.Name = "panelGrafos";
             panelGrafos.Size = new Size(485, 535);
@@ -101,7 +108,7 @@
             // 
             combo2DMatriz.FormattingEnabled = true;
             combo2DMatriz.Items.AddRange(new object[] { "3x3", "4x4", "5x5" });
-            combo2DMatriz.Location = new Point(691, 25);
+            combo2DMatriz.Location = new Point(691, 45);
             combo2DMatriz.Margin = new Padding(3, 4, 3, 4);
             combo2DMatriz.Name = "combo2DMatriz";
             combo2DMatriz.Size = new Size(110, 28);
@@ -110,7 +117,7 @@
             // txtMatriz
             // 
             txtMatriz.AutoSize = true;
-            txtMatriz.Location = new Point(521, 28);
+            txtMatriz.Location = new Point(521, 48);
             txtMatriz.Name = "txtMatriz";
             txtMatriz.Size = new Size(163, 20);
             txtMatriz.TabIndex = 3;
@@ -281,26 +288,6 @@
             btnDesahacerConexion.UseVisualStyleBackColor = true;
             btnDesahacerConexion.Click += btnDesahacerConexion_Click;
             // 
-            // btnExportGrafo
-            // 
-            btnExportGrafo.Location = new Point(904, 588);
-            btnExportGrafo.Margin = new Padding(3, 4, 3, 4);
-            btnExportGrafo.Name = "btnExportGrafo";
-            btnExportGrafo.Size = new Size(83, 71);
-            btnExportGrafo.TabIndex = 9;
-            btnExportGrafo.Text = "Exportar\r\nGrafo";
-            btnExportGrafo.UseVisualStyleBackColor = true;
-            // 
-            // btnExportAlgoritmo
-            // 
-            btnExportAlgoritmo.Location = new Point(1021, 588);
-            btnExportAlgoritmo.Margin = new Padding(3, 4, 3, 4);
-            btnExportAlgoritmo.Name = "btnExportAlgoritmo";
-            btnExportAlgoritmo.Size = new Size(83, 71);
-            btnExportAlgoritmo.TabIndex = 9;
-            btnExportAlgoritmo.Text = "Exportar\r\nAlgoritmo";
-            btnExportAlgoritmo.UseVisualStyleBackColor = true;
-            // 
             // txtValorNodo
             // 
             txtValorNodo.AutoSize = true;
@@ -321,7 +308,7 @@
             // txtColorMtriz
             // 
             txtColorMtriz.AutoSize = true;
-            txtColorMtriz.Location = new Point(811, 28);
+            txtColorMtriz.Location = new Point(811, 48);
             txtColorMtriz.Name = "txtColorMtriz";
             txtColorMtriz.Size = new Size(114, 20);
             txtColorMtriz.TabIndex = 4;
@@ -329,7 +316,7 @@
             // 
             // btnGenerarMatriz
             // 
-            btnGenerarMatriz.Location = new Point(1026, 12);
+            btnGenerarMatriz.Location = new Point(1026, 32);
             btnGenerarMatriz.Margin = new Padding(3, 4, 3, 4);
             btnGenerarMatriz.Name = "btnGenerarMatriz";
             btnGenerarMatriz.Size = new Size(89, 61);
@@ -373,7 +360,7 @@
             groupPanelControl.Controls.Add(txtDireccion);
             groupPanelControl.Controls.Add(txtBoxValorNodo);
             groupPanelControl.Enabled = false;
-            groupPanelControl.Location = new Point(515, 81);
+            groupPanelControl.Location = new Point(515, 101);
             groupPanelControl.Margin = new Padding(3, 4, 3, 4);
             groupPanelControl.Name = "groupPanelControl";
             groupPanelControl.Padding = new Padding(3, 4, 3, 4);
@@ -426,7 +413,7 @@
             // btnColrMatriz
             // 
             btnColrMatriz.BackColor = SystemColors.MenuText;
-            btnColrMatriz.Location = new Point(933, 27);
+            btnColrMatriz.Location = new Point(933, 47);
             btnColrMatriz.Name = "btnColrMatriz";
             btnColrMatriz.Size = new Size(73, 25);
             btnColrMatriz.TabIndex = 13;
@@ -440,11 +427,11 @@
             dgdvAlgoritmo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgdvAlgoritmo.Columns.AddRange(new DataGridViewColumn[] { NumeroPaso, indexFilaOrigenDataGridViewTextBoxColumn, indexColumOrigenDataGridViewTextBoxColumn, ValorNodoorigen, direccionDestinoDataGridViewTextBoxColumn, indexFilaDestinoDataGridViewTextBoxColumn, indexColumDestinoDataGridViewTextBoxColumn, valorNodoDataGridViewTextBoxColumn });
             dgdvAlgoritmo.DataSource = estructuraControlBindingSource;
-            dgdvAlgoritmo.Location = new Point(14, 560);
+            dgdvAlgoritmo.Location = new Point(14, 580);
             dgdvAlgoritmo.Margin = new Padding(3, 4, 3, 4);
             dgdvAlgoritmo.Name = "dgdvAlgoritmo";
             dgdvAlgoritmo.RowHeadersWidth = 51;
-            dgdvAlgoritmo.Size = new Size(769, 210);
+            dgdvAlgoritmo.Size = new Size(769, 202);
             dgdvAlgoritmo.TabIndex = 1;
             // 
             // NumeroPaso
@@ -523,16 +510,73 @@
             // 
             estructuraControlBindingSource.DataSource = typeof(Classes.EstructuraControl);
             // 
+            // toolStrip1
+            // 
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { tlStripAcerca, toolStripSplitButton1 });
+            toolStrip1.Location = new Point(0, 0);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(1161, 27);
+            toolStrip1.TabIndex = 14;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // tlStripAcerca
+            // 
+            tlStripAcerca.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tlStripAcerca.Image = (Image)resources.GetObject("tlStripAcerca.Image");
+            tlStripAcerca.ImageTransparentColor = Color.Magenta;
+            tlStripAcerca.Name = "tlStripAcerca";
+            tlStripAcerca.Size = new Size(79, 24);
+            tlStripAcerca.Text = "Acerca de";
+            tlStripAcerca.Click += toolStripButton1_Click;
+            // 
+            // toolStripSplitButton1
+            // 
+            toolStripSplitButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripSplitButton1.DropDownItems.AddRange(new ToolStripItem[] { grafoTlSpMenuItemExportGrafo, algoritmoToolStripMenuItem });
+            toolStripSplitButton1.Image = (Image)resources.GetObject("toolStripSplitButton1.Image");
+            toolStripSplitButton1.ImageTransparentColor = Color.Magenta;
+            toolStripSplitButton1.Name = "toolStripSplitButton1";
+            toolStripSplitButton1.Size = new Size(84, 24);
+            toolStripSplitButton1.Text = "Exportar";
+            // 
+            // grafoTlSpMenuItemExportGrafo
+            // 
+            grafoTlSpMenuItemExportGrafo.Name = "grafoTlSpMenuItemExportGrafo";
+            grafoTlSpMenuItemExportGrafo.Size = new Size(224, 26);
+            grafoTlSpMenuItemExportGrafo.Text = "Grafo";
+            grafoTlSpMenuItemExportGrafo.Click += grafoTlSpMenuItemExportGrafo_Click;
+            // 
+            // algoritmoToolStripMenuItem
+            // 
+            algoritmoToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pDFToolStripMenuItem, excelToolStripMenuItem });
+            algoritmoToolStripMenuItem.Name = "algoritmoToolStripMenuItem";
+            algoritmoToolStripMenuItem.Size = new Size(224, 26);
+            algoritmoToolStripMenuItem.Text = "Algoritmo";
+            // 
+            // pDFToolStripMenuItem
+            // 
+            pDFToolStripMenuItem.Name = "pDFToolStripMenuItem";
+            pDFToolStripMenuItem.Size = new Size(224, 26);
+            pDFToolStripMenuItem.Text = "PDF";
+            pDFToolStripMenuItem.Click += pDFToolStripMenuItem_Click;
+            // 
+            // excelToolStripMenuItem
+            // 
+            excelToolStripMenuItem.Name = "excelToolStripMenuItem";
+            excelToolStripMenuItem.Size = new Size(224, 26);
+            excelToolStripMenuItem.Text = "Excel";
+            excelToolStripMenuItem.Click += excelToolStripMenuItem_Click;
+            // 
             // diseñoGrafo
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1161, 795);
+            Controls.Add(toolStrip1);
             Controls.Add(btnColrMatriz);
             Controls.Add(groupPanelControl);
             Controls.Add(btnGenerarMatriz);
-            Controls.Add(btnExportAlgoritmo);
-            Controls.Add(btnExportGrafo);
             Controls.Add(txtColorMtriz);
             Controls.Add(txtMatriz);
             Controls.Add(combo2DMatriz);
@@ -554,6 +598,8 @@
             groupPanelControl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).EndInit();
             ((System.ComponentModel.ISupportInitialize)estructuraControlBindingSource).EndInit();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -579,8 +625,6 @@
         private PictureBox pictureLeft;
         private PictureBox pictureRight;
         private Button btnDesahacerConexion;
-        private Button btnExportGrafo;
-        private Button btnExportAlgoritmo;
         private Label txtValorNodo;
         private TextBox txtBoxValorNodo;
         private Label txtColorMtriz;
@@ -604,5 +648,12 @@
         private DataGridViewTextBoxColumn indexFilaDestinoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn indexColumDestinoDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorNodoDataGridViewTextBoxColumn;
+        private ToolStrip toolStrip1;
+        private ToolStripButton tlStripAcerca;
+        private ToolStripSplitButton toolStripSplitButton1;
+        private ToolStripMenuItem grafoTlSpMenuItemExportGrafo;
+        private ToolStripMenuItem algoritmoToolStripMenuItem;
+        private ToolStripMenuItem pDFToolStripMenuItem;
+        private ToolStripMenuItem excelToolStripMenuItem;
     }
 }
