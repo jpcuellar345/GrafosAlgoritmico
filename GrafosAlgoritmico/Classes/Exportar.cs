@@ -64,24 +64,50 @@ namespace GrafosAlgoritmico.Classes
 
                 try
                 {
-                    using (Document doc = new Document())
+                    using (Document doc = new Document(PageSize.A4.Rotate())) // Ajusta la página horizontalmente
                     {
                         PdfWriter.GetInstance(doc, new FileStream(saveDialog.FileName, FileMode.Create));
                         doc.Open();
-                        PdfPTable table = new PdfPTable(dgv.Columns.Count);
 
-                        iTextSharp.text.Font fuente = FontFactory.GetFont(FontFactory.HELVETICA, 12, iTextSharp.text.Font.BOLD);
+                        PdfPTable table = new PdfPTable(dgv.Columns.Count)
+                        {
+                            WidthPercentage = 100 // Ajusta el ancho total de la tabla en el PDF
+                        };
 
+                        // **Definir anchos dinámicos de columna**
+                        float[] anchosColumnas = new float[dgv.Columns.Count];
+                        for (int i = 0; i < dgv.Columns.Count; i++)
+                        {
+                            anchosColumnas[i] = dgv.Columns[i].Width; // Usa el mismo ancho del DataGridView
+                        }
+                        table.SetWidths(anchosColumnas);
+
+                        // **Fuente personalizada**
+                        iTextSharp.text.Font fuenteEncabezado = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12);
+                        iTextSharp.text.Font fuenteDatos = FontFactory.GetFont(FontFactory.HELVETICA, 10);
+
+                        // **Agregar encabezados**
                         foreach (DataGridViewColumn col in dgv.Columns)
                         {
-                            table.AddCell(new PdfPCell(new Phrase(col.HeaderText, fuente)));
+                            PdfPCell cell = new PdfPCell(new Phrase(col.HeaderText, fuenteEncabezado))
+                            {
+                                HorizontalAlignment = Element.ALIGN_CENTER,
+                                BackgroundColor = new BaseColor(200, 200, 200) // Color gris claro
+                            };
+                            table.AddCell(cell);
                         }
 
+                        // **Agregar filas**
                         foreach (DataGridViewRow row in dgv.Rows)
                         {
                             foreach (DataGridViewCell cell in row.Cells)
                             {
-                                table.AddCell(new Phrase(cell.Value?.ToString() ?? ""));
+                                PdfPCell pdfCell = new PdfPCell(new Phrase(cell.Value?.ToString() ?? "", fuenteDatos))
+                                {
+                                    HorizontalAlignment = Element.ALIGN_CENTER,
+                                    Padding = 5 // Espaciado interno en la celda
+                                };
+                                table.AddCell(pdfCell);
                             }
                         }
 
