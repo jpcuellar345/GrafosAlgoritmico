@@ -176,17 +176,53 @@
         }
         public void ReiniciarPuntosNodoB() //
         {
-            PuntosNodoA = PuntosNodoB;
+            try
+            {
+                PuntosNodoA = PuntosNodoB;
 
-            if (puntosNodoB[1] + 1 > Nodos.GetUpperBound(1))
-            {
-                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] - 1];
+                //if (puntosNodoB[1] + 1 > Nodos.GetUpperBound(1))
+                //{
+                //    PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] - 1];
+                //}
+                //else
+                //{
+                //    PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
+                //}
+                PuntosNodoB = BuscarCoincidenciaNodo("");
             }
-            else
+            catch
             {
-                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
+                MessageBox.Show("No se encontró nodo disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private int[] BuscarCoincidenciaNodo(string palabraClave)
+        {
+            int[] RangoDeIndex = { -1, 0, 1 };
+
+            for (int fila = 0; fila < RangoDeIndex.Length; fila++)
+            {
+                for (int columna = 0; columna < RangoDeIndex.Length; columna++)
+                {
+                    int nuevoFila = PuntosNodoA[0] + RangoDeIndex[fila];
+                    int nuevoColumna = PuntosNodoA[1] + RangoDeIndex[columna];
+
+                    // Validamos si la posición está dentro de los límites antes de acceder a nodos
+                    if (nuevoFila >= 0 && nuevoFila < nodos.GetLength(0) &&
+                        nuevoColumna >= 0 && nuevoColumna < nodos.GetLength(1) &&
+                        nodos[nuevoFila, nuevoColumna].Valor == palabraClave)
+                    {
+                        return [nuevoFila, nuevoColumna];
+                    }
+                }
+            }
+
+            // Si no se encuentra un nodo disponible, lanzamos la excepción directamente
+            throw new ArgumentException("No se encontró el nodo.");
+        }
+
+
+
+
         public void DesahacerNodoB(Color original)
         {
             try
