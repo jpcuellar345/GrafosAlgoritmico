@@ -4,11 +4,11 @@
     {
         public static Stack<EstructuraControl> pilaDeNodos;
         private int numeroPaso;
-        private int indexFilaDestino;
-        private int indexColumDestino;
         private int indexFilaOrigen;
         private int indexColumOrigen;
         private string direccionDestino;
+        private int indexFilaDestino;
+        private int indexColumDestino;
         private string valorNodoorigen;
         private string valorNodoDestino;
 

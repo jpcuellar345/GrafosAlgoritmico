@@ -198,13 +198,29 @@
             {
                 PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
             }
+        }
+        public void DesahacerNodoB(Color original)
+        {
+            try
+            {
+
+                EstructuraControl RegistroEliminar = EstructuraControl.pilaDeNodos.Peek();
+                int indexF = RegistroEliminar.IndexFilaDestino;
+                int indexC = RegistroEliminar.IndexColumDestino;
+
+                Nodos[indexF, indexC].colorNodo = original;
+                Nodos[indexF, indexC].colorValor = original;
+                Nodos[indexF, indexC].Valor = string.Empty;
 
 
-
-
-            //puntosNodoB = [0, 1]; //aqui toca hacer que el nodo siguiente no coincida con uno que ya esta ocupado
-            //ver ejemplo al descomentar y selecionar el nodo 0,1
-            //no veo la necesidad de reiniciar los puntosNodoB, ya que eso se encargara el metodo seleccionarSigueinte punto
+                indexF = RegistroEliminar.IndexFilaOrigen;
+                indexC = RegistroEliminar.IndexColumOrigen;
+                puntosNodoA = [indexF, indexC];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
