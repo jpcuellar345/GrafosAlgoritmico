@@ -13,6 +13,7 @@ namespace GrafosAlgoritmico.Classes
         public int coordenaEjeX;
         public int coordenaEjeY;
         public Color colorNodo;
+        public bool ocupado;
 
 
         public Nodo(int coordenaEjeX, int coordenaEjeY, Color colorNodo)

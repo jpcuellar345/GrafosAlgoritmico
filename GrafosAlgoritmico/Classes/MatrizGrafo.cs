@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace GrafosAlgoritmico.Classes
+﻿namespace GrafosAlgoritmico.Classes
 {
     public class MatrizGrafo
     {
@@ -38,7 +28,7 @@ namespace GrafosAlgoritmico.Classes
         }
 
         // Método para dibujar los nodos en el formulario
-        public void DibujarNodos(PaintEventArgs e, int diametroNodo, int distancia)
+        public void DibujarNodos(PaintEventArgs e, int diametroNodo, int distancia, Color colorMatriz)
         {
             // Validar que la matriz esté inicializada
             if (Nodos == null)
@@ -63,6 +53,10 @@ namespace GrafosAlgoritmico.Classes
                     {
                         g.FillEllipse(pincelNodo, x, y, diametroNodo, diametroNodo); // Dibujar círculo relleno
                     }
+                    using (Pen bordeNodo = new Pen(colorMatriz, 2)) // Color negro con grosor de 2px
+                    {
+                        g.DrawEllipse(bordeNodo, x, y, diametroNodo, diametroNodo);
+                    }
 
                     // Obtener el texto del nodo
                     string textoNodo = Nodos[fila, colum].Valor;
@@ -85,22 +79,6 @@ namespace GrafosAlgoritmico.Classes
             }
         }
 
-        //public void CrearLineaNodos(PaintEventArgs e, Color colorArista, int x1, int y1, int x2, int y2)
-        //{
-        //    // Crear el objeto Graphics
-        //    Graphics g = e.Graphics;
-
-        //    // Especificar el color de la línea
-        //    Pen pen = new Pen(colorArista, 2); // Color rojo y grosor de 2px
-
-        //    // Dibujar la línea
-        //    g.DrawLine(pen, x1, y1, x2, y2);
-
-        //    // Liberar recursos
-        //    pen.Dispose();
-        //}
-
-        // Método para cambiar el punto de partida
         public void SeleccionarPuntoPartida(Color original, Color nuevoColor, int aumentF, int aumentC)
         {
             // Validar que la matriz esté inicializada
@@ -109,6 +87,7 @@ namespace GrafosAlgoritmico.Classes
                 throw new InvalidOperationException("La matriz de nodos no ha sido inicializada."); // Lanzar excepción si no está inicializada
             }
             Nodos[PuntosPartida[0], PuntosPartida[1]].colorNodo = original; //devolver al estado
+            Nodos[PuntosPartida[0], PuntosPartida[1]].Valor = string.Empty;
 
             // Calcular nuevos índices para el punto de partida
             int nuevaFila = PuntosPartida[0] + aumentF;
@@ -129,9 +108,9 @@ namespace GrafosAlgoritmico.Classes
                 PuntosNodoA = [puntosPartida[0], puntosPartida[1]];
 
 
-                if (PuntosNodoA[0] == 0 && PuntosNodoA[0] == 0 && Nodos[puntosNodoA[0], puntosNodoA[0]].Valor == valorPuntoPartida && puntosPartida[0] == 0 && puntosPartida[1] == 0)
+                if (PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[puntosNodoA[0], puntosNodoA[0]].Valor == valorPuntoPartida)
                 {//para solucionar error de que pasa si incio el punto de partida esta en el nodo[0,0]
-                    PuntosNodoB[1]++;
+                    PuntosNodoB = [0, 1];
                 }
 
             }
@@ -177,7 +156,7 @@ namespace GrafosAlgoritmico.Classes
             {
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorNodo = original;
                 Nodos[PuntosNodoB[0], PuntosNodoB[1]].colorValor = original;
-                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = ""; // Limpiar el texto del nodo actual
+                Nodos[PuntosNodoB[0], PuntosNodoB[1]].Valor = string.Empty; // Limpiar el texto del nodo actual
 
 
                 // Validar que los nuevos índices estén dentro del rango
@@ -197,23 +176,75 @@ namespace GrafosAlgoritmico.Classes
         }
         public void ReiniciarPuntosNodoB() //
         {
-            PuntosNodoA = PuntosNodoB;
-
-            if (puntosNodoB[1] + 1 > Nodos.GetUpperBound(1))
+            try
             {
-                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] - 1];
+                PuntosNodoA = PuntosNodoB;
+
+                //if (puntosNodoB[1] + 1 > Nodos.GetUpperBound(1))
+                //{
+                //    PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] - 1];
+                //}
+                //else
+                //{
+                //    PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
+                //}
+                PuntosNodoB = BuscarCoincidenciaNodo("");
             }
-            else
+            catch
             {
-                PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
+                MessageBox.Show("No se encontró nodo disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public int[] BuscarCoincidenciaNodo(string palabraClave)
+        {
+            int[] RangoDeIndex = { -1, 0, 1 };
+
+            for (int fila = 0; fila < RangoDeIndex.Length; fila++)
+            {
+                for (int columna = 0; columna < RangoDeIndex.Length; columna++)
+                {
+                    int nuevoFila = PuntosNodoA[0] + RangoDeIndex[fila];
+                    int nuevoColumna = PuntosNodoA[1] + RangoDeIndex[columna];
+
+                    // Validamos si la posición está dentro de los límites antes de acceder a nodos
+                    if (nuevoFila >= 0 && nuevoFila < nodos.GetLength(0) &&
+                        nuevoColumna >= 0 && nuevoColumna < nodos.GetLength(1) &&
+                        nodos[nuevoFila, nuevoColumna].Valor == palabraClave)
+                    {
+                        return [nuevoFila, nuevoColumna];
+                    }
+                }
             }
 
+            // Si no se encuentra un nodo disponible, lanzamos la excepción directamente
+            throw new ArgumentException("No se encontró el nodo.");
+        }
 
 
 
-            //puntosNodoB = [0, 1]; //aqui toca hacer que el nodo siguiente no coincida con uno que ya esta ocupado
-            //ver ejemplo al descomentar y selecionar el nodo 0,1
-            //no veo la necesidad de reiniciar los puntosNodoB, ya que eso se encargara el metodo seleccionarSigueinte punto
+
+        public void DesahacerNodoB(Color original)
+        {
+            try
+            {
+
+                EstructuraControl RegistroEliminar = EstructuraControl.pilaDeNodos.Peek();
+                int indexF = RegistroEliminar.IndexFilaDestino;
+                int indexC = RegistroEliminar.IndexColumDestino;
+
+                Nodos[indexF, indexC].colorNodo = original;
+                Nodos[indexF, indexC].colorValor = original;
+                Nodos[indexF, indexC].Valor = string.Empty;
+
+
+                indexF = RegistroEliminar.IndexFilaOrigen;
+                indexC = RegistroEliminar.IndexColumOrigen;
+                puntosNodoA = [indexF, indexC];
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

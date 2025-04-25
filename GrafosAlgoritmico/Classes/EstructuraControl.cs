@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GrafosAlgoritmico.Classes
+﻿namespace GrafosAlgoritmico.Classes
 {
     public class EstructuraControl
     {
         public static Stack<EstructuraControl> pilaDeNodos;
         private int numeroPaso;
-        private int indexFilaDestino;
-        private int indexColumDestino;
         private int indexFilaOrigen;
         private int indexColumOrigen;
         private string direccionDestino;
+        private int indexFilaDestino;
+        private int indexColumDestino;
         private string valorNodoorigen;
         private string valorNodoDestino;
 

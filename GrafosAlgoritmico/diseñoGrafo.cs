@@ -1,6 +1,5 @@
 using GrafosAlgoritmico.Classes;
-using System.Drawing.Text;
-using System.Windows.Forms;
+using System.Reflection.PortableExecutable;
 
 namespace GrafosAlgoritmico
 {
@@ -34,13 +33,33 @@ namespace GrafosAlgoritmico
             EstructuraControl.IniciarStack();
             IniciarDgdvAlgoritmo();
             ActualizarDataGridView();
+            txtBoxValorNodo.Enabled = false;
         }
 
         private void panelGrafos_Paint(object sender, PaintEventArgs e)
         {
             if (permisoCrearMatriz && matriz != null)
             {
-                matriz.DibujarNodos(e, 50, 30);
+                // **Primero dibujar las conexiones**
+                Graphics g = e.Graphics;
+                using (Pen pen = new Pen(colorArista.Color, 5))
+                {
+                    foreach (EstructuraControl conexion in EstructuraControl.pilaDeNodos)
+                    {
+                        Nodo nodoOrigen = matriz.Nodos[conexion.IndexFilaOrigen, conexion.IndexColumOrigen];
+                        Nodo nodoDestino = matriz.Nodos[conexion.IndexFilaDestino, conexion.IndexColumDestino];
+
+                        int centroXOrigen = nodoOrigen.coordenaEjeX + 25;
+                        int centroYOrigen = nodoOrigen.coordenaEjeY + 25;
+                        int centroXDestino = nodoDestino.coordenaEjeX + 25;
+                        int centroYDestino = nodoDestino.coordenaEjeY + 25;
+
+                        g.DrawLine(pen, centroXOrigen, centroYOrigen, centroXDestino, centroYDestino);
+                    }
+                }
+
+                // **Luego dibujar los nodos**
+                matriz.DibujarNodos(e, 50, 30, colorMatriz.Color);
             }
         }
 
@@ -49,6 +68,11 @@ namespace GrafosAlgoritmico
             colorMatriz.ShowDialog();
             btnColrMatriz.BackColor = colorMatriz.Color;
         }
+        private void btnColrArista_Click(object sender, EventArgs e)
+        {
+            colorArista.ShowDialog();
+            btnColrArista.BackColor = colorArista.Color;
+        }
         private void btnGenerarMatriz_Click(object sender, EventArgs e) //Para generar la matriz
         {
             if (combo2DMatriz.SelectedIndex != -1)
@@ -56,7 +80,7 @@ namespace GrafosAlgoritmico
                 InicializarValor();
                 int dimension = combo2DMatriz.SelectedIndex + 3; //para obtener las longitudes de la matriz
                 matriz.CrearMatriz(dimension, dimension, 40, 60, colorMatriz.Color);
-                panelGrafos.Invalidate();
+                panelGrafos.Refresh();
             }
             else
             {
@@ -92,41 +116,58 @@ namespace GrafosAlgoritmico
                 indexAuxMovimiento = [0, 0]; //nunca en tu ideas borres esto tan indispensable para que no luches de nuevo con el problema
                 txtBoxValorNodo.Text = "";
                 ComboDireccion.SelectedIndex = -1;
+                txtBoxValorNodo.Enabled = true;
+                txtBoxValorNodo.Focus();
             }
             else
-            { //TODO
-                if (!(txtBoxValorNodo.Text == "" || ComboDireccion.SelectedIndex == -1))
+            {
+                try
                 {
-                    int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
-                    int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
-                    string direccionActual = ComboDireccion.Text;
-
-                    matriz.ReiniciarPuntosNodoB();
-                    btnStrNodOrig.Enabled = false;
-                    EstructuraControl nuevoRegistro = new EstructuraControl(0,
-                        IndexNodoA[0], IndexNodoA[1], direccionActual, IndexNodoB[0], IndexNodoB[1],
-                        valorNodoDestino: matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoA[0], IndexNodoA[1]].Valor);
-                    EstructuraControl.AgregarRegistro(nuevoRegistro);
-                    ActualizarDataGridView();
+                    if (!(txtBoxValorNodo.Text == "" || ComboDireccion.SelectedIndex == -1))
+                    {
+                        CrearNuevoRegistro();
+                        btnStrNodOrig.Enabled = false;
+                        ActualizarDataGridView();
+                        txtBoxValorNodo.Text = "";
+                        ComboDireccion.SelectedIndex = -1;
+                        txtBoxValorNodo.Focus();
+                    }
+                    else
+                    {
+                        ComboDireccion.SelectedIndex = -1;
+                        MessageBox.Show("Aun falta darle un valor nodo destino o especificar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Aun falta darle un valor nodo destino o especificar la dirección", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show($"{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
             }
+            panelGrafos.Refresh();
 
         }
-
+        private void CrearNuevoRegistro()
+        {
+            int[] IndexNodoA = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
+            int[] IndexNodoB = { matriz.PuntosNodoB[0], matriz.PuntosNodoB[1] };
+            string direccionActual = ComboDireccion.Text;
+            if (matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor == "")
+            {
+                throw new ArgumentException("En el grafo aun no aparece el valor del nodo destino. \nIntenta ejecutar de nuevo el comando.");
+            }
+            matriz.ReiniciarPuntosNodoB();
+            EstructuraControl nuevoRegistro = new EstructuraControl(0,
+                IndexNodoA[0], IndexNodoA[1], direccionActual, IndexNodoB[0], IndexNodoB[1],
+                valorNodoDestino: matriz.Nodos[IndexNodoB[0], IndexNodoB[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoA[0], IndexNodoA[1]].Valor);
+            EstructuraControl.AgregarRegistro(nuevoRegistro);
+        }
 
         private void pictureUpL_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(0,-1,-1);
+            FijarMovimientoPunto(0, -1, -1);
         }
 
         private void pictureUp_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(1,-1,0);
+            FijarMovimientoPunto(1, -1, 0);
         }
 
         private void pictureUpR_Click(object sender, EventArgs e)
@@ -136,12 +177,12 @@ namespace GrafosAlgoritmico
 
         private void pictureLeft_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(3,0,-1);
+            FijarMovimientoPunto(3, 0, -1);
         }
 
         private void pictureRight_Click(object sender, EventArgs e)
         {
-            FijarMovimientoPunto(4,0,1);
+            FijarMovimientoPunto(4, 0, 1);
         }
 
         private void pictureDownL_Click(object sender, EventArgs e)
@@ -183,6 +224,7 @@ namespace GrafosAlgoritmico
                     matriz.SeleccionarSiguientNodo(colorMatriz.Color, colorNodo.Color, indexAuxMovimiento[0], indexAuxMovimiento[1], txtBoxValorNodo.Text);
                     panelGrafos.Invalidate();
                 }
+                panelGrafos.Refresh();
             }
             catch (Exception ex)
             {
@@ -216,9 +258,73 @@ namespace GrafosAlgoritmico
             dgdvAlgoritmo.Refresh();
         }
 
-        private void diseñoGrafo_Load(object sender, EventArgs e)
-        {
 
+
+        private void btnDesahacerConexion_Click(object sender, EventArgs e)
+        {
+            if (txtBoxValorNodo.Text == "" || ComboDireccion.SelectedIndex == -1)
+            {
+                DialogResult resultado = MessageBox.Show("Se eliminará el último registro. \n¿Desea continuar?",
+                                        "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // Verificar si el usuario hizo clic en "Yes"
+                if (resultado == DialogResult.Yes)
+                {
+                    matriz.DesahacerNodoB(colorMatriz.Color);
+                    panelGrafos.Invalidate();
+                    EstructuraControl.EliminarRegistro();
+                    ActualizarDataGridView();
+                    if (EstructuraControl.pilaDeNodos.Count == 0) //para eliminar el nodo punto partida
+                    {
+                        comboNodoOrigen.Text = "Aun no definido";
+                        MessageBox.Show("Actualmente se puede cambiar el punto de partida", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtBoxValorNodo.Enabled = false;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Acción no disponible, primero debe estar vacia la dirección escogina y valor nodo destino.\nEsto debido a que se esta ejecutando la acción de definir un nuevo nodo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(@"Prestador de servicio unadista: Juan Pablo Cuellar Vanegas
+Grupo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
+
+        private void grafoTlSpMenuItemExportGrafo_Click(object sender, EventArgs e)
+        {
+            Exportar.ImagenPanel(panelGrafos);
+        }
+
+        private void pDFToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Exportar.DtGdVwAPDF(dgdvAlgoritmo);
+        }
+
+        private void btnUnirPuntos_Click(object sender, EventArgs e)
+        {
+            try
+            {matriz.BuscarCoincidenciaNodo("1°");
+            int[] IndexNodoFirst = { matriz.PuntosPartida[0], matriz.PuntosPartida[1] };
+            int[] IndexNodoLast = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
+            string direccionActual = "No definido";
+            EstructuraControl nuevoRegistro = new EstructuraControl(0,
+                IndexNodoFirst[0], IndexNodoFirst[1], direccionActual, IndexNodoLast[0], IndexNodoLast[1],
+                valorNodoDestino: matriz.Nodos[IndexNodoFirst[0], IndexNodoFirst[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoLast[0], IndexNodoLast[1]].Valor);
+            EstructuraControl.AgregarRegistro(nuevoRegistro);
+            ActualizarDataGridView();
+            panelGrafos.Refresh();
+                groupPanelControl.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
