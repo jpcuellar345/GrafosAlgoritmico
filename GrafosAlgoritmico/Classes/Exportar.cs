@@ -97,55 +97,5 @@ namespace GrafosAlgoritmico.Classes
                 }
             }
         }
-
-        //public static void DtGdVwAExcel(DataGridView dgv)
-        //{
-        //    if (dgv == null || dgv.Rows.Count == 0)
-        //    {
-        //        MessageBox.Show("No hay datos para exportar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //        return;
-        //    }
-
-        //    using (SaveFileDialog saveDialog = new SaveFileDialog())
-        //    {
-        //        saveDialog.Filter = "Excel Files|*.xlsx";
-        //        saveDialog.Title = "Guardar archivo Excel";
-
-        //        if (saveDialog.ShowDialog() != DialogResult.OK) return;
-
-        //        try
-        //        {
-        //            // **Configurar la licencia antes de usar EPPlus**
-        //            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-
-        //            FileInfo archivo = new FileInfo(saveDialog.FileName);
-
-        //            using (ExcelPackage pck = new ExcelPackage())
-        //            {
-        //                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Datos");
-
-        //                for (int i = 0; i < dgv.Columns.Count; i++)
-        //                {
-        //                    ws.Cells[1, i + 1].Value = dgv.Columns[i].HeaderText;
-        //                }
-
-        //                for (int i = 0; i < dgv.Rows.Count; i++)
-        //                {
-        //                    for (int j = 0; j < dgv.Columns.Count; j++)
-        //                    {
-        //                        ws.Cells[i + 2, j + 1].Value = dgv.Rows[i].Cells[j].Value?.ToString();
-        //                    }
-        //                }
-
-        //                pck.SaveAs(archivo);
-        //                MessageBox.Show("Archivo Excel guardado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            MessageBox.Show($"Error al generar el archivo Excel: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //}
     }
 }

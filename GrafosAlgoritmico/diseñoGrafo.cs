@@ -308,16 +308,23 @@ Grupo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         private void btnUnirPuntos_Click(object sender, EventArgs e)
         {
+            try
+            {matriz.BuscarCoincidenciaNodo("1°");
             int[] IndexNodoFirst = { matriz.PuntosPartida[0], matriz.PuntosPartida[1] };
             int[] IndexNodoLast = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
-            string direccionActual = "NN";
+            string direccionActual = "No definido";
             EstructuraControl nuevoRegistro = new EstructuraControl(0,
                 IndexNodoFirst[0], IndexNodoFirst[1], direccionActual, IndexNodoLast[0], IndexNodoLast[1],
                 valorNodoDestino: matriz.Nodos[IndexNodoFirst[0], IndexNodoFirst[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoLast[0], IndexNodoLast[1]].Valor);
             EstructuraControl.AgregarRegistro(nuevoRegistro);
             ActualizarDataGridView();
             panelGrafos.Refresh();
-            groupPanelControl.Enabled = false;
+                groupPanelControl.Enabled = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

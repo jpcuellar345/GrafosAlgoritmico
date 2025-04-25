@@ -55,8 +55,10 @@
             txtColorNodo = new Label();
             txtcolorArista = new Label();
             groupPanelControl = new GroupBox();
+            btnUnirPuntos = new Button();
             btnColrArista = new Button();
             btnColrNodo = new Button();
+            btnDesahacerConexion = new Button();
             btnStrNodOrig = new Button();
             btnDefinirNOrignen = new Button();
             colorArista = new ColorDialog();
@@ -77,8 +79,6 @@
             grafoTlSpMenuItemExportGrafo = new ToolStripMenuItem();
             algoritmoToolStripMenuItem = new ToolStripMenuItem();
             pDFToolStripMenuItem = new ToolStripMenuItem();
-            btnDesahacerConexion = new Button();
-            btnUnirPuntos = new Button();
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -340,6 +340,16 @@
             groupPanelControl.TabIndex = 12;
             groupPanelControl.TabStop = false;
             // 
+            // btnUnirPuntos
+            // 
+            btnUnirPuntos.Location = new Point(360, 264);
+            btnUnirPuntos.Name = "btnUnirPuntos";
+            btnUnirPuntos.Size = new Size(101, 43);
+            btnUnirPuntos.TabIndex = 14;
+            btnUnirPuntos.Text = "Unir nodos (Inicial - Final)";
+            btnUnirPuntos.UseVisualStyleBackColor = true;
+            btnUnirPuntos.Click += btnUnirPuntos_Click;
+            // 
             // btnColrArista
             // 
             btnColrArista.BackColor = SystemColors.MenuText;
@@ -362,6 +372,16 @@
             btnColrNodo.UseVisualStyleBackColor = false;
             btnColrNodo.Click += btnColrNodo_Click;
             // 
+            // btnDesahacerConexion
+            // 
+            btnDesahacerConexion.Location = new Point(436, 192);
+            btnDesahacerConexion.Name = "btnDesahacerConexion";
+            btnDesahacerConexion.Size = new Size(89, 43);
+            btnDesahacerConexion.TabIndex = 9;
+            btnDesahacerConexion.Text = "Desahacer\r\nultimo nodo\r\n";
+            btnDesahacerConexion.UseVisualStyleBackColor = true;
+            btnDesahacerConexion.Click += btnDesahacerConexion_Click;
+            // 
             // btnStrNodOrig
             // 
             btnStrNodOrig.Location = new Point(446, 48);
@@ -376,7 +396,7 @@
             // 
             btnDefinirNOrignen.Location = new Point(286, 192);
             btnDefinirNOrignen.Name = "btnDefinirNOrignen";
-            btnDefinirNOrignen.Size = new Size(105, 43);
+            btnDefinirNOrignen.Size = new Size(87, 43);
             btnDefinirNOrignen.TabIndex = 11;
             btnDefinirNOrignen.Text = "Definir\r\nnodo origen";
             btnDefinirNOrignen.UseVisualStyleBackColor = true;
@@ -532,26 +552,6 @@
             pDFToolStripMenuItem.Size = new Size(95, 22);
             pDFToolStripMenuItem.Text = "PDF";
             pDFToolStripMenuItem.Click += pDFToolStripMenuItem_Click;
-            // 
-            // btnDesahacerConexion
-            // 
-            btnDesahacerConexion.Location = new Point(417, 192);
-            btnDesahacerConexion.Name = "btnDesahacerConexion";
-            btnDesahacerConexion.Size = new Size(107, 43);
-            btnDesahacerConexion.TabIndex = 9;
-            btnDesahacerConexion.Text = "Desahacer\r\nultimo nodo\r\n";
-            btnDesahacerConexion.UseVisualStyleBackColor = true;
-            btnDesahacerConexion.Click += btnDesahacerConexion_Click;
-            // 
-            // btnUnirPuntos
-            // 
-            btnUnirPuntos.Location = new Point(304, 262);
-            btnUnirPuntos.Name = "btnUnirPuntos";
-            btnUnirPuntos.Size = new Size(87, 53);
-            btnUnirPuntos.TabIndex = 14;
-            btnUnirPuntos.Text = "Unir nodos";
-            btnUnirPuntos.UseVisualStyleBackColor = true;
-            btnUnirPuntos.Click += btnUnirPuntos_Click;
             // 
             // diseñoGrafo
             // 

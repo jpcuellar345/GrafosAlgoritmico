@@ -195,7 +195,7 @@
                 MessageBox.Show("No se encontró nodo disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private int[] BuscarCoincidenciaNodo(string palabraClave)
+        public int[] BuscarCoincidenciaNodo(string palabraClave)
         {
             int[] RangoDeIndex = { -1, 0, 1 };
 
