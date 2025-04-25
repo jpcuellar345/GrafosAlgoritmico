@@ -74,11 +74,12 @@
             valorNodoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             estructuraControlBindingSource = new BindingSource(components);
             toolStrip1 = new ToolStrip();
-            tlStripAcerca = new ToolStripButton();
             toolStripSplitButton1 = new ToolStripSplitButton();
             grafoTlSpMenuItemExportGrafo = new ToolStripMenuItem();
             algoritmoToolStripMenuItem = new ToolStripMenuItem();
             pDFToolStripMenuItem = new ToolStripMenuItem();
+            cerrarToolStripButton1 = new ToolStripButton();
+            tlStripAcerca = new ToolStripButton();
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -505,22 +506,12 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { tlStripAcerca, toolStripSplitButton1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSplitButton1, cerrarToolStripButton1, tlStripAcerca });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1016, 25);
             toolStrip1.TabIndex = 14;
             toolStrip1.Text = "toolStrip1";
-            // 
-            // tlStripAcerca
-            // 
-            tlStripAcerca.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            tlStripAcerca.Image = (Image)resources.GetObject("tlStripAcerca.Image");
-            tlStripAcerca.ImageTransparentColor = Color.Magenta;
-            tlStripAcerca.Name = "tlStripAcerca";
-            tlStripAcerca.Size = new Size(63, 22);
-            tlStripAcerca.Text = "Acerca de";
-            tlStripAcerca.Click += toolStripButton1_Click;
             // 
             // toolStripSplitButton1
             // 
@@ -553,6 +544,26 @@
             pDFToolStripMenuItem.Text = "PDF";
             pDFToolStripMenuItem.Click += pDFToolStripMenuItem_Click;
             // 
+            // cerrarToolStripButton1
+            // 
+            cerrarToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            cerrarToolStripButton1.Image = (Image)resources.GetObject("cerrarToolStripButton1.Image");
+            cerrarToolStripButton1.ImageTransparentColor = Color.Magenta;
+            cerrarToolStripButton1.Name = "cerrarToolStripButton1";
+            cerrarToolStripButton1.Size = new Size(43, 22);
+            cerrarToolStripButton1.Text = "Cerrar";
+            cerrarToolStripButton1.Click += cerrarToolStripButton1_Click;
+            // 
+            // tlStripAcerca
+            // 
+            tlStripAcerca.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            tlStripAcerca.Image = (Image)resources.GetObject("tlStripAcerca.Image");
+            tlStripAcerca.ImageTransparentColor = Color.Magenta;
+            tlStripAcerca.Name = "tlStripAcerca";
+            tlStripAcerca.Size = new Size(63, 22);
+            tlStripAcerca.Text = "Acerca de";
+            tlStripAcerca.Click += toolStripButton1_Click;
+            // 
             // diseñoGrafo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -567,6 +578,7 @@
             Controls.Add(combo2DMatriz);
             Controls.Add(dgdvAlgoritmo);
             Controls.Add(panelGrafos);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "diseñoGrafo";
             Text = "Grafos";
             GroupComandos.ResumeLayout(false);
@@ -639,5 +651,6 @@
         private DataGridViewTextBoxColumn valorNodoDataGridViewTextBoxColumn;
         private Button btnDesahacerConexion;
         private Button btnUnirPuntos;
+        private ToolStripButton cerrarToolStripButton1;
     }
 }

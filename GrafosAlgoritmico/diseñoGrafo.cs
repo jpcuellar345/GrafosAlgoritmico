@@ -290,8 +290,8 @@ namespace GrafosAlgoritmico
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(@"Prestador de servicio unadista: Juan Pablo Cuellar Vanegas
-Grupo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Acerca acercaMe = new Acerca();
+            acercaMe.Show();
         }
 
 
@@ -309,22 +309,27 @@ Grupo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
         private void btnUnirPuntos_Click(object sender, EventArgs e)
         {
             try
-            {matriz.BuscarCoincidenciaNodo("1°");
-            int[] IndexNodoFirst = { matriz.PuntosPartida[0], matriz.PuntosPartida[1] };
-            int[] IndexNodoLast = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
-            string direccionActual = "No definido";
-            EstructuraControl nuevoRegistro = new EstructuraControl(0,
-                IndexNodoFirst[0], IndexNodoFirst[1], direccionActual, IndexNodoLast[0], IndexNodoLast[1],
-                valorNodoDestino: matriz.Nodos[IndexNodoFirst[0], IndexNodoFirst[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoLast[0], IndexNodoLast[1]].Valor);
-            EstructuraControl.AgregarRegistro(nuevoRegistro);
-            ActualizarDataGridView();
-            panelGrafos.Refresh();
+            {
+                matriz.BuscarCoincidenciaNodo("1°");
+                int[] IndexNodoFirst = { matriz.PuntosPartida[0], matriz.PuntosPartida[1] };
+                int[] IndexNodoLast = { matriz.PuntosNodoA[0], matriz.PuntosNodoA[1] };
+                string direccionActual = "No definido";
+                EstructuraControl nuevoRegistro = new EstructuraControl(0,
+                    IndexNodoFirst[0], IndexNodoFirst[1], direccionActual, IndexNodoLast[0], IndexNodoLast[1],
+                    valorNodoDestino: matriz.Nodos[IndexNodoFirst[0], IndexNodoFirst[1]].Valor, valorNodoorigen: matriz.Nodos[IndexNodoLast[0], IndexNodoLast[1]].Valor);
+                EstructuraControl.AgregarRegistro(nuevoRegistro);
+                ActualizarDataGridView();
+                panelGrafos.Refresh();
                 groupPanelControl.Enabled = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private void cerrarToolStripButton1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
