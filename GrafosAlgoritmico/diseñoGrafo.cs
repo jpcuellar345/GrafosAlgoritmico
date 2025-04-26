@@ -329,7 +329,7 @@ namespace GrafosAlgoritmico
         }
         private void cerrarToolStripButton1_Click(object sender, EventArgs e)
         {
-            Close();
+            Close(); // dejar de ejecutar la aplicacion
         }
     }
 }
