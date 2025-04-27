@@ -51,8 +51,16 @@
             }
             else
             {
-                MessageBox.Show("La pila está vacía.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new ArgumentException("La pila está vacía. no es aqui");
             }
+        }
+        public static EstructuraControl GetUltimoRegistro()
+        {
+            if (pilaDeNodos.Count > 0)
+            {
+                return pilaDeNodos.Peek();
+            }
+            throw new ArgumentException("La pila está vacía.");
         }
     }
 }

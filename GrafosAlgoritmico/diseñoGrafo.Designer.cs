@@ -343,9 +343,9 @@
             // 
             // btnUnirPuntos
             // 
-            btnUnirPuntos.Location = new Point(360, 264);
+            btnUnirPuntos.Location = new Point(284, 270);
             btnUnirPuntos.Name = "btnUnirPuntos";
-            btnUnirPuntos.Size = new Size(101, 43);
+            btnUnirPuntos.Size = new Size(100, 43);
             btnUnirPuntos.TabIndex = 14;
             btnUnirPuntos.Text = "Unir nodos (Inicial - Final)";
             btnUnirPuntos.UseVisualStyleBackColor = true;
@@ -375,9 +375,9 @@
             // 
             // btnDesahacerConexion
             // 
-            btnDesahacerConexion.Location = new Point(436, 192);
+            btnDesahacerConexion.Location = new Point(284, 221);
             btnDesahacerConexion.Name = "btnDesahacerConexion";
-            btnDesahacerConexion.Size = new Size(89, 43);
+            btnDesahacerConexion.Size = new Size(100, 43);
             btnDesahacerConexion.TabIndex = 9;
             btnDesahacerConexion.Text = "Desahacer\r\nultimo nodo\r\n";
             btnDesahacerConexion.UseVisualStyleBackColor = true;
@@ -389,17 +389,17 @@
             btnStrNodOrig.Name = "btnStrNodOrig";
             btnStrNodOrig.Size = new Size(88, 43);
             btnStrNodOrig.TabIndex = 11;
-            btnStrNodOrig.Text = "Iniciar nodo";
+            btnStrNodOrig.Text = "Iniciar nodo 1°";
             btnStrNodOrig.UseVisualStyleBackColor = true;
             btnStrNodOrig.Click += btnStrNodOrig_Click;
             // 
             // btnDefinirNOrignen
             // 
-            btnDefinirNOrignen.Location = new Point(286, 192);
+            btnDefinirNOrignen.Location = new Point(284, 173);
             btnDefinirNOrignen.Name = "btnDefinirNOrignen";
-            btnDefinirNOrignen.Size = new Size(87, 43);
+            btnDefinirNOrignen.Size = new Size(100, 43);
             btnDefinirNOrignen.TabIndex = 11;
-            btnDefinirNOrignen.Text = "Definir\r\nnodo origen";
+            btnDefinirNOrignen.Text = "Definir nodo ";
             btnDefinirNOrignen.UseVisualStyleBackColor = true;
             btnDefinirNOrignen.Click += btnDefinirNOrignen_Click;
             // 

@@ -225,10 +225,9 @@
 
         public void DesahacerNodoB(Color original)
         {
-            try
+            if (EstructuraControl.pilaDeNodos.Count > 0)
             {
-
-                EstructuraControl RegistroEliminar = EstructuraControl.pilaDeNodos.Peek();
+                EstructuraControl RegistroEliminar = EstructuraControl.GetUltimoRegistro();
                 int indexF = RegistroEliminar.IndexFilaDestino;
                 int indexC = RegistroEliminar.IndexColumDestino;
 
@@ -241,9 +240,14 @@
                 indexC = RegistroEliminar.IndexColumOrigen;
                 puntosNodoA = [indexF, indexC];
             }
-            catch (Exception ex)
+            else if (EstructuraControl.pilaDeNodos.Count == 0)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                int indexF = puntosPartida[0];
+                int indexC = puntosPartida[1];
+                Nodos[indexF, indexC].colorNodo = original;
+                Nodos[indexF, indexC].colorValor = original;
+                Nodos[indexF, indexC].Valor = string.Empty;
+                puntosPartida = [0, 0];
             }
         }
     }
