@@ -18,7 +18,6 @@ namespace GrafosAlgoritmico
             CenterToScreen();
             trackBGrozorArista.Minimum = 1;
             trackBGrozorArista.Maximum = 10;
-            txtNumGrozorArista.Text = trackBGrozorArista.Value.ToString();
 
         }
         private void InicializarValor()
@@ -78,6 +77,7 @@ namespace GrafosAlgoritmico
         {
             colorArista.ShowDialog();
             btnColrArista.BackColor = colorArista.Color;
+            panelGrafos.Invalidate();
         }
 
         private void btnGenerarMatriz_Click(object sender, EventArgs e) //Para generar la matriz
@@ -370,5 +370,6 @@ namespace GrafosAlgoritmico
             txtNumGrozorArista.Text = trackBGrozorArista.Value.ToString();
             panelGrafos.Invalidate();
         }
+
     }
 }
