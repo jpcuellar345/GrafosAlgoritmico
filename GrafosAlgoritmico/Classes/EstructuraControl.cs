@@ -37,24 +37,27 @@
         {
             pilaDeNodos = new Stack<EstructuraControl>();
         }
+
         public static void AgregarRegistro(EstructuraControl nuevoRegistro)
         {
             nuevoRegistro.NumeroPaso += pilaDeNodos.Count();
+            //ir aumentando el numero de pasos con la idea de que en el datagridview muestre cuantos movimientos se hicieron 
             pilaDeNodos.Push(nuevoRegistro); // Agregar el Nodo a la pila
         }
+
         public static void EliminarRegistro()
         {
             if (pilaDeNodos.Count > 0)
             {
-                EstructuraControl registroEliminado = pilaDeNodos.Pop(); // Quitar el nodo del tope de la pila
-                //MessageBox.Show($"Nodo removido: {nodoEliminado.Valor}");
+                EstructuraControl registroEliminado = pilaDeNodos.Pop(); // Quitar el ultimmo nodo que hay en la pila
             }
             else
             {
                 throw new ArgumentException("La pila está vacía. no es aqui");
             }
         }
-        public static EstructuraControl GetUltimoRegistro()
+
+        public static EstructuraControl GetUltimoRegistro() //obtener el ultimo elemento de la pila
         {
             if (pilaDeNodos.Count > 0)
             {

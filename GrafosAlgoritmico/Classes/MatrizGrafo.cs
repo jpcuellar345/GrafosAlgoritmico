@@ -137,8 +137,7 @@
             {
                 throw new ArgumentException($"Se sobrepasó el rango de la matriz.");
             }
-            if (puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == valorPuntoPartida
-    /*|| (Nodos[nuevaFila - aumentF, nuevaColumna - aumentC].Valor == valorPuntoPartida && aumentF == 1 && aumentC == 1)*/) //para que me salte automaticamente a otro nodo si el punto de partida comienza en el primer nodo
+            if (puntosPartida[0] == 0 && puntosPartida[0] == 0 && PuntosNodoA[0] == 0 && PuntosNodoA[1] == 0 && Nodos[nuevaFila, nuevaColumna].Valor == valorPuntoPartida)
             { //esto es para que no me reinicie el color y valor del nodo de partida, en el caso de que el nodo partida este en [0,0]
                 PuntosNodoB[0] = nuevaFila;
                 PuntosNodoB[1] = nuevaColumna;
@@ -179,15 +178,6 @@
             try
             {
                 PuntosNodoA = PuntosNodoB;
-
-                //if (puntosNodoB[1] + 1 > Nodos.GetUpperBound(1))
-                //{
-                //    PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] - 1];
-                //}
-                //else
-                //{
-                //    PuntosNodoB = [puntosNodoA[0], puntosNodoA[1] + 1];
-                //}
                 PuntosNodoB = BuscarCoincidenciaNodo("");
             }
             catch

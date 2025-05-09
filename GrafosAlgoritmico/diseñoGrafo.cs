@@ -70,15 +70,18 @@ namespace GrafosAlgoritmico
             colorMatriz.ShowDialog();
             btnColrMatriz.BackColor = colorMatriz.Color;
         }
+
         private void btnColrArista_Click(object sender, EventArgs e)
         {
             colorArista.ShowDialog();
             btnColrArista.BackColor = colorArista.Color;
         }
+
         private void btnGenerarMatriz_Click(object sender, EventArgs e) //Para generar la matriz
         {
             GenerarMatriz();
         }
+
         private void GenerarMatriz()
         {
             if (combo2DMatriz.SelectedIndex != -1)
@@ -95,6 +98,7 @@ namespace GrafosAlgoritmico
                 MessageBox.Show("No se ha definido las dimensiones de la matriz", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void btnStrNodOrig_Click(object sender, EventArgs e)
         {
             if (btnColrNodo.BackColor == btnColrMatriz.BackColor)
@@ -108,6 +112,7 @@ namespace GrafosAlgoritmico
                 GenerarMovimientoPunto();
             }
         }
+
         private void btnColrNodo_Click(object sender, EventArgs e)
         {
             colorNodo.ShowDialog();
@@ -221,8 +226,6 @@ namespace GrafosAlgoritmico
             GenerarMovimientoPunto();
         }
 
-
-
         private void GenerarMovimientoPunto()
         {
             try
@@ -260,9 +263,7 @@ namespace GrafosAlgoritmico
             bindingSource.ResetBindings(false); // Refresca el enlace con los datos
             //dgdvAlgoritmo.DataSource = datos;
             dgdvAlgoritmo.Refresh();
-
         }
-
 
         private void IniciarDgdvAlgoritmo()
         {
@@ -270,8 +271,6 @@ namespace GrafosAlgoritmico
             dgdvAlgoritmo.DataSource = bindingSource;
             dgdvAlgoritmo.Refresh();
         }
-
-
 
         private void btnDesahacerConexion_Click(object sender, EventArgs e)
         {
@@ -319,8 +318,6 @@ namespace GrafosAlgoritmico
             Acerca acercaMe = new Acerca();
             acercaMe.Show();
         }
-
-
 
         private void grafoTlSpMenuItemExportGrafo_Click(object sender, EventArgs e)
         {
