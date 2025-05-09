@@ -16,6 +16,9 @@ namespace GrafosAlgoritmico
         {
             InitializeComponent();
             CenterToScreen();
+            trackBGrozorArista.Minimum = 1;
+            trackBGrozorArista.Maximum = 10;
+            txtNumGrozorArista.Text = trackBGrozorArista.Value.ToString();
 
         }
         private void InicializarValor()
@@ -44,7 +47,7 @@ namespace GrafosAlgoritmico
             {
                 // **Primero dibujar las conexiones**
                 Graphics g = e.Graphics;
-                using (Pen pen = new Pen(colorArista.Color, 5))
+                using (Pen pen = new Pen(colorArista.Color, trackBGrozorArista.Value))
                 {
                     foreach (EstructuraControl conexion in EstructuraControl.pilaDeNodos)
                     {
@@ -360,6 +363,12 @@ namespace GrafosAlgoritmico
         private void cerrarToolStripButton1_Click(object sender, EventArgs e)
         {
             Close(); // dejar de ejecutar la aplicacion
+        }
+
+        private void trackBGrozorArista_Scroll(object sender, EventArgs e)
+        {
+            txtNumGrozorArista.Text = trackBGrozorArista.Value.ToString();
+            panelGrafos.Invalidate();
         }
     }
 }

@@ -55,6 +55,9 @@
             txtColorNodo = new Label();
             txtcolorArista = new Label();
             groupPanelControl = new GroupBox();
+            txtNumGrozorArista = new Label();
+            label1 = new Label();
+            trackBGrozorArista = new TrackBar();
             btnUnirPuntos = new Button();
             btnColrArista = new Button();
             btnColrNodo = new Button();
@@ -78,8 +81,8 @@
             grafoTlSpMenuItemExportGrafo = new ToolStripMenuItem();
             algoritmoToolStripMenuItem = new ToolStripMenuItem();
             pDFToolStripMenuItem = new ToolStripMenuItem();
-            cerrarToolStripButton1 = new ToolStripButton();
             tlStripAcerca = new ToolStripButton();
+            cerrarToolStripButton1 = new ToolStripButton();
             GroupComandos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureDownR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUpR).BeginInit();
@@ -90,6 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureUpL).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureUp).BeginInit();
             groupPanelControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBGrozorArista).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)estructuraControlBindingSource).BeginInit();
             toolStrip1.SuspendLayout();
@@ -142,7 +146,7 @@
             // txtDireccion
             // 
             txtDireccion.AutoSize = true;
-            txtDireccion.Location = new Point(263, 132);
+            txtDireccion.Location = new Point(264, 177);
             txtDireccion.Name = "txtDireccion";
             txtDireccion.Size = new Size(110, 15);
             txtDireccion.TabIndex = 6;
@@ -153,7 +157,7 @@
             ComboDireccion.Enabled = false;
             ComboDireccion.FormattingEnabled = true;
             ComboDireccion.Items.AddRange(new object[] { "Arriba y a la izquierda", "Arriba", "Arriba y a la derecha", "Izquierda", "Derecha", "Abajo y a la izquierda", "Abajo", "Abajo y a la derecha" });
-            ComboDireccion.Location = new Point(390, 129);
+            ComboDireccion.Location = new Point(391, 174);
             ComboDireccion.Name = "ComboDireccion";
             ComboDireccion.Size = new Size(159, 23);
             ComboDireccion.TabIndex = 7;
@@ -319,6 +323,9 @@
             // 
             // groupPanelControl
             // 
+            groupPanelControl.Controls.Add(txtNumGrozorArista);
+            groupPanelControl.Controls.Add(label1);
+            groupPanelControl.Controls.Add(trackBGrozorArista);
             groupPanelControl.Controls.Add(btnUnirPuntos);
             groupPanelControl.Controls.Add(btnColrArista);
             groupPanelControl.Controls.Add(btnColrNodo);
@@ -341,9 +348,36 @@
             groupPanelControl.TabIndex = 12;
             groupPanelControl.TabStop = false;
             // 
+            // txtNumGrozorArista
+            // 
+            txtNumGrozorArista.AutoSize = true;
+            txtNumGrozorArista.Location = new Point(510, 130);
+            txtNumGrozorArista.Name = "txtNumGrozorArista";
+            txtNumGrozorArista.Size = new Size(38, 15);
+            txtNumGrozorArista.TabIndex = 17;
+            txtNumGrozorArista.Text = "label2";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(264, 130);
+            label1.Name = "label1";
+            label1.Size = new Size(104, 15);
+            label1.TabIndex = 16;
+            label1.Text = "Grozor de la arista:";
+            // 
+            // trackBGrozorArista
+            // 
+            trackBGrozorArista.Location = new Point(374, 120);
+            trackBGrozorArista.Name = "trackBGrozorArista";
+            trackBGrozorArista.Size = new Size(130, 45);
+            trackBGrozorArista.TabIndex = 15;
+            trackBGrozorArista.TickStyle = TickStyle.Both;
+            trackBGrozorArista.Scroll += trackBGrozorArista_Scroll;
+            // 
             // btnUnirPuntos
             // 
-            btnUnirPuntos.Location = new Point(284, 270);
+            btnUnirPuntos.Location = new Point(360, 276);
             btnUnirPuntos.Name = "btnUnirPuntos";
             btnUnirPuntos.Size = new Size(100, 43);
             btnUnirPuntos.TabIndex = 14;
@@ -375,7 +409,7 @@
             // 
             // btnDesahacerConexion
             // 
-            btnDesahacerConexion.Location = new Point(284, 221);
+            btnDesahacerConexion.Location = new Point(425, 216);
             btnDesahacerConexion.Name = "btnDesahacerConexion";
             btnDesahacerConexion.Size = new Size(100, 43);
             btnDesahacerConexion.TabIndex = 9;
@@ -395,7 +429,7 @@
             // 
             // btnDefinirNOrignen
             // 
-            btnDefinirNOrignen.Location = new Point(284, 173);
+            btnDefinirNOrignen.Location = new Point(292, 216);
             btnDefinirNOrignen.Name = "btnDefinirNOrignen";
             btnDefinirNOrignen.Size = new Size(100, 43);
             btnDefinirNOrignen.TabIndex = 11;
@@ -506,7 +540,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(20, 20);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSplitButton1, cerrarToolStripButton1, tlStripAcerca });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripSplitButton1, tlStripAcerca, cerrarToolStripButton1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1016, 25);
@@ -544,16 +578,6 @@
             pDFToolStripMenuItem.Text = "PDF";
             pDFToolStripMenuItem.Click += pDFToolStripMenuItem_Click;
             // 
-            // cerrarToolStripButton1
-            // 
-            cerrarToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
-            cerrarToolStripButton1.Image = (Image)resources.GetObject("cerrarToolStripButton1.Image");
-            cerrarToolStripButton1.ImageTransparentColor = Color.Magenta;
-            cerrarToolStripButton1.Name = "cerrarToolStripButton1";
-            cerrarToolStripButton1.Size = new Size(43, 22);
-            cerrarToolStripButton1.Text = "Cerrar";
-            cerrarToolStripButton1.Click += cerrarToolStripButton1_Click;
-            // 
             // tlStripAcerca
             // 
             tlStripAcerca.DisplayStyle = ToolStripItemDisplayStyle.Text;
@@ -563,6 +587,16 @@
             tlStripAcerca.Size = new Size(63, 22);
             tlStripAcerca.Text = "Acerca de";
             tlStripAcerca.Click += toolStripButton1_Click;
+            // 
+            // cerrarToolStripButton1
+            // 
+            cerrarToolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            cerrarToolStripButton1.Image = (Image)resources.GetObject("cerrarToolStripButton1.Image");
+            cerrarToolStripButton1.ImageTransparentColor = Color.Magenta;
+            cerrarToolStripButton1.Name = "cerrarToolStripButton1";
+            cerrarToolStripButton1.Size = new Size(43, 22);
+            cerrarToolStripButton1.Text = "Cerrar";
+            cerrarToolStripButton1.Click += cerrarToolStripButton1_Click;
             // 
             // diseñoGrafo
             // 
@@ -592,6 +626,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureUp).EndInit();
             groupPanelControl.ResumeLayout(false);
             groupPanelControl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)trackBGrozorArista).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgdvAlgoritmo).EndInit();
             ((System.ComponentModel.ISupportInitialize)estructuraControlBindingSource).EndInit();
             toolStrip1.ResumeLayout(false);
@@ -652,5 +687,8 @@
         private Button btnDesahacerConexion;
         private Button btnUnirPuntos;
         private ToolStripButton cerrarToolStripButton1;
+        private Label label1;
+        private TrackBar trackBGrozorArista;
+        private Label txtNumGrozorArista;
     }
 }
